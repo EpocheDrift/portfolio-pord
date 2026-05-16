@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Zayn Archive Interface Route Model</title>
+  <desc id="desc">A layered diagram showing how Zayn's portfolio identity, Chaostudio field language, archive records, and public/private rules relate.</desc>
+  <defs>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M80 0H0V80" fill="none" stroke="#e8e1d2" stroke-opacity="0.07"/>
+    </pattern>
+    <linearGradient id="panel" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#17130c"/>
+      <stop offset="1" stop-color="#060807"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="#050605"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <circle cx="1050" cy="454" r="350" fill="#d5aa59" opacity="0.06"/>
+  <circle cx="1070" cy="454" r="242" fill="#74b7b2" opacity="0.06"/>
+
+  <text x="64" y="74" fill="#d5aa59" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="18" font-weight="700" letter-spacing="2">ZAYN ARCHIVE INTERFACE / ROUTE MODEL</text>
+  <text x="64" y="132" fill="#e8e1d2" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="58" font-weight="900">Personal Portfolio, Shared Field Language</text>
+  <text x="64" y="176" fill="#e8e1d2" opacity="0.62" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="22">The site belongs to Zayn; Chaostudio operates as a context layer, not the owner of the interface.</text>
+
+  <g transform="translate(86 280)">
+    <rect width="492" height="364" fill="url(#panel)" stroke="#e8e1d2" stroke-opacity="0.24"/>
+    <text x="34" y="56" fill="#d5aa59" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="15" font-weight="700" letter-spacing="1.5">IDENTITY ROUTING RULE</text>
+    <text x="34" y="122" fill="#e8e1d2" font-family="Inter, Helvetica Neue, Arial, sans-serif" font-size="42" font-weight="900">Zayn is the site owner.</text>
+    <text x="34" y="174" fill="#e8e1d2" opacity="0.66" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="16">All project records are framed through</text>
+    <text x="34" y="202" fill="#e8e1d2" opacity="0.66" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="16">personal authorship, process, and judgment.</text>
+    <line x1="34" y1="244" x2="458" y2="244" stroke="#e8e1d2" stroke-opacity="0.18"/>
+    <text x="34" y="288" fill="#74b7b2" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="16" font-weight="700">CHAOSTUDIO = CONTEXT LAYER</text>
+    <text x="34" y="320" fill="#e8e1d2" opacity="0.58" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="15">visual system, archive attitude, field vocabulary</text>
+  </g>
+
+  <g transform="translate(714 230)">
+    <circle cx="360" cy="250" r="238" fill="none" stroke="#e8e1d2" stroke-opacity="0.16"/>
+    <circle cx="360" cy="250" r="172" fill="none" stroke="#d5aa59" stroke-opacity="0.56" stroke-width="2"/>
+    <circle cx="360" cy="250" r="96" fill="none" stroke="#74b7b2" stroke-opacity="0.62" stroke-width="2"/>
+    <circle cx="360" cy="250" r="18" fill="#d5aa59"/>
+
+    <g font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="15" font-weight="700" letter-spacing="1.4">
+      <text x="258" y="32" fill="#e8e1d2" opacity="0.6">PUBLIC / PRIVATE FILTER</text>
+      <text x="220" y="118" fill="#d5aa59">ARCHIVE RECORDS</text>
+      <text x="262" y="216" fill="#74b7b2">ZAYN ROUTE</text>
+      <text x="390" y="258" fill="#050605">Z</text>
+    </g>
+
+    <path d="M360 250L608 92" stroke="#d5aa59" stroke-width="2"/>
+    <path d="M360 250L610 402" stroke="#74b7b2" stroke-width="2"/>
+    <path d="M360 250L120 418" stroke="#e8e1d2" stroke-opacity="0.38" stroke-width="2"/>
+  </g>
+
+  <g font-family="Inter, Helvetica Neue, Arial, sans-serif" font-weight="850" font-size="30" fill="#e8e1d2">
+    <text x="1250" y="290">Main Projects</text>
+    <text x="1248" y="640">Archive Records</text>
+    <text x="692" y="674">Private Holds</text>
+  </g>
+  <g font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="15" fill="#e8e1d2" opacity="0.62">
+    <text x="1250" y="326">full narrative + visual proof</text>
+    <text x="1248" y="676">lighter record, still searchable</text>
+    <text x="692" y="710">restricted names, internal notes</text>
+  </g>
+
+  <g stroke="#e8e1d2" stroke-opacity="0.24" fill="none">
+    <rect x="1218" y="244" width="282" height="112"/>
+    <rect x="1218" y="594" width="282" height="112"/>
+    <rect x="662" y="628" width="286" height="112"/>
+  </g>
+</svg>

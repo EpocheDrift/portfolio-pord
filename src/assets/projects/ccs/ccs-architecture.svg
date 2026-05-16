@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 220">
+  <style>
+    text { font-family: 'IBM Plex Sans Condensed', monospace; letter-spacing: 0.07em; }
+    .lh { fill: #d7ac61; font-size: 9px; }
+    .li { fill: #e8e1d2; font-size: 9px; opacity: 0.72; }
+    .lb { fill: none; stroke: #d7ac61; stroke-width: 0.75; opacity: 0.5; }
+    .al { stroke: #d7ac61; stroke-width: 0.75; opacity: 0.6; }
+  </style>
+  <rect class="lb" x="1" y="1" width="210" height="190"/>
+  <text class="lh" x="14" y="22">LAYER 1</text>
+  <text class="lh" x="14" y="36">PASSIVE CAPTURE</text>
+  <line x1="14" y1="44" x2="197" y2="44" stroke="#d7ac61" stroke-width="0.5" opacity="0.3"/>
+  <text class="li" x="14" y="64">· Screenshots</text>
+  <text class="li" x="14" y="82">· Wearable Camera</text>
+  <text class="li" x="14" y="100">· Ambient Audio</text>
+  <line class="al" x1="212" y1="96" x2="270" y2="96"/>
+  <polygon points="270,92 280,96 270,100" fill="#d7ac61" opacity="0.6"/>
+  <rect class="lb" x="281" y="1" width="178" height="190"/>
+  <text class="lh" x="294" y="22">LAYER 2</text>
+  <text class="lh" x="294" y="36">AI PROCESSING</text>
+  <line x1="294" y1="44" x2="445" y2="44" stroke="#d7ac61" stroke-width="0.5" opacity="0.3"/>
+  <text class="li" x="294" y="64">· Sense</text>
+  <text class="li" x="294" y="82">· Parse</text>
+  <text class="li" x="294" y="100">· Structure</text>
+  <line class="al" x1="460" y1="96" x2="518" y2="96"/>
+  <polygon points="518,92 528,96 518,100" fill="#d7ac61" opacity="0.6"/>
+  <rect class="lb" x="529" y="1" width="290" height="190"/>
+  <text class="lh" x="542" y="22">LAYER 3</text>
+  <text class="lh" x="542" y="36">OUTPUT MODULES</text>
+  <line x1="542" y1="44" x2="805" y2="44" stroke="#d7ac61" stroke-width="0.5" opacity="0.3"/>
+  <text class="li" x="542" y="64">· Morning Briefing</text>
+  <text class="li" x="542" y="82">· Auto Snapshots</text>
+  <text class="li" x="542" y="100">· Task Agent</text>
+  <text class="li" x="542" y="118">· Context Pool</text>
+  <text class="li" x="542" y="136">· Message Agent</text>
+</svg>

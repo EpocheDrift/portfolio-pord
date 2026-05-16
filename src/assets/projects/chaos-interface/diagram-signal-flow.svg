@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 120">
+  <style>
+    text { font-family: 'IBM Plex Sans Condensed', monospace; letter-spacing: 0.07em; }
+    .sh { fill: #d7ac61; font-size: 9px; }
+    .si { fill: #e8e1d2; font-size: 9px; opacity: 0.65; }
+    .sb { fill: none; stroke: #d7ac61; stroke-width: 0.75; opacity: 0.5; }
+    .al { stroke: #d7ac61; stroke-width: 0.75; opacity: 0.6; }
+  </style>
+  <rect class="sb" x="1" y="1" width="175" height="90"/>
+  <text class="sh" x="14" y="22">LATENT</text>
+  <line x1="14" y1="30" x2="162" y2="30" stroke="#d7ac61" stroke-width="0.5" opacity="0.3"/>
+  <text class="si" x="14" y="50">compressed record</text>
+  <text class="si" x="14" y="68">scan plane: below</text>
+  <line class="al" x1="177" y1="46" x2="218" y2="46"/>
+  <polygon points="218,42 228,46 218,50" fill="#d7ac61" opacity="0.6"/>
+  <rect class="sb" x="229" y="1" width="160" height="90"/>
+  <text class="sh" x="242" y="22">QUEUED</text>
+  <line x1="242" y1="30" x2="375" y2="30" stroke="#d7ac61" stroke-width="0.5" opacity="0.3"/>
+  <text class="si" x="242" y="50">approaching scan plane</text>
+  <text class="si" x="242" y="68">focus pending</text>
+  <line class="al" x1="390" y1="46" x2="431" y2="46"/>
+  <polygon points="431,42 441,46 431,50" fill="#d7ac61" opacity="0.6"/>
+  <rect class="sb" x="442" y="1" width="155" height="90"/>
+  <text class="sh" x="455" y="22">ACTIVE</text>
+  <line x1="455" y1="30" x2="583" y2="30" stroke="#d7ac61" stroke-width="0.5" opacity="0.3"/>
+  <text class="si" x="455" y="50">scan plane: current</text>
+  <text class="si" x="455" y="68">accession open</text>
+  <line class="al" x1="598" y1="46" x2="639" y2="46"/>
+  <polygon points="639,42 649,46 639,50" fill="#d7ac61" opacity="0.6"/>
+  <rect class="sb" x="650" y="1" width="169" height="90"/>
+  <text class="sh" x="663" y="22">OUTPUT</text>
+  <line x1="663" y1="30" x2="805" y2="30" stroke="#d7ac61" stroke-width="0.5" opacity="0.3"/>
+  <text class="si" x="663" y="50">indexed record</text>
+  <text class="si" x="663" y="68">scan plane: above</text>
+</svg>
