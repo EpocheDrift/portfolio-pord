@@ -104,7 +104,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         const pulseDuration = 1450;
         const infoKickers = {
           about: "about / zayn archive",
-          contact: "contact / launch route",
+          contact: "contact / open",
         };
         let languageMode = readStoredLanguage();
         persistLanguage(languageMode);
@@ -498,7 +498,7 @@ export function mountArchiveExperience(container: HTMLElement) {
 
           infoKicker.textContent = content.kicker;
           infoTitle.textContent = content.title;
-          infoBody.textContent = content.body;
+          infoBody.innerHTML = content.body;
         }
 
         function applyLocalizedShellCopy() {

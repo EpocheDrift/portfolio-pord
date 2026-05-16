@@ -87,8 +87,7 @@ export const archiveMarkup = `
       <div class="signal-register" aria-label="Archive register">
         <div class="signal-row"><span>B02</span><strong>Energy Sense</strong><span>prototype complete</span></div>
         <div class="signal-row filed-row active-row"><span>A01</span><strong class="active">CCS</strong><span>active</span></div>
-        <div class="signal-row is-disabled"><span>B04</span><strong>Pour Decisions</strong><span>draft record</span></div>
-        <div class="signal-row filed-row"><span>C03</span><strong>混沌接口</strong><span>routed</span></div>
+<div class="signal-row filed-row"><span>C03</span><strong>混沌接口</strong><span>routed</span></div>
       </div>
     </div>
     <div class="handoff-axis" aria-hidden="true"></div>

@@ -786,6 +786,23 @@
   line-height: 1.4;
 }
 
+.info-body {
+  margin-top: 24px;
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.info-body a {
+  color: var(--color-amber);
+  text-decoration: none;
+}
+
+.info-body a:hover {
+  text-decoration: underline;
+}
+
 .return-link {
   position: absolute;
   bottom: 90px;
