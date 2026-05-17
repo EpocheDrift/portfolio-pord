@@ -390,6 +390,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         stage.add(monitorGroup);
         const closedMonitorPosition = new THREE.Vector3(0, -0.15, -0.7);
         const openMonitorPosition = new THREE.Vector3(2.75, 2.35, -0.7);
+        const mobileOpenMonitorPosition = new THREE.Vector3(0, 0.4, -0.7);
         const recordMonitorPosition = new THREE.Vector3(1.62, -0.02, -0.7);
   
         const monitor = new THREE.Mesh(
@@ -902,7 +903,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         });
   
         window.addEventListener("pointerdown", (event) => {
-          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action")) return;
+          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list")) return;
           if (event.pointerType !== "touch" && !isHovering) return;
           if (isRecordPage()) {
             closeRecordToQueue();
@@ -1355,7 +1356,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             : isRecordPage()
               ? recordMonitorPosition
               : isOpen
-                ? openMonitorPosition
+                ? (isSmallViewport() ? mobileOpenMonitorPosition : openMonitorPosition)
                 : closedMonitorPosition;
           monitorGroup.position.lerp(monitorTarget, 1 - Math.pow(0.0009, delta));
           monitorGroup.rotation.x = THREE.MathUtils.lerp(
@@ -1365,7 +1366,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           );
           monitorGroup.rotation.z = THREE.MathUtils.lerp(
             monitorGroup.rotation.z,
-            isInfoPage() ? 0 : isRecordPage() ? 0.04 : isOpen ? 0.18 : 0,
+            isInfoPage() ? 0 : isRecordPage() ? 0.04 : isOpen ? (isSmallViewport() ? 0.04 : 0.18) : 0,
             1 - Math.pow(0.0009, delta),
           );
           camera.position.x = pointer.x * (calmPageWeight ? 0.035 : 0.08);
