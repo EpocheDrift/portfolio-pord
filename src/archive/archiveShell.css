@@ -1795,7 +1795,7 @@
         .caption {
           left: 22px;
           right: 22px;
-          bottom: 24px;
+          bottom: 72px;
           max-width: none;
         }
 
@@ -2069,13 +2069,23 @@
           display: none;
         }
 
-        /* accession panel moves up since title is gone */
+        /* accession panel: move up, hide record detail rows — signal register is enough on mobile */
         .archive-experience.is-open .accession-panel {
           top: 58px;
         }
 
+        .archive-experience.is-open .accession-label,
+        .archive-experience.is-open .accession-record {
+          display: none;
+        }
+
+        .archive-experience.is-open .signal-register {
+          margin-top: 0;
+          border-top: none;
+        }
+
         .archive-experience.is-open .signal-flow {
-          top: 390px;
+          top: 220px;
           right: 0;
           bottom: 82px;
           left: 0;

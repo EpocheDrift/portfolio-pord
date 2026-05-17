@@ -880,7 +880,7 @@ export function mountArchiveExperience(container: HTMLElement) {
   
         window.addEventListener("pointerdown", (event) => {
           if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action")) return;
-          if (!isHovering) return;
+          if (event.pointerType !== "touch" && !isHovering) return;
           if (isRecordPage()) {
             closeRecordToQueue();
             return;
@@ -895,6 +895,22 @@ export function mountArchiveExperience(container: HTMLElement) {
             openFlow();
           }
         });
+
+        let touchStartY = 0;
+        let touchStartX = 0;
+
+        window.addEventListener("touchstart", (event) => {
+          touchStartY = event.touches[0].clientY;
+          touchStartX = event.touches[0].clientX;
+        }, { passive: true });
+
+        window.addEventListener("touchend", (event) => {
+          if (!isOpen || isRecordPage() || isInfoPage()) return;
+          const deltaY = touchStartY - event.changedTouches[0].clientY;
+          const deltaX = Math.abs(touchStartX - event.changedTouches[0].clientX);
+          if (Math.abs(deltaY) < 50 || deltaX > Math.abs(deltaY) * 0.7) return;
+          stepActive(deltaY > 0 ? 1 : -1);
+        }, { passive: true });
   
         signalCards.forEach((card, index) => {
           card.addEventListener("click", (event) => {
