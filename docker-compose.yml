@@ -1,6 +1,6 @@
 # Caddy config (add to your Caddyfile on VPS):
 #
-# archive.chaostudio.org {
+# zayn.chaostudio.org {
 #     reverse_proxy localhost:3010
 # }
 

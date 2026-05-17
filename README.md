@@ -2,7 +2,7 @@
 
 Personal portfolio archive built as a WebGL field system. Projects enter as signals, route through a tesseract-led interface, and surface as archive records.
 
-Live: [archive.chaostudio.org](https://archive.chaostudio.org)
+Live: [zayn.chaostudio.org](https://zayn.chaostudio.org)
 
 ## Stack
 
