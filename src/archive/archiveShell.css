@@ -731,18 +731,19 @@
 
       .field-return-hint {
         position: fixed;
-        z-index: 1;
+        z-index: 3;
         top: 0;
         left: 0;
         transform: translate(-50%, -50%);
         padding: 0;
         border: 0;
         background: transparent;
-        color: rgba(232, 225, 210, 0.52);
+        color: rgba(232, 225, 210, 0.62);
         font-family: "IBM Plex Sans Condensed", sans-serif;
         font-size: 11px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
+        mix-blend-mode: screen;
         cursor: none;
         opacity: 0;
         pointer-events: none;
