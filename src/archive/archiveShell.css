@@ -729,6 +729,37 @@
         opacity: 0.42;
       }
 
+      .field-return-hint {
+        position: fixed;
+        z-index: 14;
+        top: 42%;
+        right: 18%;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: rgba(232, 225, 210, 0.28);
+        font-family: "IBM Plex Sans Condensed", sans-serif;
+        font-size: 10px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        cursor: none;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 300ms ease;
+        user-select: none;
+      }
+
+      .archive-experience.is-open .field-return-hint {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .archive-experience.is-record-page .field-return-hint,
+      .archive-experience.is-info-page .field-return-hint {
+        opacity: 0;
+        pointer-events: none;
+      }
+
       .scanline {
         position: fixed;
         inset: 0;
@@ -1743,6 +1774,16 @@
         margin-left: 0;
       }
 
+      .archive-experience.record-template-case.is-record-page .record-plate:has(.record-plate-mark.has-media) .record-plate-caption {
+        position: static;
+        padding: 14px 18px 4px;
+        color: rgba(232, 225, 210, 0.44);
+      }
+
+      .archive-experience.record-template-case.is-record-page .record-plate:has(.record-plate-mark.has-media) .record-plate-live-link {
+        margin-top: 10px;
+      }
+
       .archive-experience.record-template-case.is-record-page .record-section {
         width: min(56ch, 42vw);
         margin-left: 6vw;
@@ -2238,6 +2279,14 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+        }
+
+        .field-return-hint {
+          top: auto;
+          right: auto;
+          left: 22px;
+          bottom: calc(44vh + 6px);
+          cursor: default;
         }
       }
     

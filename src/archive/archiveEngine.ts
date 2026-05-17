@@ -71,6 +71,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         const stateValue = root.querySelector(".state-value");
         const signalFlow = root.querySelector(".signal-flow");
         const mobileSignalList = root.querySelector(".mobile-signal-list");
+        const fieldReturnHint = root.querySelector(".field-return-hint");
         const signalCards = Array.from(root.querySelectorAll(".signal-card"));
         const signalRows = Array.from(root.querySelectorAll(".signal-row"));
         const utilityButtons = Array.from(root.querySelectorAll("[data-utility]"));
@@ -903,7 +904,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         });
   
         window.addEventListener("pointerdown", (event) => {
-          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list, .record-page")) return;
+          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list, .record-page, .field-return-hint")) return;
           if (event.pointerType !== "touch" && !isHovering) return;
           if (isRecordPage()) {
             closeRecordToQueue();
@@ -962,6 +963,11 @@ export function mountArchiveExperience(container: HTMLElement) {
         infoReturn.addEventListener("click", (event) => {
           event.stopPropagation();
           closeInfoPage();
+        });
+
+        fieldReturnHint?.addEventListener("click", (event) => {
+          event.stopPropagation();
+          if (isOpen) closeFlow();
         });
   
         recordActions.forEach((button) => {
