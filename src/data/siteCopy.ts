@@ -94,8 +94,8 @@ export const siteCopy = {
       zh: "混沌工作室",
     },
     processingFlow: {
-      en: "archive\n·\n2026",
-      zh: "档案\n·\n2026",
+      en: "archive\n2026",
+      zh: "档案\n2026",
     },
     queueSummary: {
       en: "Projects are routed through queue, focus, and record states.",

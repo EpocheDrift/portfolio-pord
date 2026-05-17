@@ -100,7 +100,7 @@ export const archiveMarkup = `
     </div>
     <div class="archive-caption" aria-hidden="true">
       chaostudio
-      <strong>archive<br />·<br />2026</strong>
+      <strong>archive<br />2026</strong>
     </div>
     <div class="field-pulse" aria-hidden="true">
       <span class="pulse-tick"></span>
