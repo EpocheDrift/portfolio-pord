@@ -541,6 +541,10 @@
         border-color: rgba(216, 170, 82, 0.75);
       }
 
+      .record-plate-live-link[hidden] {
+        display: none;
+      }
+
       .record-section {
         display: grid;
         grid-template-columns: 86px 1fr;
