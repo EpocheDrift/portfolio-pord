@@ -70,6 +70,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         const cursor = root.querySelector(".cursor");
         const stateValue = root.querySelector(".state-value");
         const signalFlow = root.querySelector(".signal-flow");
+        const mobileSignalList = root.querySelector(".mobile-signal-list");
         const signalCards = Array.from(root.querySelectorAll(".signal-card"));
         const signalRows = Array.from(root.querySelectorAll(".signal-row"));
         const utilityButtons = Array.from(root.querySelectorAll("[data-utility]"));
@@ -638,6 +639,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           signalFlow.setAttribute("aria-hidden", "true");
           infoPage.setAttribute("aria-hidden", "true");
           recordPage.setAttribute("aria-hidden", "false");
+          mobileSignalList?.setAttribute("aria-hidden", "true");
           signalCards.forEach((card) => {
             card.tabIndex = -1;
           });
@@ -755,6 +757,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           signalFlow.setAttribute("aria-hidden", "false");
           infoPage.setAttribute("aria-hidden", "true");
           recordPage.setAttribute("aria-hidden", "true");
+          mobileSignalList?.setAttribute("aria-hidden", "false");
           signalCards.forEach((card) => {
             card.tabIndex = 0;
           });
@@ -765,7 +768,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           renderSignals();
           writeRoute(routePath.open, options);
         }
-  
+
         function closeFlow(options = {}) {
           pageMode = "archive";
           isOpen = false;
@@ -776,6 +779,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           signalFlow.setAttribute("aria-hidden", "true");
           infoPage.setAttribute("aria-hidden", "true");
           recordPage.setAttribute("aria-hidden", "true");
+          mobileSignalList?.setAttribute("aria-hidden", "true");
           signalCards.forEach((card) => {
             card.tabIndex = -1;
           });
@@ -854,12 +858,31 @@ export function mountArchiveExperience(container: HTMLElement) {
           });
         }
   
+        function renderMobileSignalList() {
+          if (!mobileSignalList) return;
+          mobileSignalList.innerHTML = signals.map((signal, index) => {
+            const isActive = index === activeIndex;
+            return `<button class="mobile-signal-item${isActive ? " is-active" : ""}${signal.detailDisabled ? " is-disabled" : ""}" data-mobile-index="${index}" type="button">
+              <span class="mobile-signal-id">${signal.id}</span>
+              <span class="mobile-signal-name">${signal.name}</span>
+              <span class="mobile-signal-state">${signal.state}</span>
+            </button>`;
+          }).join("");
+          mobileSignalList.querySelectorAll("[data-mobile-index]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const index = parseInt(btn.dataset.mobileIndex);
+              if (canOpenSignal(signals[index])) openProjectRecord(index);
+            });
+          });
+        }
+
         function renderSignals() {
           const signal = signals[activeIndex];
           signalCards.forEach((card, index) => {
             renderCard(card, signals[index], index);
           });
           renderAccession(signal);
+          renderMobileSignalList();
         }
   
         function setActive(index, options = {}) {
@@ -896,22 +919,6 @@ export function mountArchiveExperience(container: HTMLElement) {
           }
         });
 
-        let touchStartY = 0;
-        let touchStartX = 0;
-
-        window.addEventListener("touchstart", (event) => {
-          touchStartY = event.touches[0].clientY;
-          touchStartX = event.touches[0].clientX;
-        }, { passive: true });
-
-        window.addEventListener("touchend", (event) => {
-          if (!isOpen || isRecordPage() || isInfoPage()) return;
-          const deltaY = touchStartY - event.changedTouches[0].clientY;
-          const deltaX = Math.abs(touchStartX - event.changedTouches[0].clientX);
-          if (Math.abs(deltaY) < 50 || deltaX > Math.abs(deltaY) * 0.7) return;
-          stepActive(deltaY > 0 ? 1 : -1);
-        }, { passive: true });
-  
         signalCards.forEach((card, index) => {
           card.addEventListener("click", (event) => {
             event.stopPropagation();
