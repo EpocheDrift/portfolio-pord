@@ -427,7 +427,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         let targetThickness = 1;
         let idleTimer = 0;
         let pulseTimer = 0;
-        let activeIndex = Math.max(0, getSignalIndexById("A01"));
+        let activeIndex = Math.max(0, getSignalIndexById("D04"));
         let wheelLocked = false;
         let pageMode = "archive";
         let stateMode = "closed";
@@ -586,9 +586,11 @@ export function mountArchiveExperience(container: HTMLElement) {
                         <figure
                           class="record-image-card ${image.src ? "has-media" : ""}"
                         >
-                          ${image.src
-                            ? `<img class="record-image" src="${image.src}" alt="${image.alt}" />`
-                            : `<div class="record-image-placeholder" aria-label="${image.alt}"></div>`}
+                          ${image.kind === "embed"
+                            ? `<iframe class="record-embed" src="${image.src}" title="${image.alt}" allowfullscreen loading="lazy"></iframe>`
+                            : image.src
+                              ? `<img class="record-image" src="${image.src}" alt="${image.alt}" />`
+                              : `<div class="record-image-placeholder" aria-label="${image.alt}"></div>`}
                           <figcaption class="record-image-caption">${image.caption}</figcaption>
                         </figure>
                       `)

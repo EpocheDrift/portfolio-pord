@@ -12,6 +12,275 @@ import tendSystemLayers from "../assets/projects/tend/tend-system-layers.svg";
 
 export const projects: ProjectRecord[] = [
   {
+    id: "D04",
+    slug: "tend",
+    liveUrl: "https://tend.chaostudio.org",
+    title: {
+      en: "Tend",
+    },
+    status: "demo complete",
+    statusLabel: {
+      en: "demo complete",
+      zh: "演示版完成",
+    },
+    type: "booking automation system",
+    typeLabel: {
+      en: "booking automation system",
+      zh: "预约自动化系统",
+    },
+    route: "DEMO / COMPLETE",
+    meta: "004 / booking automation / demo complete",
+    code: "z-04",
+    format: "system design / Next.js / state machine",
+    formatLabel: {
+      en: "system design / Next.js / state machine",
+      zh: "系统设计 / Next.js / 状态机",
+    },
+    summary: {
+      en: "A booking automation system for independent wellness practitioners. Built around a deterministic state machine: every booking moves through defined states, every transition is triggered by an event, every action is traceable.",
+      zh: "为独立 wellness 从业者构建的预约自动化系统。以确定性状态机为核心：每次预约经过明确定义的状态，每次跳转由事件触发，每个动作都可追溯。",
+    },
+    evidence: [
+      {
+        en: "3–5 hrs/week lost to booking coordination per independent practitioner",
+        zh: "每位独立从业者每周因预约协调损失 3–5 小时",
+      },
+      {
+        en: "Deterministic state machine — all transitions explicit, no hidden mutations",
+        zh: "确定性状态机——所有跳转显式，没有隐式状态变更",
+      },
+      {
+        en: "Policy layer: auto · draft · manual — practitioner controls automation level",
+        zh: "策略层：自动 · 草稿 · 手动——从业者掌控自动化程度",
+      },
+    ],
+    template: "slab",
+    metadata: [
+      { label: { en: "year", zh: "年份" }, value: { en: "2026" } },
+      { label: { en: "role", zh: "角色" }, value: { en: "system design / product", zh: "系统设计 / 产品" } },
+      { label: { en: "medium", zh: "媒介" }, value: { en: "Next.js / state machine / Docker", zh: "Next.js / 状态机 / Docker" } },
+      { label: { en: "status", zh: "状态" }, value: { en: "demo complete", zh: "演示版完成" } },
+      { label: { en: "ICP", zh: "目标用户" }, value: { en: "independent wellness practitioners", zh: "独立 wellness 从业者" } },
+      { label: { en: "demo", zh: "演示" }, value: { en: "tend.chaostudio.org", zh: "tend.chaostudio.org" } },
+    ],
+    sections: [
+      {
+        id: "booking-tax",
+        title: { en: "The coordination problem", zh: "协调成本" },
+        body: [
+          {
+            en: "Independent practitioners spend 3–5 hours per week on booking admin: answering inquiries, chasing intake forms, confirming availability, sending reminders. Existing tools either require complex setup (MindBody, Momence) or offer scheduling without automation (Acuity, Time2Book). Tend targets the gap: powerful automation that works without configuration.",
+            zh: "独立从业者每周花 3–5 小时在预约管理上：回复询问、追问填表、确认档期、发送提醒。现有工具要么配置复杂（MindBody、Momence），要么只提供日程安排而没有自动化（Acuity、Time2Book）。Tend 瞄准的正是这个空白：无需配置、开箱即用的强大自动化。",
+          },
+        ],
+      },
+      {
+        id: "harness",
+        title: { en: "Harness: the execution engine", zh: "Harness：执行引擎" },
+        body: [
+          {
+            en: "The core of Tend is the Harness — a deterministic execution engine that processes events, validates state, enforces policy, and applies transitions. No external system mutates booking state directly. Every action is logged. The booking lifecycle is a state machine with six defined states: new lead → intake pending → fit review → fit confirmed → awaiting confirmation → booked.",
+            zh: "Tend 的核心是 Harness——一个确定性执行引擎，处理事件、验证状态、执行策略、应用跳转。没有外部系统直接修改预约状态。每个动作都被记录。预约生命周期是一个有六个明确状态的状态机：新询盘 → 等待填表 → 适配评审 → 适配确认 → 等待确认 → 已预约。",
+          },
+        ],
+        mediaIds: ["tend-state-machine"],
+      },
+      {
+        id: "policy-layer",
+        title: { en: "Policy layer: controlled automation", zh: "策略层：受控自动化" },
+        body: [
+          {
+            en: "Automation without control creates anxiety. Tend's policy layer lets practitioners set each action to auto (execute immediately), draft (queue for approval), or manual (practitioner triggers). A practitioner who wants to review every intake email before it sends can do that. One who wants the entire flow automated can do that too. The system adapts to trust level, not the other way around.",
+            zh: "没有控制的自动化会制造焦虑。Tend 的策略层让从业者为每个动作设置模式：自动（立即执行）、草稿（排队等待审核）、手动（由从业者触发）。想在每封接诊邮件发出前先审查的从业者可以这样做。想完全自动化整个流程的也可以。系统适应信任程度，而不是反过来。",
+          },
+        ],
+        mediaIds: ["tend-system-layers"],
+      },
+      {
+        id: "build",
+        title: { en: "Build and deployment", zh: "构建与部署" },
+        body: [
+          {
+            en: "Tend is built on Next.js with the Harness running as a server-side service, deployed via Docker on a VPS. The demo at tend.chaostudio.org runs the full booking flow end-to-end: inquiry form, intake email, fit review, slot proposal, and booking confirmation — all through the state machine.",
+            zh: "Tend 基于 Next.js 构建，Harness 作为服务端服务运行，通过 Docker 部署在 VPS 上。tend.chaostudio.org 的演示运行完整的预约流程：询盘表单、接诊邮件、适配评审、档期提案、预约确认——全部经由状态机处理。",
+          },
+        ],
+        mediaIds: ["tend-demo-video"],
+      },
+    ],
+    media: [
+      {
+        id: "tend-state-machine",
+        kind: "image",
+        src: tendStateMachine,
+        role: "diagram",
+        alt: {
+          en: "Booking state machine: six states from new lead to booked.",
+          zh: "预约状态机：从新询盘到已预约的六个状态。",
+        },
+        caption: {
+          en: "State is the single source of truth. All transitions are explicit.",
+          zh: "状态是唯一的事实来源。所有跳转都是显式的。",
+        },
+      },
+      {
+        id: "tend-system-layers",
+        kind: "image",
+        src: tendSystemLayers,
+        role: "diagram",
+        alt: {
+          en: "System architecture: events enter, Harness processes, actions execute.",
+          zh: "系统架构：事件进入，Harness 处理，动作执行。",
+        },
+        caption: {
+          en: "Events in. Harness decides. Actions out. Policy controls the middle.",
+          zh: "事件进入。Harness 决策。动作输出。策略控制中间层。",
+        },
+      },
+      {
+        id: "tend-demo-video",
+        kind: "embed",
+        src: "https://www.youtube.com/embed/dcH8HoswkHs",
+        role: "plate",
+        alt: {
+          en: "Tend demo: full booking flow end-to-end through the state machine.",
+          zh: "Tend 演示：完整预约流程端到端经由状态机处理。",
+        },
+        caption: {
+          en: "Full booking flow: inquiry → intake → fit review → slot selection → confirmed.",
+          zh: "完整预约流程：询盘 → 接诊 → 适配评审 → 档期选择 → 确认。",
+        },
+      },
+    ],
+  },
+  {
+    id: "A01",
+    slug: "ccs",
+    title: {
+      en: "CCS",
+      zh: "认知连续系统",
+    },
+    status: "specification complete",
+    statusLabel: {
+      en: "specification complete",
+      zh: "规格完成",
+    },
+    type: "AI operating system / personal infrastructure",
+    typeLabel: {
+      en: "AI operating system / personal infrastructure",
+      zh: "AI 操作系统 / 个人基础设施",
+    },
+    route: "FIELD / ACTIVE",
+    meta: "001 / cognitive continuity / specification complete",
+    code: "z-01",
+    format: "AI agent spec / system design",
+    formatLabel: {
+      en: "AI agent spec / system design",
+      zh: "AI 代理规格 / 系统设计",
+    },
+    plateCaption: {
+      en: "Three-layer architecture: Passive Capture → AI Processing → Output Modules.",
+      zh: "三层架构：被动捕捉 → AI 处理 → 输出模块。",
+    },
+    summary: {
+      en: "A personal AI operating system that passively captures cognitive context as you work — so the record of what you were doing, thinking, and deciding is never lost.",
+      zh: "一个个人 AI 操作系统，在你工作时被动捕捉认知上下文——让你决策的过程、当时的状态与思考的脉络，永远不会丢失。",
+    },
+    evidence: [
+      {
+        en: "The system continuously watches. You only need to decide.",
+        zh: "系统持续看着你。你只需要做决定。",
+      },
+      {
+        en: "Passive capture removes the act of remembering from the cognitive stack.",
+        zh: "被动捕捉将\"记忆\"这个动作从认知负担中移除。",
+      },
+      {
+        en: "v0.1 runs on Notion. v0.2 is designed and waiting.",
+        zh: "v0.1 在 Notion 上运行。v0.2 已设计完成，等待实现。",
+      },
+    ],
+    template: "slab",
+    metadata: [
+      { label: { en: "year", zh: "年份" }, value: { en: "2025–2026", zh: "2025–2026" } },
+      { label: { en: "role", zh: "角色" }, value: { en: "concept / design / system architecture", zh: "概念 / 设计 / 系统架构" } },
+      { label: { en: "medium", zh: "媒介" }, value: { en: "AI agent spec / product documentation / system design", zh: "AI 代理规格 / 产品文档 / 系统设计" } },
+      { label: { en: "status", zh: "状态" }, value: { en: "specification complete", zh: "规格完成" } },
+      { label: { en: "context", zh: "背景" }, value: { en: "personal research", zh: "个人研究" } },
+      { label: { en: "v0.1", zh: "v0.1" }, value: { en: "manual snapshots / live", zh: "手动快照 / 运行中" } },
+      { label: { en: "v0.2", zh: "v0.2" }, value: { en: "passive sensing / design complete", zh: "被动感知 / 设计完成" } },
+    ],
+    sections: [
+      {
+        id: "gap",
+        title: { en: "The Gap Between Action and Record", zh: "行动与记录之间的空白" },
+        body: [
+          {
+            en: "Every day, we operate in a continuous stream of cognitive state: what we were working on, what decision we were mid-way through, what context made a particular choice make sense. These states generate, shift, and dissolve faster than we can capture them.",
+            zh: "每一天，我们都在持续的认知状态流中运作：做到哪里了，哪个决定还悬着，是什么上下文让某个选择在当时显得合理。这些状态生成、变化、消散的速度，比我们能记下来的速度还要快。",
+          },
+          {
+            en: "When we return to a task after interruption — after a meeting, after sleep, after a week — we spend time and energy reconstructing the state we were in. That reconstruction is imperfect. The original context is partly gone.",
+            zh: "当我们在中断后回到一项任务——一次会议之后，睡眠之后，一周之后——需要花时间重建当时的状态。这种重建从来不完整。原始的上下文已经部分消失了。",
+          },
+          {
+            en: "CCS begins from a single premise: the gap between doing and recording should not exist. If the system watches continuously, you never have to remember to remember.",
+            zh: "CCS 从一个前提出发：做与记录之间的空白不应该存在。如果系统持续地看着你，你就永远不需要记得去记住。",
+          },
+        ],
+        mediaIds: ["ccs-architecture"],
+      },
+      {
+        id: "architecture",
+        title: { en: "Three-Layer Architecture", zh: "三层架构" },
+        body: [
+          {
+            en: "The system is designed in three layers. Layer 1 is Passive Capture: the environment continuously records — screenshots, wearable camera, ambient audio — without requiring any intentional act from the user. Layer 2 is AI Processing: raw capture is parsed and structured by AI into meaningful snapshots, state records, and decision contexts. Layer 3 is Output: structured context becomes usable — morning briefings, auto-generated snapshots, task agent handoffs, context pools for future recall, and message agents that surface relevant prior state.",
+            zh: "系统分为三层。第一层是被动捕捉：环境持续记录——截图、可穿戴摄像头、环境音频——无需任何主动行为。第二层是 AI 处理：原始捕捉被解析并结构化为快照、状态记录和决策上下文。第三层是输出：结构化的上下文变得可用——早晨简报、自动生成的快照、任务代理交接、供未来回溯的上下文池，以及主动呈现历史状态的消息代理。",
+          },
+          {
+            en: "The key design principle across all three layers is removal of friction. The user does not decide when to capture. The user does not structure the record. The system handles both. The user only encounters the output — when they need it.",
+            zh: "贯穿三层的核心设计原则是消除摩擦。不需要决定何时捕捉，不需要整理记录——系统处理这一切。只有在需要时，输出才会出现。",
+          },
+        ],
+      },
+      {
+        id: "versioning",
+        title: { en: "From Spec to Living System", zh: "从规格到运行系统" },
+        body: [
+          {
+            en: "v0.1 runs today. It is a manual practice: periodic state snapshots, captured in structured Notion documents, recording what I am working on, what decisions are open, and what context the next session will need. It is imperfect — it requires intention — but it has confirmed the value of the underlying model.",
+            zh: "v0.1 今天仍在运行。它是一种手动实践：定期的状态快照，记录在结构化的 Notion 文档里——我在做什么、哪些决定还悬着、下次会话需要什么上下文。不完美，需要主动意图。但它已经验证了底层模型的价值。",
+          },
+          {
+            en: "v0.2 is fully designed but not yet built. The passive sensing core replaces intention with infrastructure: always-on capture, AI-structured output, ambient delivery. The spec is complete: architecture, data flow, privacy constraints, and output module behavior are all documented.",
+            zh: "v0.2 已经完整设计，但尚未构建。被动感知核心用基础设施替代了意图：持续开启的捕捉，AI 结构化的输出，环境式的传递。规格已经完成——架构、数据流、隐私约束、输出模块行为，都已有文档记录。",
+          },
+          {
+            en: "The gap between v0.1 and v0.2 is the gap between a manual practice and an operating system. CCS is currently in that gap — and the design work in that gap is the artifact.",
+            zh: "v0.1 和 v0.2 之间的距离，是手动实践与操作系统之间的距离。CCS 目前在那个距离中——而那个距离中的设计工作，就是这个档案记录的。",
+          },
+        ],
+      },
+    ],
+    media: [
+      {
+        id: "ccs-architecture",
+        kind: "image",
+        src: ccsArchitecture,
+        role: "plate",
+        alt: {
+          en: "Three-layer system architecture diagram: Passive Capture, AI Processing, and Output Modules.",
+          zh: "三层系统架构图：被动捕捉、AI 处理与输出模块。",
+        },
+        caption: {
+          en: "Three-layer system: Passive Capture → AI Processing → Output Modules.",
+          zh: "三层系统：被动捕捉 → AI 处理 → 输出模块。",
+        },
+      },
+    ],
+  },
+  {
     id: "B02",
     slug: "energy-sense",
     liveUrl: "https://energy.chaostudio.org",
@@ -159,133 +428,6 @@ export const projects: ProjectRecord[] = [
         caption: {
           en: "The landscape opens into directional flow. You are entering a focus window.",
           zh: "场域向有方向的流动打开。你正在进入一个专注窗口。",
-        },
-      },
-    ],
-  },
-  {
-    id: "A01",
-    slug: "ccs",
-    title: {
-      en: "CCS",
-      zh: "认知连续系统",
-    },
-    status: "specification complete",
-    statusLabel: {
-      en: "specification complete",
-      zh: "规格完成",
-    },
-    type: "AI operating system / personal infrastructure",
-    typeLabel: {
-      en: "AI operating system / personal infrastructure",
-      zh: "AI 操作系统 / 个人基础设施",
-    },
-    route: "FIELD / ACTIVE",
-    meta: "001 / cognitive continuity / specification complete",
-    code: "z-01",
-    format: "AI agent spec / system design",
-    formatLabel: {
-      en: "AI agent spec / system design",
-      zh: "AI 代理规格 / 系统设计",
-    },
-    plateCaption: {
-      en: "Three-layer architecture: Passive Capture → AI Processing → Output Modules.",
-      zh: "三层架构：被动捕捉 → AI 处理 → 输出模块。",
-    },
-    summary: {
-      en: "A personal AI operating system that passively captures cognitive context as you work — so the record of what you were doing, thinking, and deciding is never lost.",
-      zh: "一个个人 AI 操作系统，在你工作时被动捕捉认知上下文——让你决策的过程、当时的状态与思考的脉络，永远不会丢失。",
-    },
-    evidence: [
-      {
-        en: "The system continuously watches. You only need to decide.",
-        zh: "系统持续看着你。你只需要做决定。",
-      },
-      {
-        en: "Passive capture removes the act of remembering from the cognitive stack.",
-        zh: "被动捕捉将\"记忆\"这个动作从认知负担中移除。",
-      },
-      {
-        en: "v0.1 runs on Notion. v0.2 is designed and waiting.",
-        zh: "v0.1 在 Notion 上运行。v0.2 已设计完成，等待实现。",
-      },
-    ],
-    template: "slab",
-    metadata: [
-      { label: { en: "year", zh: "年份" }, value: { en: "2025–2026", zh: "2025–2026" } },
-      { label: { en: "role", zh: "角色" }, value: { en: "concept / design / system architecture", zh: "概念 / 设计 / 系统架构" } },
-      { label: { en: "medium", zh: "媒介" }, value: { en: "AI agent spec / product documentation / system design", zh: "AI 代理规格 / 产品文档 / 系统设计" } },
-      { label: { en: "status", zh: "状态" }, value: { en: "specification complete", zh: "规格完成" } },
-      { label: { en: "context", zh: "背景" }, value: { en: "personal research", zh: "个人研究" } },
-      { label: { en: "v0.1", zh: "v0.1" }, value: { en: "manual snapshots / live", zh: "手动快照 / 运行中" } },
-      { label: { en: "v0.2", zh: "v0.2" }, value: { en: "passive sensing / design complete", zh: "被动感知 / 设计完成" } },
-    ],
-    sections: [
-      {
-        id: "gap",
-        title: { en: "The Gap Between Action and Record", zh: "行动与记录之间的空白" },
-        body: [
-          {
-            en: "Every day, we operate in a continuous stream of cognitive state: what we were working on, what decision we were mid-way through, what context made a particular choice make sense. These states generate, shift, and dissolve faster than we can capture them.",
-            zh: "每一天，我们都在持续的认知状态流中运作：做到哪里了，哪个决定还悬着，是什么上下文让某个选择在当时显得合理。这些状态生成、变化、消散的速度，比我们能记下来的速度还要快。",
-          },
-          {
-            en: "When we return to a task after interruption — after a meeting, after sleep, after a week — we spend time and energy reconstructing the state we were in. That reconstruction is imperfect. The original context is partly gone.",
-            zh: "当我们在中断后回到一项任务——一次会议之后，睡眠之后，一周之后——需要花时间重建当时的状态。这种重建从来不完整。原始的上下文已经部分消失了。",
-          },
-          {
-            en: "CCS begins from a single premise: the gap between doing and recording should not exist. If the system watches continuously, you never have to remember to remember.",
-            zh: "CCS 从一个前提出发：做与记录之间的空白不应该存在。如果系统持续地看着你，你就永远不需要记得去记住。",
-          },
-        ],
-        mediaIds: ["ccs-architecture"],
-      },
-      {
-        id: "architecture",
-        title: { en: "Three-Layer Architecture", zh: "三层架构" },
-        body: [
-          {
-            en: "The system is designed in three layers. Layer 1 is Passive Capture: the environment continuously records — screenshots, wearable camera, ambient audio — without requiring any intentional act from the user. Layer 2 is AI Processing: raw capture is parsed and structured by AI into meaningful snapshots, state records, and decision contexts. Layer 3 is Output: structured context becomes usable — morning briefings, auto-generated snapshots, task agent handoffs, context pools for future recall, and message agents that surface relevant prior state.",
-            zh: "系统分为三层。第一层是被动捕捉：环境持续记录——截图、可穿戴摄像头、环境音频——无需任何主动行为。第二层是 AI 处理：原始捕捉被解析并结构化为快照、状态记录和决策上下文。第三层是输出：结构化的上下文变得可用——早晨简报、自动生成的快照、任务代理交接、供未来回溯的上下文池，以及主动呈现历史状态的消息代理。",
-          },
-          {
-            en: "The key design principle across all three layers is removal of friction. The user does not decide when to capture. The user does not structure the record. The system handles both. The user only encounters the output — when they need it.",
-            zh: "贯穿三层的核心设计原则是消除摩擦。不需要决定何时捕捉，不需要整理记录——系统处理这一切。只有在需要时，输出才会出现。",
-          },
-        ],
-      },
-      {
-        id: "versioning",
-        title: { en: "From Spec to Living System", zh: "从规格到运行系统" },
-        body: [
-          {
-            en: "v0.1 runs today. It is a manual practice: periodic state snapshots, captured in structured Notion documents, recording what I am working on, what decisions are open, and what context the next session will need. It is imperfect — it requires intention — but it has confirmed the value of the underlying model.",
-            zh: "v0.1 今天仍在运行。它是一种手动实践：定期的状态快照，记录在结构化的 Notion 文档里——我在做什么、哪些决定还悬着、下次会话需要什么上下文。不完美，需要主动意图。但它已经验证了底层模型的价值。",
-          },
-          {
-            en: "v0.2 is fully designed but not yet built. The passive sensing core replaces intention with infrastructure: always-on capture, AI-structured output, ambient delivery. The spec is complete: architecture, data flow, privacy constraints, and output module behavior are all documented.",
-            zh: "v0.2 已经完整设计，但尚未构建。被动感知核心用基础设施替代了意图：持续开启的捕捉，AI 结构化的输出，环境式的传递。规格已经完成——架构、数据流、隐私约束、输出模块行为，都已有文档记录。",
-          },
-          {
-            en: "The gap between v0.1 and v0.2 is the gap between a manual practice and an operating system. CCS is currently in that gap — and the design work in that gap is the artifact.",
-            zh: "v0.1 和 v0.2 之间的距离，是手动实践与操作系统之间的距离。CCS 目前在那个距离中——而那个距离中的设计工作，就是这个档案记录的。",
-          },
-        ],
-      },
-    ],
-    media: [
-      {
-        id: "ccs-architecture",
-        kind: "image",
-        src: ccsArchitecture,
-        role: "plate",
-        alt: {
-          en: "Three-layer system architecture diagram: Passive Capture, AI Processing, and Output Modules.",
-          zh: "三层系统架构图：被动捕捉、AI 处理与输出模块。",
-        },
-        caption: {
-          en: "Three-layer system: Passive Capture → AI Processing → Output Modules.",
-          zh: "三层系统：被动捕捉 → AI 处理 → 输出模块。",
         },
       },
     ],
@@ -511,133 +653,6 @@ export const projects: ProjectRecord[] = [
         caption: {
           en: "The queue structure compresses project browsing into signal states.",
           zh: "队列结构把项目浏览压缩成信号状态。",
-        },
-      },
-    ],
-  },
-  {
-    id: "D04",
-    slug: "tend",
-    liveUrl: "https://tend.chaostudio.org",
-    title: {
-      en: "Tend",
-    },
-    status: "demo complete",
-    statusLabel: {
-      en: "demo complete",
-      zh: "演示版完成",
-    },
-    type: "booking automation system",
-    typeLabel: {
-      en: "booking automation system",
-      zh: "预约自动化系统",
-    },
-    route: "DEMO / COMPLETE",
-    meta: "004 / booking automation / demo complete",
-    code: "z-04",
-    format: "system design / Next.js / state machine",
-    formatLabel: {
-      en: "system design / Next.js / state machine",
-      zh: "系统设计 / Next.js / 状态机",
-    },
-    summary: {
-      en: "A booking automation system for independent wellness practitioners. Built around a deterministic state machine: every booking moves through defined states, every transition is triggered by an event, every action is traceable.",
-      zh: "为独立 wellness 从业者构建的预约自动化系统。以确定性状态机为核心：每次预约经过明确定义的状态，每次跳转由事件触发，每个动作都可追溯。",
-    },
-    evidence: [
-      {
-        en: "3–5 hrs/week lost to booking coordination per independent practitioner",
-        zh: "每位独立从业者每周因预约协调损失 3–5 小时",
-      },
-      {
-        en: "Deterministic state machine — all transitions explicit, no hidden mutations",
-        zh: "确定性状态机——所有跳转显式，没有隐式状态变更",
-      },
-      {
-        en: "Policy layer: auto · draft · manual — practitioner controls automation level",
-        zh: "策略层：自动 · 草稿 · 手动——从业者掌控自动化程度",
-      },
-    ],
-    template: "slab",
-    metadata: [
-      { label: { en: "year", zh: "年份" }, value: { en: "2026" } },
-      { label: { en: "role", zh: "角色" }, value: { en: "system design / product", zh: "系统设计 / 产品" } },
-      { label: { en: "medium", zh: "媒介" }, value: { en: "Next.js / state machine / Docker", zh: "Next.js / 状态机 / Docker" } },
-      { label: { en: "status", zh: "状态" }, value: { en: "demo complete", zh: "演示版完成" } },
-      { label: { en: "ICP", zh: "目标用户" }, value: { en: "independent wellness practitioners", zh: "独立 wellness 从业者" } },
-      { label: { en: "demo", zh: "演示" }, value: { en: "tend.chaostudio.org", zh: "tend.chaostudio.org" } },
-    ],
-    sections: [
-      {
-        id: "booking-tax",
-        title: { en: "The coordination problem", zh: "协调成本" },
-        body: [
-          {
-            en: "Independent practitioners spend 3–5 hours per week on booking admin: answering inquiries, chasing intake forms, confirming availability, sending reminders. Existing tools either require complex setup (MindBody, Momence) or offer scheduling without automation (Acuity, Time2Book). Tend targets the gap: powerful automation that works without configuration.",
-            zh: "独立从业者每周花 3–5 小时在预约管理上：回复询问、追问填表、确认档期、发送提醒。现有工具要么配置复杂（MindBody、Momence），要么只提供日程安排而没有自动化（Acuity、Time2Book）。Tend 瞄准的正是这个空白：无需配置、开箱即用的强大自动化。",
-          },
-        ],
-      },
-      {
-        id: "harness",
-        title: { en: "Harness: the execution engine", zh: "Harness：执行引擎" },
-        body: [
-          {
-            en: "The core of Tend is the Harness — a deterministic execution engine that processes events, validates state, enforces policy, and applies transitions. No external system mutates booking state directly. Every action is logged. The booking lifecycle is a state machine with six defined states: new lead → intake pending → fit review → fit confirmed → awaiting confirmation → booked.",
-            zh: "Tend 的核心是 Harness——一个确定性执行引擎，处理事件、验证状态、执行策略、应用跳转。没有外部系统直接修改预约状态。每个动作都被记录。预约生命周期是一个有六个明确状态的状态机：新询盘 → 等待填表 → 适配评审 → 适配确认 → 等待确认 → 已预约。",
-          },
-        ],
-        mediaIds: ["tend-state-machine"],
-      },
-      {
-        id: "policy-layer",
-        title: { en: "Policy layer: controlled automation", zh: "策略层：受控自动化" },
-        body: [
-          {
-            en: "Automation without control creates anxiety. Tend's policy layer lets practitioners set each action to auto (execute immediately), draft (queue for approval), or manual (practitioner triggers). A practitioner who wants to review every intake email before it sends can do that. One who wants the entire flow automated can do that too. The system adapts to trust level, not the other way around.",
-            zh: "没有控制的自动化会制造焦虑。Tend 的策略层让从业者为每个动作设置模式：自动（立即执行）、草稿（排队等待审核）、手动（由从业者触发）。想在每封接诊邮件发出前先审查的从业者可以这样做。想完全自动化整个流程的也可以。系统适应信任程度，而不是反过来。",
-          },
-        ],
-        mediaIds: ["tend-system-layers"],
-      },
-      {
-        id: "build",
-        title: { en: "Build and deployment", zh: "构建与部署" },
-        body: [
-          {
-            en: "Tend is built on Next.js with the Harness running as a server-side service, deployed via Docker on a VPS. The demo at tend.chaostudio.org runs the full booking flow end-to-end: inquiry form, intake email, fit review, slot proposal, and booking confirmation — all through the state machine.",
-            zh: "Tend 基于 Next.js 构建，Harness 作为服务端服务运行，通过 Docker 部署在 VPS 上。tend.chaostudio.org 的演示运行完整的预约流程：询盘表单、接诊邮件、适配评审、档期提案、预约确认——全部经由状态机处理。",
-          },
-        ],
-      },
-    ],
-    media: [
-      {
-        id: "tend-state-machine",
-        kind: "image",
-        src: tendStateMachine,
-        role: "diagram",
-        alt: {
-          en: "Booking state machine: six states from new lead to booked.",
-          zh: "预约状态机：从新询盘到已预约的六个状态。",
-        },
-        caption: {
-          en: "State is the single source of truth. All transitions are explicit.",
-          zh: "状态是唯一的事实来源。所有跳转都是显式的。",
-        },
-      },
-      {
-        id: "tend-system-layers",
-        kind: "image",
-        src: tendSystemLayers,
-        role: "diagram",
-        alt: {
-          en: "System architecture: events enter, Harness processes, actions execute.",
-          zh: "系统架构：事件进入，Harness 处理，动作执行。",
-        },
-        caption: {
-          en: "Events in. Harness decides. Actions out. Policy controls the middle.",
-          zh: "事件进入。Harness 决策。动作输出。策略控制中间层。",
         },
       },
     ],
