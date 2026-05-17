@@ -732,8 +732,9 @@
       .field-return-hint {
         position: fixed;
         z-index: 14;
-        top: 42%;
-        right: 18%;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
         padding: 0;
         border: 0;
         background: transparent;
@@ -747,6 +748,7 @@
         pointer-events: none;
         transition: opacity 300ms ease;
         user-select: none;
+        white-space: nowrap;
       }
 
       .archive-experience.is-open .field-return-hint {
@@ -1912,7 +1914,7 @@
           display: flex;
           flex-direction: column;
           gap: 0;
-          padding: 34px 18px 106px;
+          padding: 0 18px 106px;
         }
 
         .archive-experience.is-record-page .record-sidebar,
@@ -1944,7 +1946,7 @@
         }
 
         .archive-experience.record-template-slab.is-record-page .record-actions {
-          order: 8;
+          order: 0;
         }
 
         .archive-experience.is-record-page .record-sidebar > div:nth-child(2) {
@@ -1953,6 +1955,7 @@
 
         .record-kicker {
           order: 1;
+          padding-top: 28px;
         }
 
         .record-title {
@@ -2081,10 +2084,17 @@
         }
 
         .record-actions {
-          order: 8;
-          position: static;
-          width: 100%;
-          margin-top: 34px;
+          order: 0;
+          position: sticky;
+          top: 0;
+          z-index: 20;
+          width: calc(100% + 36px);
+          margin-top: 0;
+          margin-left: -18px;
+          background: rgba(5, 6, 5, 0.94);
+          backdrop-filter: blur(6px);
+          border-bottom: 1px solid rgba(232, 225, 210, 0.12);
+          border-top: none;
         }
 
         .accession-panel {
@@ -2282,10 +2292,6 @@
         }
 
         .field-return-hint {
-          top: auto;
-          right: auto;
-          left: 22px;
-          bottom: calc(44vh + 6px);
           cursor: default;
         }
       }

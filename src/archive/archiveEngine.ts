@@ -1390,6 +1390,15 @@ export function mountArchiveExperience(container: HTMLElement) {
           }
   
           updateTesseract(elapsed, delta);
+
+          if (fieldReturnHint && isOpen) {
+            const _hintPos = new THREE.Vector3();
+            tesseract.group.getWorldPosition(_hintPos);
+            _hintPos.project(camera);
+            fieldReturnHint.style.left = ((_hintPos.x + 1) / 2 * window.innerWidth) + "px";
+            fieldReturnHint.style.top = ((-_hintPos.y + 1) / 2 * window.innerHeight) + "px";
+          }
+
           renderer.render(scene, camera);
           requestAnimationFrame(animate);
         }
