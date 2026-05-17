@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 160">
+  <style>
+    text { font-family: 'IBM Plex Sans Condensed', monospace; letter-spacing: 0.07em; }
+    .sh { fill: #d7ac61; font-size: 9px; }
+    .si { fill: #e8e1d2; font-size: 9px; opacity: 0.65; }
+    .sm { fill: #e8e1d2; font-size: 8px; opacity: 0.42; }
+    .sb { fill: none; stroke: #d7ac61; stroke-width: 0.75; opacity: 0.5; }
+    .al { stroke: #d7ac61; stroke-width: 0.75; opacity: 0.6; }
+    .dv { stroke: #d7ac61; stroke-width: 0.5; opacity: 0.3; }
+  </style>
+
+  <!-- Box 1: EVENTS -->
+  <rect class="sb" x="10" y="10" width="150" height="140"/>
+  <text class="sh" x="24" y="32">EVENTS</text>
+  <line class="dv" x1="24" y1="40" x2="146" y2="40"/>
+  <text class="si" x="24" y="58">booking_inquiry</text>
+  <text class="si" x="24" y="76">intake_completed</text>
+  <text class="si" x="24" y="94">fit_review_done</text>
+  <text class="si" x="24" y="112">slot_selected</text>
+
+  <line class="al" x1="162" y1="80" x2="176" y2="80"/>
+  <polygon points="176,76 186,80 176,84" fill="#d7ac61" opacity="0.6"/>
+
+  <!-- Box 2: HARNESS ENGINE -->
+  <rect class="sb" x="188" y="10" width="372" height="140"/>
+  <text class="sh" x="202" y="32">HARNESS ENGINE</text>
+  <line class="dv" x1="202" y1="40" x2="546" y2="40"/>
+  <text class="si" x="202" y="58">event received → state validated</text>
+  <text class="si" x="202" y="76">policy checked → action executed</text>
+  <text class="si" x="202" y="94">state updated → timeline logged</text>
+  <line class="dv" x1="202" y1="106" x2="546" y2="106"/>
+  <text class="sm" x="202" y="121">POLICY</text>
+  <text class="sm" x="248" y="121">auto · draft · manual</text>
+  <text class="sm" x="202" y="138">deterministic · traceable · no hidden state mutations</text>
+
+  <line class="al" x1="562" y1="80" x2="576" y2="80"/>
+  <polygon points="576,76 586,80 576,84" fill="#d7ac61" opacity="0.6"/>
+
+  <!-- Box 3: OUTPUT -->
+  <rect class="sb" x="588" y="10" width="222" height="140"/>
+  <text class="sh" x="602" y="32">OUTPUT</text>
+  <line class="dv" x1="602" y1="40" x2="796" y2="40"/>
+  <text class="si" x="602" y="58">send_intake_email</text>
+  <text class="si" x="602" y="76">approve_fit</text>
+  <text class="si" x="602" y="94">propose_time_slots</text>
+  <text class="si" x="602" y="112">confirm_booking</text>
+  <text class="si" x="602" y="130">schedule_reminder</text>
+</svg>

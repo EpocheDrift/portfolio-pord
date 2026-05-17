@@ -1711,24 +1711,17 @@
         position: fixed;
         z-index: 18;
         left: 32px;
-        top: 28px;
+        top: 54px;
         width: min(32vw, 460px);
-        height: calc(100vh - 50px);
-        grid-template-rows: auto auto 1fr;
+        height: calc(100vh - 88px);
       }
 
       .archive-experience.record-template-case.is-record-page .record-actions {
-        grid-row: 1;
-        border-top: 0;
-      }
-
-      .archive-experience.record-template-case.is-record-page .record-sidebar > div:first-child {
-        grid-row: 2;
-        padding-top: 12px;
-      }
-
-      .archive-experience.record-template-case.is-record-page .record-sidebar > div:nth-child(2) {
-        grid-row: 3;
+        position: fixed;
+        right: 32px;
+        top: 28px;
+        width: min(28vw, 340px);
+        z-index: 20;
       }
 
       .archive-experience.record-template-case.is-record-page .record-title {

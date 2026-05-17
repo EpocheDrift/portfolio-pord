@@ -7,6 +7,8 @@ import ccsArchitecture from "../assets/projects/ccs/ccs-architecture.svg";
 import energyClarityState from "../assets/projects/energy-sense/energy-clarity-state.png";
 import energyDrainState from "../assets/projects/energy-sense/energy-drain-state.png";
 import energyRecoveryState from "../assets/projects/energy-sense/energy-recovery-state.png";
+import tendStateMachine from "../assets/projects/tend/tend-state-machine.svg";
+import tendSystemLayers from "../assets/projects/tend/tend-system-layers.svg";
 
 export const projects: ProjectRecord[] = [
   {
@@ -509,6 +511,133 @@ export const projects: ProjectRecord[] = [
         caption: {
           en: "The queue structure compresses project browsing into signal states.",
           zh: "队列结构把项目浏览压缩成信号状态。",
+        },
+      },
+    ],
+  },
+  {
+    id: "D04",
+    slug: "tend",
+    liveUrl: "https://tend.chaostudio.org",
+    title: {
+      en: "Tend",
+    },
+    status: "demo complete",
+    statusLabel: {
+      en: "demo complete",
+      zh: "演示版完成",
+    },
+    type: "booking automation system",
+    typeLabel: {
+      en: "booking automation system",
+      zh: "预约自动化系统",
+    },
+    route: "DEMO / COMPLETE",
+    meta: "004 / booking automation / demo complete",
+    code: "z-04",
+    format: "system design / Next.js / state machine",
+    formatLabel: {
+      en: "system design / Next.js / state machine",
+      zh: "系统设计 / Next.js / 状态机",
+    },
+    summary: {
+      en: "A booking automation system for independent wellness practitioners. Built around a deterministic state machine: every booking moves through defined states, every transition is triggered by an event, every action is traceable.",
+      zh: "为独立 wellness 从业者构建的预约自动化系统。以确定性状态机为核心：每次预约经过明确定义的状态，每次跳转由事件触发，每个动作都可追溯。",
+    },
+    evidence: [
+      {
+        en: "3–5 hrs/week lost to booking coordination per independent practitioner",
+        zh: "每位独立从业者每周因预约协调损失 3–5 小时",
+      },
+      {
+        en: "Deterministic state machine — all transitions explicit, no hidden mutations",
+        zh: "确定性状态机——所有跳转显式，没有隐式状态变更",
+      },
+      {
+        en: "Policy layer: auto · draft · manual — practitioner controls automation level",
+        zh: "策略层：自动 · 草稿 · 手动——从业者掌控自动化程度",
+      },
+    ],
+    template: "slab",
+    metadata: [
+      { label: { en: "year", zh: "年份" }, value: { en: "2026" } },
+      { label: { en: "role", zh: "角色" }, value: { en: "system design / product", zh: "系统设计 / 产品" } },
+      { label: { en: "medium", zh: "媒介" }, value: { en: "Next.js / state machine / Docker", zh: "Next.js / 状态机 / Docker" } },
+      { label: { en: "status", zh: "状态" }, value: { en: "demo complete", zh: "演示版完成" } },
+      { label: { en: "ICP", zh: "目标用户" }, value: { en: "independent wellness practitioners", zh: "独立 wellness 从业者" } },
+      { label: { en: "demo", zh: "演示" }, value: { en: "tend.chaostudio.org", zh: "tend.chaostudio.org" } },
+    ],
+    sections: [
+      {
+        id: "booking-tax",
+        title: { en: "The coordination problem", zh: "协调成本" },
+        body: [
+          {
+            en: "Independent practitioners spend 3–5 hours per week on booking admin: answering inquiries, chasing intake forms, confirming availability, sending reminders. Existing tools either require complex setup (MindBody, Momence) or offer scheduling without automation (Acuity, Time2Book). Tend targets the gap: powerful automation that works without configuration.",
+            zh: "独立从业者每周花 3–5 小时在预约管理上：回复询问、追问填表、确认档期、发送提醒。现有工具要么配置复杂（MindBody、Momence），要么只提供日程安排而没有自动化（Acuity、Time2Book）。Tend 瞄准的正是这个空白：无需配置、开箱即用的强大自动化。",
+          },
+        ],
+      },
+      {
+        id: "harness",
+        title: { en: "Harness: the execution engine", zh: "Harness：执行引擎" },
+        body: [
+          {
+            en: "The core of Tend is the Harness — a deterministic execution engine that processes events, validates state, enforces policy, and applies transitions. No external system mutates booking state directly. Every action is logged. The booking lifecycle is a state machine with six defined states: new lead → intake pending → fit review → fit confirmed → awaiting confirmation → booked.",
+            zh: "Tend 的核心是 Harness——一个确定性执行引擎，处理事件、验证状态、执行策略、应用跳转。没有外部系统直接修改预约状态。每个动作都被记录。预约生命周期是一个有六个明确状态的状态机：新询盘 → 等待填表 → 适配评审 → 适配确认 → 等待确认 → 已预约。",
+          },
+        ],
+        mediaIds: ["tend-state-machine"],
+      },
+      {
+        id: "policy-layer",
+        title: { en: "Policy layer: controlled automation", zh: "策略层：受控自动化" },
+        body: [
+          {
+            en: "Automation without control creates anxiety. Tend's policy layer lets practitioners set each action to auto (execute immediately), draft (queue for approval), or manual (practitioner triggers). A practitioner who wants to review every intake email before it sends can do that. One who wants the entire flow automated can do that too. The system adapts to trust level, not the other way around.",
+            zh: "没有控制的自动化会制造焦虑。Tend 的策略层让从业者为每个动作设置模式：自动（立即执行）、草稿（排队等待审核）、手动（由从业者触发）。想在每封接诊邮件发出前先审查的从业者可以这样做。想完全自动化整个流程的也可以。系统适应信任程度，而不是反过来。",
+          },
+        ],
+        mediaIds: ["tend-system-layers"],
+      },
+      {
+        id: "build",
+        title: { en: "Build and deployment", zh: "构建与部署" },
+        body: [
+          {
+            en: "Tend is built on Next.js with the Harness running as a server-side service, deployed via Docker on a VPS. The demo at tend.chaostudio.org runs the full booking flow end-to-end: inquiry form, intake email, fit review, slot proposal, and booking confirmation — all through the state machine.",
+            zh: "Tend 基于 Next.js 构建，Harness 作为服务端服务运行，通过 Docker 部署在 VPS 上。tend.chaostudio.org 的演示运行完整的预约流程：询盘表单、接诊邮件、适配评审、档期提案、预约确认——全部经由状态机处理。",
+          },
+        ],
+      },
+    ],
+    media: [
+      {
+        id: "tend-state-machine",
+        kind: "image",
+        src: tendStateMachine,
+        role: "diagram",
+        alt: {
+          en: "Booking state machine: six states from new lead to booked.",
+          zh: "预约状态机：从新询盘到已预约的六个状态。",
+        },
+        caption: {
+          en: "State is the single source of truth. All transitions are explicit.",
+          zh: "状态是唯一的事实来源。所有跳转都是显式的。",
+        },
+      },
+      {
+        id: "tend-system-layers",
+        kind: "image",
+        src: tendSystemLayers,
+        role: "diagram",
+        alt: {
+          en: "System architecture: events enter, Harness processes, actions execute.",
+          zh: "系统架构：事件进入，Harness 处理，动作执行。",
+        },
+        caption: {
+          en: "Events in. Harness decides. Actions out. Policy controls the middle.",
+          zh: "事件进入。Harness 决策。动作输出。策略控制中间层。",
         },
       },
     ],
