@@ -1773,8 +1773,8 @@
         transform: none;
         clip-path: none;
         min-height: auto;
-        width: min(82vw, 1360px);
-        margin-left: 0;
+        width: min(66vw, 1020px);
+        margin-left: 8vw;
       }
 
       .archive-experience.record-template-case.is-record-page .record-plate:has(.record-plate-mark.has-media) .record-plate-caption {
