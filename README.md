@@ -1,49 +1,53 @@
-# Portfolio Production
+# Zayn Archive Interface
 
-This repository contains the buildable production version of the portfolio archive interface.
+Personal portfolio archive built as a WebGL field system. Projects enter as signals, route through a tesseract-led interface, and surface as archive records.
 
-The app was migrated from:
-
-```text
-/Users/zaynw/Documents/Projects/portfolio/site
-```
-
-Research notes, mirrored references, and exploratory HTML prototypes should stay in the research archive:
-
-```text
-/Users/zaynw/Documents/Projects/portfolio
-```
+Live: [archive.chaostudio.org](https://archive.chaostudio.org)
 
 ## Stack
 
-```text
-Vite + React + TypeScript + Three.js
+```
+Vite + React 19 + TypeScript + Three.js
 ```
 
 ## Commands
 
 ```bash
 npm install
-npm run dev
-npm run build
-npm run preview
+npm run dev       # dev server
+npm run build     # type-check + bundle → dist/
+npm run preview   # serve dist/ locally
 ```
+
+## Deploy
+
+Docker image is built and pushed to `ghcr.io/epochedrift/portfolio-pord:latest` automatically on every push to `main` via GitHub Actions.
+
+To deploy on VPS:
+
+```bash
+docker pull ghcr.io/epochedrift/portfolio-pord:latest
+docker compose -f /opt/portfolio-pord/docker-compose.yml up -d --force-recreate
+docker image prune -f
+```
+
+Caddy reverse-proxies port 3010 to the container.
 
 ## Structure
 
-```text
-src/archive/          Archive experience shell, markup, and interaction engine
-src/assets/projects/ Project images and diagrams
-src/components/       Extracted React components from the production scaffold
-src/data/             Structured bilingual project content and navigation copy
+```
+src/archive/          Engine, markup, shell styles (live runtime)
+src/assets/projects/  Project images and diagrams
+src/data/             Bilingual project content and site copy
+src/styles/           Shared CSS tokens and global styles
+src/components/       Extracted React components (migration target)
+src/state/            Archive state hooks (migration target)
 src/routes/           URL state helpers
-src/state/            Archive interaction state
-src/styles/           Shared tokens and global styles
-src/visual-anchor/    Tesseract field geometry and motion helpers
+src/visual-anchor/    Tesseract geometry and motion helpers
 ```
 
-## Production Notes
+## Adding a project
 
-- Keep production code, content, assets, and deploy configuration in this repo.
-- Keep exploratory branches, downloaded mirrors, and visual experiments in the original portfolio archive.
-- Run `npm run build` before treating a change as ready to ship.
+1. Add assets to `src/assets/projects/<slug>/`
+2. Add a `ProjectRecord` entry to `src/data/projects.ts`
+3. Run `npm run build` to verify
