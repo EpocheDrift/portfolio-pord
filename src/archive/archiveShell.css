@@ -2308,4 +2308,15 @@
           cursor: default;
         }
       }
-    
+
+      @media (prefers-reduced-motion: reduce) {
+        .archive-experience *,
+        .archive-experience *::before,
+        .archive-experience *::after {
+          animation-duration: 1ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 1ms !important;
+          transition-delay: 0ms !important;
+        }
+      }
+

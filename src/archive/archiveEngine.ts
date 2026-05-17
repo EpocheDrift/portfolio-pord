@@ -352,6 +352,8 @@ export function mountArchiveExperience(container: HTMLElement) {
         renderer.toneMappingExposure = 1.34;
         container.appendChild(renderer.domElement);
   
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x050605);
         scene.fog = new THREE.FogExp2(0x050605, 0.045);
@@ -1256,7 +1258,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           const motionPulse =
             Math.sin(t * 0.17 + 0.7) * 0.018 +
             Math.sin(t * 0.047 + 2.2) * 0.012;
-          const motionSpeed = (0.5 + motionBlend * 0.09) * (1 + motionBlend * motionPulse);
+          const motionSpeed = reducedMotion ? 0 : (0.5 + motionBlend * 0.09) * (1 + motionBlend * motionPulse);
           tesseract.group.userData.motionTime += delta * motionSpeed;
           const localTime = tesseract.group.userData.motionTime + 1.7;
   
@@ -1365,23 +1367,26 @@ export function mountArchiveExperience(container: HTMLElement) {
               : isOpen
                 ? (isSmallViewport() ? mobileOpenMonitorPosition : openMonitorPosition)
                 : closedMonitorPosition;
-          monitorGroup.position.lerp(monitorTarget, 1 - Math.pow(0.0009, delta));
+          const lerpFactor = reducedMotion ? 1 : 1 - Math.pow(0.0009, delta);
+          monitorGroup.position.lerp(monitorTarget, lerpFactor);
           monitorGroup.rotation.x = THREE.MathUtils.lerp(
             monitorGroup.rotation.x,
             isInfoPage() ? -0.035 : isRecordPage() ? -0.03 : isOpen ? -0.02 : -0.08,
-            1 - Math.pow(0.0009, delta),
+            lerpFactor,
           );
           monitorGroup.rotation.z = THREE.MathUtils.lerp(
             monitorGroup.rotation.z,
             isInfoPage() ? 0 : isRecordPage() ? 0.04 : isOpen ? (isSmallViewport() ? 0.04 : 0.18) : 0,
-            1 - Math.pow(0.0009, delta),
+            lerpFactor,
           );
-          camera.position.x = pointer.x * (calmPageWeight ? 0.035 : 0.08);
-          camera.position.y = 0.8 + pointer.y * (calmPageWeight ? 0.025 : 0.055);
+          camera.position.x = reducedMotion ? 0 : pointer.x * (calmPageWeight ? 0.035 : 0.08);
+          camera.position.y = reducedMotion ? 0.8 : 0.8 + pointer.y * (calmPageWeight ? 0.025 : 0.055);
           camera.lookAt(0, 0, 0);
-  
-          particles.rotation.y += delta * 0.018;
-          particles.rotation.x = Math.sin(elapsed * 0.22) * 0.04;
+
+          if (!reducedMotion) {
+            particles.rotation.y += delta * 0.018;
+            particles.rotation.x = Math.sin(elapsed * 0.22) * 0.04;
+          }
           raycaster.setFromCamera(pointerTarget, camera);
           const hovered = !isInfoPage() && !isRecordPage() && raycaster.intersectObject(monitor, false).length > 0;
           if (hovered !== isHovering) {
