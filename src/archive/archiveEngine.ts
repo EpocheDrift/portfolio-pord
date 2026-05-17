@@ -390,7 +390,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         stage.add(monitorGroup);
         const closedMonitorPosition = new THREE.Vector3(0, -0.15, -0.7);
         const openMonitorPosition = new THREE.Vector3(2.75, 2.35, -0.7);
-        const mobileOpenMonitorPosition = new THREE.Vector3(0, 0.4, -0.7);
+        const mobileOpenMonitorPosition = new THREE.Vector3(0, 1.5, -0.7);
         const recordMonitorPosition = new THREE.Vector3(1.62, -0.02, -0.7);
   
         const monitor = new THREE.Mesh(
@@ -1047,7 +1047,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         }
   
         function getOpenScale() {
-          return isSmallViewport() ? 0.92 : 1.02;
+          return isSmallViewport() ? 1.2 : 1.02;
         }
   
         function getInfoScale() {
@@ -1286,8 +1286,9 @@ export function mountArchiveExperience(container: HTMLElement) {
           }
           tesseract.nodeMesh.instanceMatrix.needsUpdate = true;
   
-          updateEdgeInstances(tesseract.primaryEdgeMesh, tesseract.primaryEdges, lineScale);
-          updateEdgeInstances(tesseract.secondaryEdgeMesh, tesseract.secondaryEdges, lineScale * stateSecondaryFactor);
+          const mobileLineBoost = isSmallViewport() && isOpen ? 1.45 : 1.0;
+          updateEdgeInstances(tesseract.primaryEdgeMesh, tesseract.primaryEdges, lineScale * mobileLineBoost);
+          updateEdgeInstances(tesseract.secondaryEdgeMesh, tesseract.secondaryEdges, lineScale * stateSecondaryFactor * mobileLineBoost);
   
           const closedYaw =
             -0.42 +
