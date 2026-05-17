@@ -15,7 +15,7 @@ export const projects: ProjectRecord[] = [
     liveUrl: "https://energy.chaostudio.org",
     title: {
       en: "Energy Sense",
-      zh: "内景",
+      zh: "能量感知",
     },
     status: "prototype complete",
     statusLabel: {
@@ -73,11 +73,11 @@ export const projects: ProjectRecord[] = [
         body: [
           {
             en: "Throughout the day, something shifts inside — a moment of unusual clarity, a slow drain after a long conversation, a quiet pressure building toward rest. These states happen before we consciously notice them. By the time we do, we have already pushed through the wrong moment.",
-            zh: "一天当中，身体内部在不断变化——某个异常清醒的时刻，一段长时间社交之后缓缓累积的耗竭，深夜里悄声发出的恢复信号。这些状态在我们意识到之前就已经发生。而当我们终于察觉到时，往往已经做了错误的决定。",
+            zh: "一天里，身体在持续变化——某个异常清醒的时刻，漫长社交之后缓慢累积的耗竭，深夜里悄然浮出的恢复需求。这些状态在我们察觉到之前就已经发生。而当我们终于意识到时，往往已经做了错误的选择。",
           },
           {
             en: "We can feel temperature. We can hear silence. But we cannot perceive our own cognitive clarity, our social drain, or our body's need for recovery. Energy Sense begins with a single question: what if we could?",
-            zh: "我们能感受到温度，能听见寂静。但我们无法感知自己的认知清晰度、社交耗能，或身体对恢复的需求。内景从一个问题出发：如果我们能感知到这些呢？",
+            zh: "我们能感受到温度，能听见寂静。但我们无法感知自己的认知清晰度、社交耗能，或身体对恢复的需求。能量感知从一个问题出发：如果我们能感知到这些呢？",
           },
         ],
         mediaIds: ["energy-drain-state"],
@@ -92,7 +92,7 @@ export const projects: ProjectRecord[] = [
           },
           {
             en: "Three states shape the landscape. Drain: the field grows dense and slow. Recovery: structure begins to reappear. Clarity: the landscape opens into directional flow. In each case, the system does not decide. It makes the invisible perceivable, and returns the choice to the person.",
-            zh: "三种状态塑造这片场域。Drain：场域变得沉重而迟缓。Recovery：结构开始重新浮现。Clarity：场域向有方向的流动打开。在每一种情况下，系统不做决定。它让不可见的变得可感，然后把选择权还给人本身。",
+            zh: "三种状态塑造这片场域。Drain：场域变得沉重而迟缓。Recovery：结构开始重新浮现。Clarity：场域向有方向的流动打开。无论哪种状态，系统都不做决定——它让不可见的变得可感，然后把选择权还给人本身。",
           },
         ],
         mediaIds: ["energy-recovery-state", "energy-clarity-state"],
@@ -103,15 +103,15 @@ export const projects: ProjectRecord[] = [
         body: [
           {
             en: "The hardest design challenge was restraint. Early versions of the landscape were visually expressive but emotionally illegible — texture without meaning. It took several iterations to find a visual language where Drain, Recovery, and Clarity felt genuinely distinct while still belonging to the same continuous environment.",
-            zh: "最难的设计挑战是克制。早期版本的场域视觉上富有表现力，但情感上难以辨认——只有纹理，没有意义。经过多次迭代，才找到一种语言，让 Drain、Recovery、Clarity 彼此清晰可辨，同时仍属于同一个连续的环境。",
+            zh: "最难的设计挑战是克制。早期的场域版本视觉上很丰富，但情感上难以辨认——有纹理，没有意义。经过多次迭代，我才找到一种语言，让 Drain、Recovery、Clarity 彼此清晰可辨，同时仍属于同一个连续的环境。",
           },
           {
             en: "The second challenge was tone. A system that monitors internal states can easily feel surveillance-like — clinical, anxious, prescriptive. Every design decision pulled back toward something quieter: a companion that notices, not a system that judges. Every word in the interface was chosen to reflect that difference.",
-            zh: "第二个挑战是语气。一个感知内在状态的系统很容易变得像监控系统一样——临床、焦虑、带有评判。每一个设计决策都在将它拉回更安静的方向：一个会注意到的陪伴者，而不是一个做判断的系统。界面里的每一个词，都是为了体现这种差异而选择的。",
+            zh: "第二个挑战是语气。一个感知内在状态的系统很容易变成监控——临床、焦虑、带有评判。每一个设计决策，我都在把它往更安静的方向拉：一个会注意到的陪伴，而不是一个做判断的系统。界面里的每个词，都是为这个差异而选的。",
           },
           {
             en: "We learned that sensing does not require precision to be meaningful. The design problem is translation, not measurement.",
-            zh: "我们学到：感知不需要精确，才能有意义。设计问题是转译，不是测量。",
+            zh: "感知不需要精确，才能有意义。设计问题是转译，不是测量。",
           },
         ],
       },
@@ -166,7 +166,7 @@ export const projects: ProjectRecord[] = [
     slug: "ccs",
     title: {
       en: "CCS",
-      zh: "意识档案",
+      zh: "认知连续系统",
     },
     status: "specification complete",
     statusLabel: {
@@ -225,11 +225,11 @@ export const projects: ProjectRecord[] = [
         body: [
           {
             en: "Every day, we operate in a continuous stream of cognitive state: what we were working on, what decision we were mid-way through, what context made a particular choice make sense. These states generate, shift, and dissolve faster than we can capture them.",
-            zh: "每一天，我们都在持续的认知状态流中运作：我们在做什么，哪个决定做到一半，是什么上下文让某个选择在当时显得合理。这些状态生成、变化、消散的速度，比我们能捕捉它们的速度还要快。",
+            zh: "每一天，我们都在持续的认知状态流中运作：做到哪里了，哪个决定还悬着，是什么上下文让某个选择在当时显得合理。这些状态生成、变化、消散的速度，比我们能记下来的速度还要快。",
           },
           {
             en: "When we return to a task after interruption — after a meeting, after sleep, after a week — we spend time and energy reconstructing the state we were in. That reconstruction is imperfect. The original context is partly gone.",
-            zh: "当我们在中断之后回到一项任务——一次会议之后，睡眠之后，一周之后——我们会花费时间和精力重建当时的状态。这种重建是不完整的。原始的上下文已经部分消失。",
+            zh: "当我们在中断后回到一项任务——一次会议之后，睡眠之后，一周之后——需要花时间重建当时的状态。这种重建从来不完整。原始的上下文已经部分消失了。",
           },
           {
             en: "CCS begins from a single premise: the gap between doing and recording should not exist. If the system watches continuously, you never have to remember to remember.",
@@ -244,11 +244,11 @@ export const projects: ProjectRecord[] = [
         body: [
           {
             en: "The system is designed in three layers. Layer 1 is Passive Capture: the environment continuously records — screenshots, wearable camera, ambient audio — without requiring any intentional act from the user. Layer 2 is AI Processing: raw capture is parsed and structured by AI into meaningful snapshots, state records, and decision contexts. Layer 3 is Output: structured context becomes usable — morning briefings, auto-generated snapshots, task agent handoffs, context pools for future recall, and message agents that surface relevant prior state.",
-            zh: "系统设计为三层结构。第一层是被动捕捉：环境持续记录——截图、可穿戴摄像头、环境音频——不需要用户做出任何主动的行为。第二层是 AI 处理：原始捕捉被 AI 解析并结构化为有意义的快照、状态记录和决策上下文。第三层是输出：结构化的上下文变得可用——早晨简报、自动生成的快照、任务代理交接、用于未来回溯的上下文池，以及呈现相关历史状态的消息代理。",
+            zh: "系统分为三层。第一层是被动捕捉：环境持续记录——截图、可穿戴摄像头、环境音频——无需任何主动行为。第二层是 AI 处理：原始捕捉被解析并结构化为快照、状态记录和决策上下文。第三层是输出：结构化的上下文变得可用——早晨简报、自动生成的快照、任务代理交接、供未来回溯的上下文池，以及主动呈现历史状态的消息代理。",
           },
           {
             en: "The key design principle across all three layers is removal of friction. The user does not decide when to capture. The user does not structure the record. The system handles both. The user only encounters the output — when they need it.",
-            zh: "贯穿三层的核心设计原则是消除摩擦。用户不决定何时捕捉。用户不整理记录。系统处理这两件事。用户只会在需要时遇到输出。",
+            zh: "贯穿三层的核心设计原则是消除摩擦。不需要决定何时捕捉，不需要整理记录——系统处理这一切。只有在需要时，输出才会出现。",
           },
         ],
       },
@@ -258,11 +258,11 @@ export const projects: ProjectRecord[] = [
         body: [
           {
             en: "v0.1 runs today. It is a manual practice: periodic state snapshots, captured in structured Notion documents, recording what I am working on, what decisions are open, and what context the next session will need. It is imperfect — it requires intention — but it has confirmed the value of the underlying model.",
-            zh: "v0.1 今天在运行。它是一种手动实践：定期的状态快照，记录在结构化的 Notion 文档中，记下我在做什么、哪些决定尚未完成、下一次会话需要什么上下文。它并不完美——需要主动意图——但它已经验证了底层模型的价值。",
+            zh: "v0.1 今天仍在运行。它是一种手动实践：定期的状态快照，记录在结构化的 Notion 文档里——我在做什么、哪些决定还悬着、下次会话需要什么上下文。不完美，需要主动意图。但它已经验证了底层模型的价值。",
           },
           {
             en: "v0.2 is fully designed but not yet built. The passive sensing core replaces intention with infrastructure: always-on capture, AI-structured output, ambient delivery. The spec is complete: architecture, data flow, privacy constraints, and output module behavior are all documented.",
-            zh: "v0.2 已经完整设计，但尚未构建。被动感知核心用基础设施替代了意图：持续开启的捕捉，AI 结构化的输出，环境式的传递。规格已经完成：架构、数据流、隐私约束和输出模块行为都已有文档记录。",
+            zh: "v0.2 已经完整设计，但尚未构建。被动感知核心用基础设施替代了意图：持续开启的捕捉，AI 结构化的输出，环境式的传递。规格已经完成——架构、数据流、隐私约束、输出模块行为，都已有文档记录。",
           },
           {
             en: "The gap between v0.1 and v0.2 is the gap between a manual practice and an operating system. CCS is currently in that gap — and the design work in that gap is the artifact.",
@@ -372,11 +372,11 @@ export const projects: ProjectRecord[] = [
         body: [
           {
             en: "This project began with a refusal of the default portfolio format. The goal was not to make a polished display surface, but to build a running archive for active systems, unfinished signals, and project records.",
-            zh: "这个项目一开始就拒绝了默认的作品集格式。目标不是做一个精致的展示页面，也不是做 Chaostudio 主站，而是为 Zayn 建立一个正在运行的档案系统，用来容纳活跃系统、未完成信号与项目记录。",
+            zh: "这个项目一开始就拒绝了默认的作品集格式。我不想做一个精致的展示页面，也不是做 Chaostudio 主站——而是建立一个正在运行的档案系统，用来容纳活跃系统、未完成的信号与项目记录。",
           },
           {
             en: "The core proposition is: chaos is not disorder; it is the state before everything begins. In the interface, that idea becomes a field. Projects enter as compressed signals, pass through focus states, and only later become readable records.",
-            zh: "核心命题是：混沌不是失序，而是一切生长之前的状态。在界面中，这句话变成了一个场域。项目先以压缩信号进入，穿过聚焦状态，然后才成为可读的记录。",
+            zh: "核心命题是：混沌不是失序，而是一切生长之前的状态。在界面里，这个想法变成了一个场域。项目先以压缩信号进入，穿过聚焦状态，然后才成为可读的记录。",
           },
         ],
         mediaIds: ["plate-closed-field-p3"],
@@ -387,11 +387,11 @@ export const projects: ProjectRecord[] = [
         body: [
           {
             en: "Early directions tested minimal portfolio layouts, text-heavy references, and a Namespace-like archive structure. Those versions clarified what the site should not become: a reference-site remix with Chaostudio copy placed on top.",
-            zh: "早期方向测试过极简作品集、文字密集参考，以及接近 Namespace 的档案结构。这些版本帮助确认了这个站不应该变成什么：不是把 Chaostudio 的文案贴在参考站结构上的 remix，也不是 Chaostudio 的公司主页。",
+            zh: "早期我测试过极简作品集排版、文字密集的参考版本，以及接近 Namespace 的档案结构。这些版本帮助确认了这个站不应该变成什么：不是把 Chaostudio 的文案套在参考站结构上，也不是 Chaostudio 的公司主页。",
           },
           {
             en: "The direction shifted toward a darker, more personal field/system. Chaostudio stayed as the field language, but Zayn remained the subject of the portfolio. The archive index became secondary to the visual field. The tesseract stopped acting like a logo and became the pressure source that opens the system.",
-            zh: "方向随后转向更暗、更个人化的场域系统。Chaostudio 保留为场域语言，但作品集的主体仍然是 Zayn。档案索引退到第二层，视觉场域成为入口。Tesseract 也不再像一个 logo，而成为打开系统的压力源。",
+            zh: "方向随后转向更暗、更个人化的场域系统。Chaostudio 保留为场域语言，但作品集的主体仍然是我。档案索引退到第二层，视觉场域成为入口。Tesseract 不再像一个 logo，而成为打开系统的压力源。",
           },
         ],
       },
@@ -401,11 +401,11 @@ export const projects: ProjectRecord[] = [
         body: [
           {
             en: "The tesseract is the site's central visual anchor. It comes from the idea of a high-dimensional structure projected into a lower-dimensional interface. It should not read as decoration. It acts as entry point, processing object, field engine, and compressed system marker.",
-            zh: "Tesseract 是这个站的核心视觉锚点。它来自「高维结构在低维界面中的投影」这个想法。它不应该读成装饰，而是入口、处理对象、场域引擎与压缩的系统标记。",
+            zh: "Tesseract 是这个站的核心视觉锚点。它来自「高维结构投影到低维界面」这个想法。它不是装饰——它是入口、处理对象、场域引擎与压缩的系统标记。",
           },
           {
             en: "The visual-anchor line explored scale, line weight, reverse type, idle pulse, and open-state handoff. The accepted direction places the visitor inside a projected field rather than outside a complete 3D object.",
-            zh: "视觉锚点的迭代线测试了尺度、线重、反白文字、idle pulse，以及打开状态的 handoff。最终方向不是让访客站在外部观看一个完整的 3D 物体，而是让人进入一个被投影出来的场域。",
+            zh: "视觉锚点的迭代里，我测试了尺度、线重、反白文字、idle pulse，以及打开状态的 handoff。最终方向不是让访客站在外部观看一个 3D 物体，而是进入一个被投影出来的场域。",
           },
         ],
       },
@@ -419,7 +419,7 @@ export const projects: ProjectRecord[] = [
           },
           {
             en: "The interaction model syncs the active signal with accession metadata and project register state. Click, wheel, and keyboard movement shift the focus without turning the archive into a normal carousel.",
-            zh: "交互模型会同步当前信号、接入元数据与项目登记状态。点击、滚轮和键盘切换焦点，但它不应该读成普通 carousel，而应该像档案扫描行为。",
+            zh: "交互模型同步当前信号、接入元数据与项目登记状态。点击、滚轮、键盘都可以切换焦点——但它不应该读成普通 carousel，而应该像档案扫描。",
           },
         ],
         mediaIds: ["plate-open-queue-p3", "diagram-signal-flow"],
@@ -434,7 +434,7 @@ export const projects: ProjectRecord[] = [
           },
           {
             en: "The system keeps two templates: slab for maintainable long-form records, and case for rawer asymmetric dossiers. This project belongs in case, because its strongest material is an uneven trail of concept, visual research, prototype states, and production bridge decisions.",
-            zh: "系统保留两套模板：slab 用于更稳定、长文本的记录；case 用于更原始、不对称的档案页面。这个项目适合 case，因为它最强的材料是一条不均匀但有力的轨迹：概念、视觉研究、原型状态与生产桥接决策。",
+            zh: "系统保留两套模板：slab 用于更稳定的长文本记录，case 用于更原始、不对称的档案页面。这个项目我选了 case——它最强的材料是一条不均匀但有力的轨迹：概念、视觉研究、原型状态，和生产桥接决策。",
           },
         ],
         mediaIds: ["plate-detail-record"],
@@ -445,11 +445,11 @@ export const projects: ProjectRecord[] = [
         body: [
           {
             en: "After v4.16 locked the structure, the project moved into Phase 3 production build-out. The prototype became a Vite + React + TypeScript site with URL-backed states, bilingual-ready project records, and a content-intake workflow for real project material.",
-            zh: "v4.16 锁定结构后，项目进入 Phase 3 的生产化建设。原型被迁移为 Vite + React + TypeScript 站点，并建立了 URL 状态、双语项目记录，以及用于收集真实项目材料的 content-intake 工作流。",
+            zh: "v4.16 锁定结构后，我把原型迁移为 Vite + React + TypeScript 站点，并建立了 URL 状态、双语项目记录，以及用于收集真实项目材料的 content-intake 工作流。",
           },
           {
             en: "The production bridge matters because the visual system is no longer only a standalone prototype. It now has a content model that can hold future records without redesigning the layout every time a project changes.",
-            zh: "这个生产桥接重要，因为视觉系统不再只是一个独立原型。它已经有了可以继续承载未来项目记录的内容模型，而不需要每次项目变化都重新设计布局。",
+            zh: "这一步之所以重要：视觉系统不再只是一个独立原型。它现在有了可以继续承载未来项目记录的内容模型，不需要每次有新项目就重新设计布局。",
           },
         ],
       },
