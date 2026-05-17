@@ -45,9 +45,9 @@ function buildArchiveSignals(language) {
       resolveOptionalText(project.media.find((item) => item.role === "plate" || item.role === "hero")?.caption, language) ??
       resolveText(siteCopy.ui.imagePending, language),
     primaryMedia: resolveProjectMedia(
-      project.media.find((item) => item.role === "hero" && item.src) ??
-        project.media.find((item) => item.role === "plate" && item.src) ??
-        project.media.find((item) => item.src),
+      project.media.find((item) => item.kind !== "embed" && item.role === "hero" && item.src) ??
+        project.media.find((item) => item.kind !== "embed" && item.role === "plate" && item.src) ??
+        project.media.find((item) => item.kind !== "embed" && item.src),
     ),
     sections: project.sections.map((section) => ({
       title: resolveText(section.title, language),
@@ -70,6 +70,8 @@ export function mountArchiveExperience(container: HTMLElement) {
         const cursor = root.querySelector(".cursor");
         const stateValue = root.querySelector(".state-value");
         const signalFlow = root.querySelector(".signal-flow");
+        const mobileSignalList = root.querySelector(".mobile-signal-list");
+        const fieldReturnHint = root.querySelector(".field-return-hint");
         const signalCards = Array.from(root.querySelectorAll(".signal-card"));
         const signalRows = Array.from(root.querySelectorAll(".signal-row"));
         const utilityButtons = Array.from(root.querySelectorAll("[data-utility]"));
@@ -350,6 +352,8 @@ export function mountArchiveExperience(container: HTMLElement) {
         renderer.toneMappingExposure = 1.34;
         container.appendChild(renderer.domElement);
   
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
         const scene = new THREE.Scene();
         scene.background = new THREE.Color(0x050605);
         scene.fog = new THREE.FogExp2(0x050605, 0.045);
@@ -389,6 +393,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         stage.add(monitorGroup);
         const closedMonitorPosition = new THREE.Vector3(0, -0.15, -0.7);
         const openMonitorPosition = new THREE.Vector3(2.75, 2.35, -0.7);
+        const mobileOpenMonitorPosition = new THREE.Vector3(0, 1.5, -0.7);
         const recordMonitorPosition = new THREE.Vector3(1.62, -0.02, -0.7);
   
         const monitor = new THREE.Mesh(
@@ -422,7 +427,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         let targetThickness = 1;
         let idleTimer = 0;
         let pulseTimer = 0;
-        let activeIndex = Math.max(0, getSignalIndexById("A01"));
+        let activeIndex = Math.max(0, getSignalIndexById("D04"));
         let wheelLocked = false;
         let pageMode = "archive";
         let stateMode = "closed";
@@ -581,9 +586,11 @@ export function mountArchiveExperience(container: HTMLElement) {
                         <figure
                           class="record-image-card ${image.src ? "has-media" : ""}"
                         >
-                          ${image.src
-                            ? `<img class="record-image" src="${image.src}" alt="${image.alt}" />`
-                            : `<div class="record-image-placeholder" aria-label="${image.alt}"></div>`}
+                          ${image.kind === "embed"
+                            ? `<iframe class="record-embed" src="${image.src}" title="${image.alt}" allowfullscreen loading="lazy"></iframe>`
+                            : image.src
+                              ? `<img class="record-image" src="${image.src}" alt="${image.alt}" />`
+                              : `<div class="record-image-placeholder" aria-label="${image.alt}"></div>`}
                           <figcaption class="record-image-caption">${image.caption}</figcaption>
                         </figure>
                       `)
@@ -638,6 +645,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           signalFlow.setAttribute("aria-hidden", "true");
           infoPage.setAttribute("aria-hidden", "true");
           recordPage.setAttribute("aria-hidden", "false");
+          mobileSignalList?.setAttribute("aria-hidden", "true");
           signalCards.forEach((card) => {
             card.tabIndex = -1;
           });
@@ -755,6 +763,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           signalFlow.setAttribute("aria-hidden", "false");
           infoPage.setAttribute("aria-hidden", "true");
           recordPage.setAttribute("aria-hidden", "true");
+          mobileSignalList?.setAttribute("aria-hidden", "false");
           signalCards.forEach((card) => {
             card.tabIndex = 0;
           });
@@ -765,7 +774,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           renderSignals();
           writeRoute(routePath.open, options);
         }
-  
+
         function closeFlow(options = {}) {
           pageMode = "archive";
           isOpen = false;
@@ -776,6 +785,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           signalFlow.setAttribute("aria-hidden", "true");
           infoPage.setAttribute("aria-hidden", "true");
           recordPage.setAttribute("aria-hidden", "true");
+          mobileSignalList?.setAttribute("aria-hidden", "true");
           signalCards.forEach((card) => {
             card.tabIndex = -1;
           });
@@ -854,12 +864,31 @@ export function mountArchiveExperience(container: HTMLElement) {
           });
         }
   
+        function renderMobileSignalList() {
+          if (!mobileSignalList) return;
+          mobileSignalList.innerHTML = signals.map((signal, index) => {
+            const isActive = index === activeIndex;
+            return `<button class="mobile-signal-item${isActive ? " is-active" : ""}${signal.detailDisabled ? " is-disabled" : ""}" data-mobile-index="${index}" type="button">
+              <span class="mobile-signal-id">${signal.id}</span>
+              <span class="mobile-signal-name">${signal.name}</span>
+              <span class="mobile-signal-state">${signal.state}</span>
+            </button>`;
+          }).join("");
+          mobileSignalList.querySelectorAll("[data-mobile-index]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const index = parseInt(btn.dataset.mobileIndex);
+              if (canOpenSignal(signals[index])) openProjectRecord(index);
+            });
+          });
+        }
+
         function renderSignals() {
           const signal = signals[activeIndex];
           signalCards.forEach((card, index) => {
             renderCard(card, signals[index], index);
           });
           renderAccession(signal);
+          renderMobileSignalList();
         }
   
         function setActive(index, options = {}) {
@@ -879,8 +908,8 @@ export function mountArchiveExperience(container: HTMLElement) {
         });
   
         window.addEventListener("pointerdown", (event) => {
-          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action")) return;
-          if (!isHovering) return;
+          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list, .record-page, .field-return-hint")) return;
+          if (event.pointerType !== "touch" && !isHovering) return;
           if (isRecordPage()) {
             closeRecordToQueue();
             return;
@@ -895,7 +924,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             openFlow();
           }
         });
-  
+
         signalCards.forEach((card, index) => {
           card.addEventListener("click", (event) => {
             event.stopPropagation();
@@ -938,6 +967,11 @@ export function mountArchiveExperience(container: HTMLElement) {
         infoReturn.addEventListener("click", (event) => {
           event.stopPropagation();
           closeInfoPage();
+        });
+
+        fieldReturnHint?.addEventListener("click", (event) => {
+          event.stopPropagation();
+          if (isOpen) closeFlow();
         });
   
         recordActions.forEach((button) => {
@@ -1023,7 +1057,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         }
   
         function getOpenScale() {
-          return isSmallViewport() ? 0.92 : 1.02;
+          return isSmallViewport() ? 1.2 : 1.02;
         }
   
         function getInfoScale() {
@@ -1226,7 +1260,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           const motionPulse =
             Math.sin(t * 0.17 + 0.7) * 0.018 +
             Math.sin(t * 0.047 + 2.2) * 0.012;
-          const motionSpeed = (0.5 + motionBlend * 0.09) * (1 + motionBlend * motionPulse);
+          const motionSpeed = reducedMotion ? 0 : (0.5 + motionBlend * 0.09) * (1 + motionBlend * motionPulse);
           tesseract.group.userData.motionTime += delta * motionSpeed;
           const localTime = tesseract.group.userData.motionTime + 1.7;
   
@@ -1262,8 +1296,9 @@ export function mountArchiveExperience(container: HTMLElement) {
           }
           tesseract.nodeMesh.instanceMatrix.needsUpdate = true;
   
-          updateEdgeInstances(tesseract.primaryEdgeMesh, tesseract.primaryEdges, lineScale);
-          updateEdgeInstances(tesseract.secondaryEdgeMesh, tesseract.secondaryEdges, lineScale * stateSecondaryFactor);
+          const mobileLineBoost = isSmallViewport() && isOpen ? 1.45 : 1.0;
+          updateEdgeInstances(tesseract.primaryEdgeMesh, tesseract.primaryEdges, lineScale * mobileLineBoost);
+          updateEdgeInstances(tesseract.secondaryEdgeMesh, tesseract.secondaryEdges, lineScale * stateSecondaryFactor * mobileLineBoost);
   
           const closedYaw =
             -0.42 +
@@ -1332,25 +1367,28 @@ export function mountArchiveExperience(container: HTMLElement) {
             : isRecordPage()
               ? recordMonitorPosition
               : isOpen
-                ? openMonitorPosition
+                ? (isSmallViewport() ? mobileOpenMonitorPosition : openMonitorPosition)
                 : closedMonitorPosition;
-          monitorGroup.position.lerp(monitorTarget, 1 - Math.pow(0.0009, delta));
+          const lerpFactor = reducedMotion ? 1 : 1 - Math.pow(0.0009, delta);
+          monitorGroup.position.lerp(monitorTarget, lerpFactor);
           monitorGroup.rotation.x = THREE.MathUtils.lerp(
             monitorGroup.rotation.x,
             isInfoPage() ? -0.035 : isRecordPage() ? -0.03 : isOpen ? -0.02 : -0.08,
-            1 - Math.pow(0.0009, delta),
+            lerpFactor,
           );
           monitorGroup.rotation.z = THREE.MathUtils.lerp(
             monitorGroup.rotation.z,
-            isInfoPage() ? 0 : isRecordPage() ? 0.04 : isOpen ? 0.18 : 0,
-            1 - Math.pow(0.0009, delta),
+            isInfoPage() ? 0 : isRecordPage() ? 0.04 : isOpen ? (isSmallViewport() ? 0.04 : 0.18) : 0,
+            lerpFactor,
           );
-          camera.position.x = pointer.x * (calmPageWeight ? 0.035 : 0.08);
-          camera.position.y = 0.8 + pointer.y * (calmPageWeight ? 0.025 : 0.055);
+          camera.position.x = reducedMotion ? 0 : pointer.x * (calmPageWeight ? 0.035 : 0.08);
+          camera.position.y = reducedMotion ? 0.8 : 0.8 + pointer.y * (calmPageWeight ? 0.025 : 0.055);
           camera.lookAt(0, 0, 0);
-  
-          particles.rotation.y += delta * 0.018;
-          particles.rotation.x = Math.sin(elapsed * 0.22) * 0.04;
+
+          if (!reducedMotion) {
+            particles.rotation.y += delta * 0.018;
+            particles.rotation.x = Math.sin(elapsed * 0.22) * 0.04;
+          }
           raycaster.setFromCamera(pointerTarget, camera);
           const hovered = !isInfoPage() && !isRecordPage() && raycaster.intersectObject(monitor, false).length > 0;
           if (hovered !== isHovering) {
@@ -1359,6 +1397,15 @@ export function mountArchiveExperience(container: HTMLElement) {
           }
   
           updateTesseract(elapsed, delta);
+
+          if (fieldReturnHint && isOpen) {
+            const _hintPos = new THREE.Vector3();
+            tesseract.group.getWorldPosition(_hintPos);
+            _hintPos.project(camera);
+            fieldReturnHint.style.left = ((_hintPos.x + 1) / 2 * window.innerWidth) + "px";
+            fieldReturnHint.style.top = ((-_hintPos.y + 1) / 2 * window.innerHeight) + "px";
+          }
+
           renderer.render(scene, camera);
           requestAnimationFrame(animate);
         }

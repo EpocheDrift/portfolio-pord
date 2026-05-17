@@ -85,9 +85,10 @@ export const archiveMarkup = `
         <div class="record-row"><span>Route</span><strong data-record="route">ROOT / ROUTED</strong></div>
       </div>
       <div class="signal-register" aria-label="Archive register">
-        <div class="signal-row"><span>B02</span><strong>Energy Sense</strong><span>prototype complete</span></div>
-        <div class="signal-row filed-row active-row"><span>A01</span><strong class="active">CCS</strong><span>active</span></div>
-<div class="signal-row filed-row"><span>C03</span><strong>混沌接口</strong><span>routed</span></div>
+        <div class="signal-row active-row"><span>D04</span><strong class="active">Tend</strong><span>demo complete</span></div>
+        <div class="signal-row filed-row"><span>A01</span><strong>CCS</strong><span>specification complete</span></div>
+        <div class="signal-row filed-row"><span>B02</span><strong>Energy Sense</strong><span>prototype complete</span></div>
+        <div class="signal-row filed-row"><span>C03</span><strong>混沌接口</strong><span>routed</span></div>
       </div>
     </div>
     <div class="handoff-axis" aria-hidden="true"></div>
@@ -99,8 +100,8 @@ export const archiveMarkup = `
       <article class="signal-card output strip" data-signal-index="3" tabindex="0"></article>
     </div>
     <div class="archive-caption" aria-hidden="true">
-      portfolio system
-      <strong>archive<br />record<br />flow</strong>
+      chaostudio
+      <strong>archive<br />2026</strong>
     </div>
     <div class="field-pulse" aria-hidden="true">
       <span class="pulse-tick"></span>
@@ -113,4 +114,6 @@ export const archiveMarkup = `
     </div>
     <div class="scanline" aria-hidden="true"></div>
     <div class="cursor" aria-hidden="true"></div>
+    <button class="field-return-hint" type="button" aria-label="Return to field">return / field</button>
+    <nav class="mobile-signal-list" aria-label="Archive signal list" aria-hidden="true"></nav>
 `;

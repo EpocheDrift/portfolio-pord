@@ -13,8 +13,8 @@ export const siteCopy = {
     zh: "我构建 AI 原生系统——在这些系统中，产品判断力、技术架构与工艺同等重要。<br><br>我的工作往往从混乱的问题出发：在不抹去人类判断的前提下将需要权衡的工作流自动化，设计从业者能够信任的 AI 系统，以及构建那些感觉像活着的档案而不是静态简历的界面。<br><br>我将这些想法从概念带向部署——塑造产品逻辑，设计系统，编写代码，并在此过程中把 AI 作为真正的乘数加以运用。<br><br>目前正在建设 Chaostudio，一个专注于系统与创意工作的独立工作室，同时在华盛顿大学修读数据科学。<br><br>欢迎 AI 产品、创意技术与早期团队方向的机会。",
   },
   contact: {
-    en: "<a href=\"https://www.linkedin.com/in/zayn-w-7059212b9\" target=\"_blank\" rel=\"noopener\">LinkedIn</a><br><a href=\"https://x.com/inkspots3008\" target=\"_blank\" rel=\"noopener\">X / @inkspots3008</a><br><a href=\"https://www.instagram.com/zhuaizige3008/\" target=\"_blank\" rel=\"noopener\">Instagram</a><br>WeChat: Inkspots3008",
-    zh: "<a href=\"https://www.linkedin.com/in/zayn-w-7059212b9\" target=\"_blank\" rel=\"noopener\">LinkedIn</a><br><a href=\"https://x.com/inkspots3008\" target=\"_blank\" rel=\"noopener\">X / @inkspots3008</a><br><a href=\"https://www.instagram.com/zhuaizige3008/\" target=\"_blank\" rel=\"noopener\">Instagram</a><br>微信：Inkspots3008",
+    en: "<a href=\"https://www.linkedin.com/in/zayn-w-7059212b9\" target=\"_blank\" rel=\"noopener\">LinkedIn</a><br><a href=\"https://github.com/EpocheDrift\" target=\"_blank\" rel=\"noopener\">GitHub / EpocheDrift</a><br><a href=\"https://x.com/inkspots3008\" target=\"_blank\" rel=\"noopener\">X / @inkspots3008</a><br><a href=\"https://www.instagram.com/zhuaizige3008/\" target=\"_blank\" rel=\"noopener\">Instagram</a><br>WeChat: Inkspots3008",
+    zh: "<a href=\"https://www.linkedin.com/in/zayn-w-7059212b9\" target=\"_blank\" rel=\"noopener\">LinkedIn</a><br><a href=\"https://github.com/EpocheDrift\" target=\"_blank\" rel=\"noopener\">GitHub / EpocheDrift</a><br><a href=\"https://x.com/inkspots3008\" target=\"_blank\" rel=\"noopener\">X / @inkspots3008</a><br><a href=\"https://www.instagram.com/zhuaizige3008/\" target=\"_blank\" rel=\"noopener\">Instagram</a><br>微信：Inkspots3008",
   },
   ui: {
     state: {
@@ -90,12 +90,12 @@ export const siteCopy = {
       zh: "纵向记录处理",
     },
     archiveForm: {
-      en: "PORTFOLIO SYSTEM",
-      zh: "作品集系统",
+      en: "CHAOSTUDIO",
+      zh: "混沌工作室",
     },
     processingFlow: {
-      en: "archive\nrecord\nflow",
-      zh: "档案\n记录\n流",
+      en: "archive\n2026",
+      zh: "档案\n2026",
     },
     queueSummary: {
       en: "Projects are routed through queue, focus, and record states.",

@@ -736,20 +736,27 @@
 }
 
 .case-live-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin-top: 16px;
+  padding: 6px 12px;
   color: var(--color-amber);
   font-family: var(--font-condensed);
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  opacity: 0.85;
-  transition: opacity 0.2s;
+  border: 1px solid rgba(216, 170, 82, 0.45);
+  border-radius: 2px;
+  background: rgba(216, 170, 82, 0.07);
+  transition: background 0.2s, border-color 0.2s;
+  width: fit-content;
 }
 
 .case-live-link:hover {
-  opacity: 1;
+  background: rgba(216, 170, 82, 0.14);
+  border-color: rgba(216, 170, 82, 0.75);
 }
 
 .case-evidence ul {
