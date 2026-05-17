@@ -45,9 +45,9 @@ function buildArchiveSignals(language) {
       resolveOptionalText(project.media.find((item) => item.role === "plate" || item.role === "hero")?.caption, language) ??
       resolveText(siteCopy.ui.imagePending, language),
     primaryMedia: resolveProjectMedia(
-      project.media.find((item) => item.role === "hero" && item.src) ??
-        project.media.find((item) => item.role === "plate" && item.src) ??
-        project.media.find((item) => item.src),
+      project.media.find((item) => item.kind !== "embed" && item.role === "hero" && item.src) ??
+        project.media.find((item) => item.kind !== "embed" && item.role === "plate" && item.src) ??
+        project.media.find((item) => item.kind !== "embed" && item.src),
     ),
     sections: project.sections.map((section) => ({
       title: resolveText(section.title, language),

@@ -141,7 +141,7 @@ export const projects: ProjectRecord[] = [
         id: "tend-demo-video",
         kind: "embed",
         src: "https://www.youtube.com/embed/dcH8HoswkHs",
-        role: "plate",
+        role: "diagram",
         alt: {
           en: "Tend demo: full booking flow end-to-end through the state machine.",
           zh: "Tend 演示：完整预约流程端到端经由状态机处理。",
