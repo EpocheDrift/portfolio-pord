@@ -903,7 +903,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         });
   
         window.addEventListener("pointerdown", (event) => {
-          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list")) return;
+          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list, .record-page")) return;
           if (event.pointerType !== "touch" && !isHovering) return;
           if (isRecordPage()) {
             closeRecordToQueue();

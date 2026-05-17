@@ -1915,14 +1915,14 @@
         }
 
         .record-thesis {
-          order: 3;
+          order: 4;
           max-width: 38ch;
           margin-top: 18px;
           font-size: 14px;
         }
 
         .record-plate {
-          order: 4;
+          order: 5;
           width: 100%;
           min-height: 0;
           margin: 34px 0 0;
@@ -1976,7 +1976,7 @@
         }
 
         .record-meta {
-          order: 5;
+          order: 6;
           width: 100%;
           margin-top: 28px;
         }
@@ -1984,7 +1984,7 @@
         .record-section,
         .archive-experience.record-template-slab.is-record-page .record-section,
         .archive-experience.record-template-case.is-record-page .record-section {
-          order: 6;
+          order: 7;
           width: 100%;
           max-width: 100%;
           min-height: 0;
@@ -2027,9 +2027,9 @@
         }
 
         .record-index {
-          order: 7;
+          order: 3;
           display: block;
-          margin-top: 44px;
+          margin-top: 28px;
         }
 
         .record-actions {
