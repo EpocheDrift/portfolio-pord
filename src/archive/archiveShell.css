@@ -518,20 +518,27 @@
 
       .record-plate-live-link {
         grid-column: 1 / -1;
-        display: inline-block;
-        margin-top: 8px;
-        color: var(--amber);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 14px;
+        padding: 6px 12px;
+        color: var(--color-amber, #d8aa52);
         font-family: "IBM Plex Sans Condensed", sans-serif;
-        font-size: 11px;
+        font-size: 13px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
         text-decoration: none;
-        opacity: 0.85;
-        transition: opacity 0.2s;
+        border: 1px solid rgba(216, 170, 82, 0.45);
+        border-radius: 2px;
+        background: rgba(216, 170, 82, 0.07);
+        transition: background 0.2s, border-color 0.2s;
+        width: fit-content;
       }
 
       .record-plate-live-link:hover {
-        opacity: 1;
+        background: rgba(216, 170, 82, 0.14);
+        border-color: rgba(216, 170, 82, 0.75);
       }
 
       .record-section {
@@ -2121,7 +2128,7 @@
           display: none;
           position: fixed;
           z-index: 10;
-          top: 65vh;
+          top: 56vh;
           left: 0;
           right: 0;
           bottom: 68px;
@@ -2133,6 +2140,18 @@
           padding: 0;
           background: rgba(5, 6, 5, 0.88);
           border-top: 1px solid rgba(232, 225, 210, 0.12);
+        }
+
+        .archive-experience.is-open .mobile-signal-list::after {
+          content: "";
+          position: sticky;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 48px;
+          flex-shrink: 0;
+          background: linear-gradient(to bottom, transparent, rgba(5, 6, 5, 0.92));
+          pointer-events: none;
         }
 
         .mobile-signal-list::-webkit-scrollbar {
