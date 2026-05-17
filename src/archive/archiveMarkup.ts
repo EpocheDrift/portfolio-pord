@@ -99,8 +99,8 @@ export const archiveMarkup = `
       <article class="signal-card output strip" data-signal-index="3" tabindex="0"></article>
     </div>
     <div class="archive-caption" aria-hidden="true">
-      portfolio system
-      <strong>archive<br />record<br />flow</strong>
+      chaostudio
+      <strong>archive<br />·<br />2026</strong>
     </div>
     <div class="field-pulse" aria-hidden="true">
       <span class="pulse-tick"></span>

@@ -90,12 +90,12 @@ export const siteCopy = {
       zh: "纵向记录处理",
     },
     archiveForm: {
-      en: "PORTFOLIO SYSTEM",
-      zh: "作品集系统",
+      en: "CHAOSTUDIO",
+      zh: "混沌工作室",
     },
     processingFlow: {
-      en: "archive\nrecord\nflow",
-      zh: "档案\n记录\n流",
+      en: "archive\n·\n2026",
+      zh: "档案\n·\n2026",
     },
     queueSummary: {
       en: "Projects are routed through queue, focus, and record states.",
