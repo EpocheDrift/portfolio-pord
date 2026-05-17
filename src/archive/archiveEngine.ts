@@ -1,5 +1,31 @@
 // @ts-nocheck
-import * as THREE from "three";
+import {
+  ACESFilmicToneMapping,
+  BoxGeometry,
+  BufferAttribute,
+  BufferGeometry,
+  Color,
+  DirectionalLight,
+  DynamicDrawUsage,
+  FogExp2,
+  GridHelper,
+  Group,
+  InstancedMesh,
+  MathUtils,
+  Mesh,
+  MeshBasicMaterial,
+  Object3D,
+  PerspectiveCamera,
+  PointLight,
+  Points,
+  PointsMaterial,
+  Raycaster,
+  SRGBColorSpace,
+  Scene,
+  Vector2,
+  Vector3,
+  WebGLRenderer,
+} from "three";
 import { projects } from "../data/projects";
 import { siteCopy } from "../data/siteCopy";
 import {
@@ -340,25 +366,25 @@ export function mountArchiveExperience(container: HTMLElement) {
           window.history.pushState({}, "", path);
         }
   
-        const renderer = new THREE.WebGLRenderer({
+        const renderer = new WebGLRenderer({
           antialias: true,
           alpha: false,
           powerPreference: "high-performance",
         });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.outputColorSpace = THREE.SRGBColorSpace;
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.outputColorSpace = SRGBColorSpace;
+        renderer.toneMapping = ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.34;
         container.appendChild(renderer.domElement);
   
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x050605);
-        scene.fog = new THREE.FogExp2(0x050605, 0.045);
+        const scene = new Scene();
+        scene.background = new Color(0x050605);
+        scene.fog = new FogExp2(0x050605, 0.045);
   
-        const camera = new THREE.PerspectiveCamera(
+        const camera = new PerspectiveCamera(
           42,
           window.innerWidth / window.innerHeight,
           0.1,
@@ -366,39 +392,39 @@ export function mountArchiveExperience(container: HTMLElement) {
         );
         camera.position.set(0, 0.8, getCameraZ());
   
-        const pointer = new THREE.Vector2();
-        const pointerTarget = new THREE.Vector2();
-        const raycaster = new THREE.Raycaster();
+        const pointer = new Vector2();
+        const pointerTarget = new Vector2();
+        const raycaster = new Raycaster();
         const startTime = performance.now();
         let lastFrameTime = startTime;
   
-        const keyLight = new THREE.DirectionalLight(0xf4ead8, 1.86);
+        const keyLight = new DirectionalLight(0xf4ead8, 1.86);
         keyLight.position.set(2.8, 5, 5);
         scene.add(keyLight);
   
-        const rimLight = new THREE.PointLight(0x83bdb8, 5.6, 18, 2);
+        const rimLight = new PointLight(0x83bdb8, 5.6, 18, 2);
         rimLight.position.set(-4, 2.5, 3.5);
         scene.add(rimLight);
   
-        const amberLight = new THREE.PointLight(0xd7ac61, 5.2, 14, 2);
+        const amberLight = new PointLight(0xd7ac61, 5.2, 14, 2);
         amberLight.position.set(3.6, -1.8, 2.8);
         scene.add(amberLight);
   
-        const stage = new THREE.Group();
+        const stage = new Group();
         scene.add(stage);
   
-        const monitorGroup = new THREE.Group();
+        const monitorGroup = new Group();
         monitorGroup.position.set(0, -0.15, -0.7);
         monitorGroup.rotation.x = -0.08;
         stage.add(monitorGroup);
-        const closedMonitorPosition = new THREE.Vector3(0, -0.15, -0.7);
-        const openMonitorPosition = new THREE.Vector3(2.75, 2.35, -0.7);
-        const mobileOpenMonitorPosition = new THREE.Vector3(0, 1.5, -0.7);
-        const recordMonitorPosition = new THREE.Vector3(1.62, -0.02, -0.7);
+        const closedMonitorPosition = new Vector3(0, -0.15, -0.7);
+        const openMonitorPosition = new Vector3(2.75, 2.35, -0.7);
+        const mobileOpenMonitorPosition = new Vector3(0, 1.5, -0.7);
+        const recordMonitorPosition = new Vector3(1.62, -0.02, -0.7);
   
-        const monitor = new THREE.Mesh(
-          new THREE.BoxGeometry(14.8, 10.1, 0.18),
-          new THREE.MeshBasicMaterial({
+        const monitor = new Mesh(
+          new BoxGeometry(14.8, 10.1, 0.18),
+          new MeshBasicMaterial({
             transparent: true,
             opacity: 0,
             depthWrite: false,
@@ -406,7 +432,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         );
         monitorGroup.add(monitor);
   
-        const grid = new THREE.GridHelper(9, 22, 0x6d604a, 0x202018);
+        const grid = new GridHelper(9, 22, 0x6d604a, 0x202018);
         grid.position.set(0, -2.45, -0.6);
         grid.rotation.x = Math.PI / 2;
         grid.material.transparent = true;
@@ -1098,53 +1124,53 @@ export function mountArchiveExperience(container: HTMLElement) {
             }
           }
   
-          const group = new THREE.Group();
+          const group = new Group();
           group.userData.thickness = 1;
           group.userData.motionBlend = 1;
           group.userData.motionTime = 0;
           group.userData.baseScale = getBaseScale();
   
-          const primaryEdgeMaterial = new THREE.MeshBasicMaterial({
+          const primaryEdgeMaterial = new MeshBasicMaterial({
             color: 0xf0eadb,
             transparent: true,
             opacity: 0.88,
             depthWrite: false,
           });
   
-          const secondaryEdgeMaterial = new THREE.MeshBasicMaterial({
+          const secondaryEdgeMaterial = new MeshBasicMaterial({
             color: 0x9da39a,
             transparent: true,
             opacity: 0.32,
             depthWrite: false,
           });
   
-          const nodeMaterial = new THREE.MeshBasicMaterial({
+          const nodeMaterial = new MeshBasicMaterial({
             color: 0xd7ac61,
             transparent: true,
             opacity: 0.16,
             depthWrite: false,
           });
   
-          const primaryEdgeMesh = new THREE.InstancedMesh(
-            new THREE.BoxGeometry(0.018, 0.018, 1),
+          const primaryEdgeMesh = new InstancedMesh(
+            new BoxGeometry(0.018, 0.018, 1),
             primaryEdgeMaterial,
             primaryEdges.length,
           );
-          primaryEdgeMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+          primaryEdgeMesh.instanceMatrix.setUsage(DynamicDrawUsage);
   
-          const secondaryEdgeMesh = new THREE.InstancedMesh(
-            new THREE.BoxGeometry(0.01, 0.01, 1),
+          const secondaryEdgeMesh = new InstancedMesh(
+            new BoxGeometry(0.01, 0.01, 1),
             secondaryEdgeMaterial,
             secondaryEdges.length,
           );
-          secondaryEdgeMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+          secondaryEdgeMesh.instanceMatrix.setUsage(DynamicDrawUsage);
   
-          const nodeMesh = new THREE.InstancedMesh(
-            new THREE.BoxGeometry(0.026, 0.026, 0.026),
+          const nodeMesh = new InstancedMesh(
+            new BoxGeometry(0.026, 0.026, 0.026),
             nodeMaterial,
             vertices4D.length,
           );
-          nodeMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+          nodeMesh.instanceMatrix.setUsage(DynamicDrawUsage);
   
           group.add(secondaryEdgeMesh, primaryEdgeMesh, nodeMesh);
   
@@ -1156,8 +1182,8 @@ export function mountArchiveExperience(container: HTMLElement) {
             primaryEdgeMesh,
             secondaryEdgeMesh,
             nodeMesh,
-            projected: vertices4D.map(() => new THREE.Vector3()),
-            dummy: new THREE.Object3D(),
+            projected: vertices4D.map(() => new Vector3()),
+            dummy: new Object3D(),
           };
         }
   
@@ -1170,12 +1196,12 @@ export function mountArchiveExperience(container: HTMLElement) {
             positions[i * 3 + 2] = -Math.random() * 9 + 3;
           }
   
-          const geometry = new THREE.BufferGeometry();
-          geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+          const geometry = new BufferGeometry();
+          geometry.setAttribute("position", new BufferAttribute(positions, 3));
   
-          return new THREE.Points(
+          return new Points(
             geometry,
-            new THREE.PointsMaterial({
+            new PointsMaterial({
               color: 0x83bdb8,
               size: 0.012,
               transparent: true,
@@ -1239,7 +1265,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         }
   
         function updateTesseract(t, delta) {
-          const thickness = THREE.MathUtils.lerp(
+          const thickness = MathUtils.lerp(
             tesseract.group.userData.thickness,
             targetThickness,
             1 - Math.pow(0.001, delta),
@@ -1248,9 +1274,9 @@ export function mountArchiveExperience(container: HTMLElement) {
   
           tesseract.group.visible = thickness > 0.012;
   
-          const closedWeight = THREE.MathUtils.clamp((thickness - 0.34) / 0.66, 0, 1);
+          const closedWeight = MathUtils.clamp((thickness - 0.34) / 0.66, 0, 1);
           const motionTarget = isInfoPage() ? 0.42 : isRecordPage() ? 0.22 : isOpen ? 0 : 1;
-          const motionBlend = THREE.MathUtils.lerp(
+          const motionBlend = MathUtils.lerp(
             tesseract.group.userData.motionBlend,
             motionTarget,
             1 - Math.pow(0.025, delta),
@@ -1279,9 +1305,9 @@ export function mountArchiveExperience(container: HTMLElement) {
             0.035 + closedWeight * 0.045 + openWeight * 0.055 + infoWeight * 0.06;
           amberLight.intensity = 5.2;
   
-          const closeLineFactor = THREE.MathUtils.lerp(1, 0.66, closedWeight);
-          const closeSecondaryFactor = THREE.MathUtils.lerp(0.72, 0.56, closedWeight);
-          const closeNodeFactor = THREE.MathUtils.lerp(0.48, 0.31, closedWeight);
+          const closeLineFactor = MathUtils.lerp(1, 0.66, closedWeight);
+          const closeSecondaryFactor = MathUtils.lerp(0.72, 0.56, closedWeight);
+          const closeNodeFactor = MathUtils.lerp(0.48, 0.31, closedWeight);
           const stateLineFactor = closeLineFactor + openWeight * 0.48 + infoWeight * 0.42;
           const stateSecondaryFactor = closeSecondaryFactor + openWeight * 0.27 + infoWeight * 0.24;
           const stateNodeFactor = closeNodeFactor + openWeight * 0.12 + infoWeight * 0.12;
@@ -1316,12 +1342,12 @@ export function mountArchiveExperience(container: HTMLElement) {
           const openPitch = localTime * 0.04;
   
           tesseract.group.rotation.y =
-            THREE.MathUtils.lerp(openYaw, closedYaw, motionBlend) + pointer.x * 0.055;
+            MathUtils.lerp(openYaw, closedYaw, motionBlend) + pointer.x * 0.055;
           tesseract.group.rotation.x =
-            THREE.MathUtils.lerp(openPitch, closedPitch, motionBlend) - pointer.y * 0.035;
+            MathUtils.lerp(openPitch, closedPitch, motionBlend) - pointer.y * 0.035;
           tesseract.group.rotation.z = closedRoll * motionBlend;
   
-          const baseScale = THREE.MathUtils.lerp(
+          const baseScale = MathUtils.lerp(
             tesseract.group.userData.baseScale,
             targetScale,
             1 - Math.pow(0.0008, delta),
@@ -1371,12 +1397,12 @@ export function mountArchiveExperience(container: HTMLElement) {
                 : closedMonitorPosition;
           const lerpFactor = reducedMotion ? 1 : 1 - Math.pow(0.0009, delta);
           monitorGroup.position.lerp(monitorTarget, lerpFactor);
-          monitorGroup.rotation.x = THREE.MathUtils.lerp(
+          monitorGroup.rotation.x = MathUtils.lerp(
             monitorGroup.rotation.x,
             isInfoPage() ? -0.035 : isRecordPage() ? -0.03 : isOpen ? -0.02 : -0.08,
             lerpFactor,
           );
-          monitorGroup.rotation.z = THREE.MathUtils.lerp(
+          monitorGroup.rotation.z = MathUtils.lerp(
             monitorGroup.rotation.z,
             isInfoPage() ? 0 : isRecordPage() ? 0.04 : isOpen ? (isSmallViewport() ? 0.04 : 0.18) : 0,
             lerpFactor,
@@ -1399,7 +1425,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           updateTesseract(elapsed, delta);
 
           if (fieldReturnHint && isOpen) {
-            const _hintPos = new THREE.Vector3();
+            const _hintPos = new Vector3();
             tesseract.group.getWorldPosition(_hintPos);
             _hintPos.project(camera);
             fieldReturnHint.style.left = ((_hintPos.x + 1) / 2 * window.innerWidth) + "px";

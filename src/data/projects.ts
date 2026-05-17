@@ -1,12 +1,12 @@
 import type { ProjectRecord } from "./contentTypes";
 import diagramSignalFlow from "../assets/projects/chaos-interface/diagram-signal-flow.svg";
-import plateClosedFieldP3 from "../assets/projects/chaos-interface/plate-closed-field-p3.png";
-import plateOpenQueueP3 from "../assets/projects/chaos-interface/plate-open-queue-p3.png";
-import plateDetailRecord from "../assets/projects/chaos-interface/plate-detail-record.png";
+import plateClosedFieldP3 from "../assets/projects/chaos-interface/plate-closed-field-p3.webp";
+import plateOpenQueueP3 from "../assets/projects/chaos-interface/plate-open-queue-p3.webp";
+import plateDetailRecord from "../assets/projects/chaos-interface/plate-detail-record.webp";
 import ccsArchitecture from "../assets/projects/ccs/ccs-architecture.svg";
-import energyClarityState from "../assets/projects/energy-sense/energy-clarity-state.png";
-import energyDrainState from "../assets/projects/energy-sense/energy-drain-state.png";
-import energyRecoveryState from "../assets/projects/energy-sense/energy-recovery-state.png";
+import energyClarityState from "../assets/projects/energy-sense/energy-clarity-state.webp";
+import energyDrainState from "../assets/projects/energy-sense/energy-drain-state.webp";
+import energyRecoveryState from "../assets/projects/energy-sense/energy-recovery-state.webp";
 import tendStateMachine from "../assets/projects/tend/tend-state-machine.svg";
 import tendSystemLayers from "../assets/projects/tend/tend-system-layers.svg";
 
