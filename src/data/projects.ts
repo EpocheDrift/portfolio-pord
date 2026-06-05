@@ -37,8 +37,8 @@ export const projects: ProjectRecord[] = [
       zh: "系统设计 / Next.js / 状态机",
     },
     summary: {
-      en: "A booking automation system for independent wellness practitioners. Built around a deterministic state machine: every booking moves through defined states, every transition is triggered by an event, every action is traceable.",
-      zh: "为独立 wellness 从业者构建的预约自动化系统。以确定性状态机为核心：每次预约经过明确定义的状态，每次跳转由事件触发，每个动作都可追溯。",
+      en: "Tend is a booking automation system for independent wellness practitioners, built around a deterministic state machine. The core design problem: how do you automate discretionary decisions without erasing practitioner judgment?",
+      zh: "Tend 是为独立 wellness 从业者构建的预约自动化系统，以确定性状态机为核心。核心设计问题：如何在不抹去从业者判断的前提下，自动化那些需要权衡的决策？",
     },
     evidence: [
       {
@@ -183,8 +183,8 @@ export const projects: ProjectRecord[] = [
       zh: "三层架构：被动捕捉 → AI 处理 → 输出模块。",
     },
     summary: {
-      en: "A personal AI operating system that passively captures cognitive context as you work — so the record of what you were doing, thinking, and deciding is never lost.",
-      zh: "一个个人 AI 操作系统，在你工作时被动捕捉认知上下文——让你决策的过程、当时的状态与思考的脉络，永远不会丢失。",
+      en: "CCS is a specification for a personal AI operating system that removes the act of remembering from the cognitive stack — through passive capture and AI-structured recall. The artifact is the architecture: v0.1 is live, v0.2 is designed and waiting.",
+      zh: "CCS 是一个个人 AI 操作系统的完整规格——通过被动捕捉与 AI 结构化回溯，把「记住去记」从认知负担中移除。这份记录的核心是架构本身：v0.1 手动版本运行中，v0.2 已设计完成，等待构建。",
     },
     evidence: [
       {
@@ -311,8 +311,8 @@ export const projects: ProjectRecord[] = [
       zh: "场域向有方向的流动打开。你正在进入一个专注窗口。",
     },
     summary: {
-      en: "A speculative sensing interface that translates invisible internal energy states — cognitive clarity, social drain, recovery pressure — into a living visual landscape.",
-      zh: "一个推测性感知界面，将认知清晰度、社交耗能与恢复压力这三种不可见的内在状态，转译为一片持续变化的视觉场域。",
+      en: "Energy Sense translates invisible internal states — cognitive clarity, social drain, recovery pressure — into a living visual landscape. The design problem was restraint: a companion that notices, not a system that judges.",
+      zh: "Energy Sense 将认知清晰度、社交耗能与恢复压力这些不可见的内在状态，转译为一片持续变化的视觉场域。核心设计问题是克制：一个会注意到的陪伴，而不是一个做判断的系统。",
     },
     evidence: [
       { en: "The design problem is translation, not measurement.", zh: "设计问题是转译，不是测量。" },
@@ -462,8 +462,8 @@ export const projects: ProjectRecord[] = [
       zh: "档案以一个安静的投影场域开始。",
     },
     summary: {
-      en: "Zayn's personal archive interface turns portfolio content into signals, routes, and project records inside a tesseract-led field system.",
-      zh: "Zayn 的个人档案界面，将作品内容转化为信号、路径与项目记录，并放入由 Tesseract 引导的场域系统中。",
+      en: "The archive you are currently inside — built to prove that a portfolio can be a running system rather than a static display surface. The interface, content model, and bilingual routing are all part of the evidence.",
+      zh: "你现在正在其中的这个档案——被构建来证明：一个作品集可以是一个正在运行的系统，而不只是一个静态展示页面。界面本身、内容模型，和双语路由——都是证明的一部分。",
     },
     evidence: [
       {
