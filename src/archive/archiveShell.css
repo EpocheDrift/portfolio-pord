@@ -1215,7 +1215,7 @@
 
       .record-row strong {
         color: rgba(232, 225, 210, 0.86);
-        font-size: 12px;
+        font-size: 13px;
         line-height: 1.35;
         letter-spacing: 0.06em;
         text-transform: uppercase;
@@ -1271,7 +1271,7 @@
       .signal-row strong {
         color: rgba(232, 225, 210, 0.8);
         font-family: "Archivo", "Arial Narrow", Inter, ui-sans-serif, system-ui, sans-serif;
-        font-size: 13px;
+        font-size: 15px;
         line-height: 1;
         letter-spacing: 0;
       }
@@ -1385,6 +1385,7 @@
         width: calc(100% - 54px);
         padding-bottom: 8px;
         border-bottom: 1px solid rgba(232, 225, 210, 0.1);
+        font-size: 11px;
       }
 
       .signal-card strong {
@@ -1402,7 +1403,7 @@
         margin-top: 12px;
         max-width: 38ch;
         color: rgba(232, 225, 210, 0.5);
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.45;
       }
 
