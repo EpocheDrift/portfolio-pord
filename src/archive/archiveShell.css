@@ -802,8 +802,8 @@
         max-width: 40ch;
         color: rgba(232, 225, 210, 0.56);
         font-family: "IBM Plex Sans Condensed", sans-serif;
-        font-size: 15px;
-        letter-spacing: 0.04em;
+        font-size: 18px;
+        letter-spacing: 0.03em;
         line-height: 1.45;
         pointer-events: none;
         opacity: 1;
