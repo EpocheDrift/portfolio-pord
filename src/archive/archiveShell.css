@@ -798,7 +798,7 @@
         position: fixed;
         z-index: 3;
         left: 32px;
-        bottom: 76px;
+        bottom: 28px;
         max-width: 40ch;
         color: rgba(232, 225, 210, 0.56);
         font-family: "IBM Plex Sans Condensed", sans-serif;
