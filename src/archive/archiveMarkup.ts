@@ -100,8 +100,8 @@ export const archiveMarkup = `
       <article class="signal-card output strip" data-signal-index="3" tabindex="0"></article>
     </div>
     <div class="archive-caption" aria-hidden="true">
-      chaostudio
-      <strong>archive<br />2026</strong>
+      zayn wang
+      <strong>Zayn turns early AI product and workflow ideas into runnable prototypes, demo stories, and short cases that people can test and discuss.</strong>
     </div>
     <div class="field-pulse" aria-hidden="true">
       <span class="pulse-tick"></span>
