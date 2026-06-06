@@ -1285,7 +1285,7 @@
         z-index: 10;
         left: 32px;
         bottom: 34px;
-        max-width: 42ch;
+        max-width: min(29vw, 360px);
         opacity: 0;
         transform: translateY(8px);
         pointer-events: none;
@@ -1304,9 +1304,9 @@
         margin-top: 10px;
         color: rgba(232, 225, 210, 0.82);
         font-family: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
-        font-size: 15px;
+        font-size: 17px;
         font-weight: 400;
-        line-height: 1.55;
+        line-height: 1.5;
         letter-spacing: 0.02em;
         text-transform: none;
       }
