@@ -1469,16 +1469,7 @@ export function mountArchiveExperience(container: HTMLElement) {
                 : getBaseScale();
         }
   
-        function positionFieldIntro() {
-          if (!fieldIntro) return;
-          const rt = root.querySelector(".reverse-type:not(.reverse-type-burn):not(.reverse-type-violent)");
-          if (!rt) return;
-          const rect = rt.getBoundingClientRect();
-          fieldIntro.style.top = (rect.bottom + 14) + "px";
-          fieldIntro.style.left = rect.left + "px";
-        }
-
-        window.addEventListener("resize", () => { resize(); positionFieldIntro(); });
+        window.addEventListener("resize", resize);
         window.addEventListener("popstate", () => {
           applyRouteFromLocation();
         });
@@ -1534,7 +1525,6 @@ export function mountArchiveExperience(container: HTMLElement) {
           activeIndex = requestedSignal;
         }
         applyLocalizedShellCopy();
-        positionFieldIntro();
         renderSignals();
         applyRouteFromLocation();
         animate();
