@@ -117,5 +117,6 @@ export const archiveMarkup = `
     <button class="field-return-hint" type="button" aria-label="Return to field">return / field</button>
     <button class="field-enter-hint" type="button" aria-label="Enter archive">ENTER ARCHIVE</button>
     <div class="field-intro" aria-hidden="true"></div>
+    <div class="scroll-hint" aria-hidden="true">↕ scroll to browse</div>
     <nav class="mobile-signal-list" aria-label="Archive signal list" aria-hidden="true"></nav>
 `;

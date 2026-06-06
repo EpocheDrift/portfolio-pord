@@ -100,6 +100,8 @@ export function mountArchiveExperience(container: HTMLElement) {
         const fieldReturnHint = root.querySelector(".field-return-hint");
         const fieldEnterHint = root.querySelector(".field-enter-hint");
         const fieldIntro = root.querySelector(".field-intro");
+        const scrollHint = root.querySelector(".scroll-hint");
+        let scrollHintTimer: ReturnType<typeof setTimeout> | null = null;
         const signalCards = Array.from(root.querySelectorAll(".signal-card"));
         const signalRows = Array.from(root.querySelectorAll(".signal-row"));
         const utilityButtons = Array.from(root.querySelectorAll("[data-utility]"));
@@ -803,6 +805,13 @@ export function mountArchiveExperience(container: HTMLElement) {
           setShellState("open");
           renderSignals();
           writeRoute(routePath.open, options);
+          if (scrollHint) {
+            if (scrollHintTimer) clearTimeout(scrollHintTimer);
+            scrollHint.classList.add("is-visible");
+            scrollHintTimer = setTimeout(() => {
+              scrollHint.classList.remove("is-visible");
+            }, 3000);
+          }
         }
 
         function closeFlow(options = {}) {
@@ -1038,21 +1047,21 @@ export function mountArchiveExperience(container: HTMLElement) {
         window.addEventListener("wheel", (event) => {
           if (isInfoPage() || isRecordPage()) return;
           if (!window.matchMedia("(min-width: 861px)").matches) return;
-          if (Math.abs(event.deltaY) < 8) return;
-  
+          if (Math.abs(event.deltaY) < 20) return;
+
           event.preventDefault();
-  
+
           if (!isOpen) {
             openFlow();
             return;
           }
-  
+
           if (wheelLocked) return;
           wheelLocked = true;
           stepActive(event.deltaY > 0 ? 1 : -1);
           window.setTimeout(() => {
             wheelLocked = false;
-          }, 360);
+          }, 600);
         }, { passive: false });
   
         window.addEventListener("keydown", (event) => {
@@ -1460,7 +1469,16 @@ export function mountArchiveExperience(container: HTMLElement) {
                 : getBaseScale();
         }
   
-        window.addEventListener("resize", resize);
+        function positionFieldIntro() {
+          if (!fieldIntro) return;
+          const rt = root.querySelector(".reverse-type:not(.reverse-type-burn):not(.reverse-type-violent)");
+          if (!rt) return;
+          const rect = rt.getBoundingClientRect();
+          fieldIntro.style.top = (rect.bottom + 14) + "px";
+          fieldIntro.style.left = rect.left + "px";
+        }
+
+        window.addEventListener("resize", () => { resize(); positionFieldIntro(); });
         window.addEventListener("popstate", () => {
           applyRouteFromLocation();
         });
@@ -1516,6 +1534,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           activeIndex = requestedSignal;
         }
         applyLocalizedShellCopy();
+        positionFieldIntro();
         renderSignals();
         applyRouteFromLocation();
         animate();
