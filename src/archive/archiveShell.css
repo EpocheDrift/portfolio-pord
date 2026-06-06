@@ -1168,8 +1168,8 @@
         opacity: 0;
         transform: translateY(10px);
         transition:
-          opacity 360ms ease 160ms,
-          transform 520ms cubic-bezier(0.2, 0.72, 0.18, 1) 160ms;
+          opacity 420ms ease 700ms,
+          transform 580ms cubic-bezier(0.2, 0.72, 0.18, 1) 700ms;
       }
 
       .archive-experience.is-open .accession-panel {
@@ -1290,8 +1290,8 @@
         transform: translateY(8px);
         pointer-events: none;
         transition:
-          opacity 360ms ease 220ms,
-          transform 520ms cubic-bezier(0.2, 0.72, 0.18, 1) 180ms;
+          opacity 420ms ease 700ms,
+          transform 580ms cubic-bezier(0.2, 0.72, 0.18, 1) 700ms;
       }
 
       .archive-experience.is-open .archive-caption {
@@ -1317,7 +1317,7 @@
         inset: 0;
         pointer-events: none;
         opacity: 0;
-        transition: opacity 360ms ease 180ms;
+        transition: opacity 280ms ease 60ms;
       }
 
       .archive-experience.is-open .signal-flow {
