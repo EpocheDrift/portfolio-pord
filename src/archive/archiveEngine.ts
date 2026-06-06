@@ -98,6 +98,8 @@ export function mountArchiveExperience(container: HTMLElement) {
         const signalFlow = root.querySelector(".signal-flow");
         const mobileSignalList = root.querySelector(".mobile-signal-list");
         const fieldReturnHint = root.querySelector(".field-return-hint");
+        const fieldEnterHint = root.querySelector(".field-enter-hint");
+        const fieldIntro = root.querySelector(".field-intro");
         const signalCards = Array.from(root.querySelectorAll(".signal-card"));
         const signalRows = Array.from(root.querySelectorAll(".signal-row"));
         const utilityButtons = Array.from(root.querySelectorAll("[data-utility]"));
@@ -556,6 +558,8 @@ export function mountArchiveExperience(container: HTMLElement) {
               languageMode,
             );
           });
+          if (fieldEnterHint) fieldEnterHint.textContent = resolveText(siteCopy.ui.enterArchive, languageMode);
+          if (fieldIntro) fieldIntro.textContent = resolveText(siteCopy.intro, languageMode);
           setShellState(stateMode);
         }
   
@@ -858,6 +862,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             <strong>${signal.name}</strong>
             <p>${signal.description}</p>
             <span class="route-code">${signal.code}</span>
+            ${isActive ? `<span class="card-enter-cue">open record →</span>` : ""}
           `;
         }
   
@@ -934,7 +939,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         });
   
         window.addEventListener("pointerdown", (event) => {
-          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list, .record-page, .field-return-hint")) return;
+          if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list, .record-page, .field-return-hint, .field-enter-hint")) return;
           if (event.pointerType !== "touch" && !isHovering) return;
           if (isRecordPage()) {
             closeRecordToQueue();
@@ -999,7 +1004,12 @@ export function mountArchiveExperience(container: HTMLElement) {
           event.stopPropagation();
           if (isOpen) closeFlow();
         });
-  
+
+        fieldEnterHint?.addEventListener("click", (event) => {
+          event.stopPropagation();
+          if (!isOpen) openFlow();
+        });
+
         recordActions.forEach((button) => {
           button.addEventListener("click", (event) => {
             event.stopPropagation();
