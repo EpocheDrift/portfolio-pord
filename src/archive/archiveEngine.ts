@@ -831,6 +831,8 @@ export function mountArchiveExperience(container: HTMLElement) {
           utilityButtons.forEach((button) => {
             button.classList.remove("is-active");
           });
+          if (scrollHintTimer) { clearTimeout(scrollHintTimer); scrollHintTimer = null; }
+          if (scrollHint) scrollHint.classList.remove("is-visible");
           setShellState("closed");
           scheduleFieldPulse();
           writeRoute(routePath.closed, options);
