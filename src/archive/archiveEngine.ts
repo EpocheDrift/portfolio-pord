@@ -783,6 +783,18 @@ export function mountArchiveExperience(container: HTMLElement) {
           return Math.max(0, Math.min(signals.length - 1, index));
         }
   
+        function onScrollHintKeyDismiss(e: KeyboardEvent) {
+          if (["ArrowUp", "ArrowDown"].includes(e.key)) hideScrollHint();
+        }
+
+        function hideScrollHint() {
+          if (!scrollHint) return;
+          scrollHint.classList.remove("is-visible");
+          if (scrollHintTimer) { clearTimeout(scrollHintTimer); scrollHintTimer = null; }
+          window.removeEventListener("wheel", hideScrollHint);
+          window.removeEventListener("keydown", onScrollHintKeyDismiss);
+        }
+
         function openFlow(options = {}) {
           cancelFieldPulse();
           pageMode = "archive";
@@ -806,11 +818,11 @@ export function mountArchiveExperience(container: HTMLElement) {
           renderSignals();
           writeRoute(routePath.open, options);
           if (scrollHint) {
-            if (scrollHintTimer) clearTimeout(scrollHintTimer);
+            hideScrollHint();
             scrollHint.classList.add("is-visible");
-            scrollHintTimer = setTimeout(() => {
-              scrollHint.classList.remove("is-visible");
-            }, 3000);
+            scrollHintTimer = setTimeout(hideScrollHint, 6000);
+            window.addEventListener("wheel", hideScrollHint, { once: true });
+            window.addEventListener("keydown", onScrollHintKeyDismiss);
           }
         }
 
@@ -831,8 +843,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           utilityButtons.forEach((button) => {
             button.classList.remove("is-active");
           });
-          if (scrollHintTimer) { clearTimeout(scrollHintTimer); scrollHintTimer = null; }
-          if (scrollHint) scrollHint.classList.remove("is-visible");
+          hideScrollHint();
           setShellState("closed");
           scheduleFieldPulse();
           writeRoute(routePath.closed, options);
@@ -940,6 +951,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         }
   
         function stepActive(direction) {
+          hideScrollHint();
           setActive(activeIndex + direction);
         }
   
@@ -991,6 +1003,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         signalRows.forEach((row, index) => {
           row.addEventListener("click", (event) => {
             event.stopPropagation();
+            hideScrollHint();
             if (isOpen && index === activeIndex) {
               openProjectRecord(index);
               return;
