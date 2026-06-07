@@ -232,59 +232,6 @@
         line-height: 1.5;
       }
 
-      .info-body p {
-        margin: 0;
-      }
-
-      .info-body p + p {
-        margin-top: 1.2em;
-      }
-
-      @media (min-width: 861px) {
-        .archive-experience.page-about .info-copy {
-          --info-column: minmax(0, min(36vw, 460px));
-          --info-gap: clamp(96px, 16vw, 240px);
-
-          right: 32px;
-          width: auto;
-          display: grid;
-          grid-template-columns: var(--info-column) var(--info-column);
-          column-gap: var(--info-gap);
-          align-items: start;
-        }
-
-        .archive-experience.page-about .info-kicker,
-        .archive-experience.page-about .info-title {
-          grid-column: 1;
-        }
-
-        .archive-experience.page-about .info-body {
-          grid-column: 1 / -1;
-          display: grid;
-          grid-template-columns: var(--info-column) var(--info-column);
-          column-gap: var(--info-gap);
-          max-width: none;
-          font-size: 16px;
-          line-height: 1.45;
-        }
-
-        .archive-experience.page-about .info-body-columns {
-          display: contents;
-        }
-
-        .archive-experience.page-about .info-body-column {
-          min-width: 0;
-        }
-
-        .archive-experience.page-about .info-return-link {
-          left: auto;
-          right: 32px;
-          top: 32px;
-          bottom: auto;
-          transform: none;
-        }
-      }
-
       .record-page {
         position: fixed;
         z-index: 14;
@@ -2501,3 +2448,4 @@
           transition-delay: 0ms !important;
         }
       }
+
