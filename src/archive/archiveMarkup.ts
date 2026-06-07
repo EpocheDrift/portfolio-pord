@@ -88,10 +88,10 @@ export const archiveMarkup = `
         <div class="record-row"><span>Route</span><strong data-record="route">ROOT / ROUTED</strong></div>
       </div>
       <div class="signal-register" aria-label="Archive register">
-        <div class="signal-row active-row"><span>D04</span><strong class="active">Tend</strong><span>demo complete</span></div>
+        <div class="signal-row active-row filed-row"><span>C03</span><strong class="active">Zayn Archive Interface</strong><span>routed</span></div>
+        <div class="signal-row"><span>D04</span><strong>Tend</strong><span>demo complete</span></div>
         <div class="signal-row filed-row"><span>A01</span><strong>CCS</strong><span>specification complete</span></div>
-        <div class="signal-row filed-row"><span>B02</span><strong>Energy Sense</strong><span>prototype complete</span></div>
-        <div class="signal-row filed-row"><span>C03</span><strong>混沌接口</strong><span>routed</span></div>
+        <div class="signal-row"><span>B02</span><strong>Energy Sense</strong><span>prototype complete</span></div>
       </div>
     </div>
     <div class="handoff-axis" aria-hidden="true"></div>
