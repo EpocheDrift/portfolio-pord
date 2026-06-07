@@ -510,6 +510,35 @@ export function mountArchiveExperience(container: HTMLElement) {
           };
         }
 
+        function renderInfoBody(type, body) {
+          if (type !== "about") {
+            return body;
+          }
+
+          const paragraphs = body
+            .split(/<br\s*\/?><br\s*\/?>/i)
+            .map((paragraph) => paragraph.trim())
+            .filter(Boolean);
+
+          if (paragraphs.length < 2) {
+            return body;
+          }
+
+          const splitIndex = Math.max(1, Math.floor(paragraphs.length / 2));
+          const renderColumn = (items) => `
+            <div class="info-body-column">
+              ${items.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+            </div>
+          `;
+
+          return `
+            <div class="info-body-columns">
+              ${renderColumn(paragraphs.slice(0, splitIndex))}
+              ${renderColumn(paragraphs.slice(splitIndex))}
+            </div>
+          `;
+        }
+
         function stateLabel(mode) {
           const labels = {
             closed: siteCopy.ui.viewClosed,
@@ -533,7 +562,7 @@ export function mountArchiveExperience(container: HTMLElement) {
 
           infoKicker.textContent = content.kicker;
           infoTitle.textContent = content.title;
-          infoBody.innerHTML = content.body;
+          infoBody.innerHTML = renderInfoBody(type, content.body);
         }
 
         function applyLocalizedShellCopy() {
