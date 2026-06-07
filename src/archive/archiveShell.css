@@ -241,7 +241,7 @@
         transition: opacity 400ms ease 300ms;
       }
 
-      .archive-experience.is-info-page .info-scroll-track.is-scrollable {
+      .archive-experience.is-info-page .info-scroll-track {
         opacity: 1;
       }
 
@@ -253,6 +253,10 @@
         height: 0;
         background: rgba(215, 172, 97, 0.5);
         will-change: top, height;
+      }
+
+      .archive-experience.is-info-page .info-scroll-track:not(.is-scrollable) .info-scroll-thumb {
+        display: none;
       }
 
       .info-body {
@@ -269,6 +273,17 @@
 
       .info-body::-webkit-scrollbar {
         display: none;
+      }
+
+      .info-body a {
+        color: rgba(215, 172, 97, 0.72);
+        text-decoration: none;
+      }
+
+      .info-body a:hover,
+      .info-body a:focus-visible {
+        color: rgba(215, 172, 97, 1);
+        outline: none;
       }
 
       .record-page {
