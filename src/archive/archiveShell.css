@@ -224,12 +224,51 @@
         text-transform: uppercase;
       }
 
-      .info-body {
+      .info-body-wrap {
+        display: flex;
+        align-items: stretch;
+        gap: 14px;
         margin-top: 38px;
+      }
+
+      .info-scroll-track {
+        order: -1;
+        flex-shrink: 0;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.06);
+        opacity: 0;
+        position: relative;
+        transition: opacity 400ms ease 300ms;
+      }
+
+      .archive-experience.is-info-page .info-scroll-track.is-scrollable {
+        opacity: 1;
+      }
+
+      .info-scroll-thumb {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1px;
+        height: 0;
+        background: rgba(215, 172, 97, 0.5);
+        will-change: top, height;
+      }
+
+      .info-body {
+        flex: 1;
         max-width: 36ch;
+        max-height: calc(100vh - 440px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: none;
         color: rgba(232, 225, 210, 0.6);
         font-size: 19px;
         line-height: 1.5;
+      }
+
+      .info-body::-webkit-scrollbar {
+        display: none;
       }
 
       .record-page {
@@ -2009,6 +2048,7 @@
         .info-body {
           max-width: 35ch;
           font-size: 17px;
+          max-height: calc(100vh - 560px);
         }
 
         .info-return-link {

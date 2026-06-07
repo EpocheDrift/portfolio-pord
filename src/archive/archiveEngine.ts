@@ -109,7 +109,9 @@ export function mountArchiveExperience(container: HTMLElement) {
         const infoReturn = root.querySelector(".info-return-link");
         const infoKicker = root.querySelector("[data-info-kicker]");
         const infoTitle = root.querySelector("[data-info-title]");
-        const infoBody = root.querySelector("[data-info-body]");
+        const infoBody = root.querySelector("[data-info-body]") as HTMLElement | null;
+        const infoScrollTrack = root.querySelector(".info-scroll-track") as HTMLElement | null;
+        const infoScrollThumb = root.querySelector(".info-scroll-thumb") as HTMLElement | null;
         const recordPage = root.querySelector(".record-page");
         const recordActions = Array.from(root.querySelectorAll("[data-record-action]"));
         const projectFields = {
@@ -527,6 +529,20 @@ export function mountArchiveExperience(container: HTMLElement) {
           stateValue.textContent = stateLabel(mode);
         }
 
+        function updateInfoScroll() {
+          if (!infoBody || !infoScrollTrack || !infoScrollThumb) return;
+          const { scrollTop, scrollHeight, clientHeight } = infoBody;
+          const canScroll = scrollHeight > clientHeight + 2;
+          infoScrollTrack.classList.toggle("is-scrollable", canScroll);
+          if (!canScroll) return;
+          const trackHeight = infoScrollTrack.offsetHeight;
+          const thumbHeight = Math.max(20, (clientHeight / scrollHeight) * trackHeight);
+          const maxScroll = scrollHeight - clientHeight;
+          const thumbTop = maxScroll > 0 ? (scrollTop / maxScroll) * (trackHeight - thumbHeight) : 0;
+          infoScrollThumb.style.height = `${thumbHeight}px`;
+          infoScrollThumb.style.top = `${thumbTop}px`;
+        }
+
         function updateInfoPageContent(type) {
           const content = getInfoContent(type);
           if (!content) return;
@@ -534,6 +550,8 @@ export function mountArchiveExperience(container: HTMLElement) {
           infoKicker.textContent = content.kicker;
           infoTitle.textContent = content.title;
           infoBody.innerHTML = content.body;
+          infoBody.scrollTop = 0;
+          requestAnimationFrame(updateInfoScroll);
         }
 
         function applyLocalizedShellCopy() {
@@ -1023,6 +1041,8 @@ export function mountArchiveExperience(container: HTMLElement) {
           event.stopPropagation();
           closeInfoPage();
         });
+
+        infoBody?.addEventListener("scroll", updateInfoScroll);
 
         fieldReturnHint?.addEventListener("click", (event) => {
           event.stopPropagation();

@@ -15,7 +15,10 @@ export const archiveMarkup = `
       <div class="info-copy">
         <div class="info-kicker" data-info-kicker>about / zayn archive</div>
         <div class="info-title" data-info-title>About</div>
+        <div class="info-body-wrap">
+        <div class="info-scroll-track" aria-hidden="true"><div class="info-scroll-thumb"></div></div>
         <div class="info-body" data-info-body></div>
+      </div>
       </div>
       <button class="info-return-link" type="button">Return / Archive</button>
     </section>
