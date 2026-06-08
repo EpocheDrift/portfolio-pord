@@ -31,6 +31,7 @@ export const archiveMarkup = `
             <div class="record-thesis" data-project-thesis>
               A personal portfolio structured as an archive machine: projects enter, routes form, and records become readable.
             </div>
+            <div class="record-evidence" data-project-evidence></div>
             <div class="record-meta" aria-label="Project metadata" data-project-meta></div>
           </div>
           <div></div>

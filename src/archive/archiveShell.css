@@ -719,6 +719,12 @@
         color: rgba(232, 225, 210, 0.42);
       }
 
+      .record-evidence {
+        margin-top: 28px;
+        margin-bottom: 40px;
+        border-top: 1px solid rgba(232, 225, 210, 0.24);
+      }
+
       .record-evidence-item {
         display: grid;
         grid-template-columns: 46px 1fr;

@@ -1,5 +1,6 @@
 import type { ProjectRecord } from "./contentTypes";
 import diagramSignalFlow from "../assets/projects/chaos-interface/diagram-signal-flow.svg";
+import diagramRouteModel from "../assets/projects/chaos-interface/diagram-route-model.svg";
 import plateClosedFieldP3 from "../assets/projects/chaos-interface/plate-closed-field-p3.webp";
 import plateOpenQueueP3 from "../assets/projects/chaos-interface/plate-open-queue-p3.webp";
 import plateDetailRecord from "../assets/projects/chaos-interface/plate-detail-record.webp";
@@ -46,16 +47,16 @@ export const projects: ProjectRecord[] = [
     },
     evidence: [
       {
-        en: "The portfolio is not a display surface. It is a running archive machine.",
-        zh: "这不是一个展示表面。它是一台运行中的档案机器。",
+        en: "System architecture proof: URL-backed routing, typed project records, bilingual content model — built to hold future work without redesign.",
+        zh: "系统架构证明：URL 状态路由、类型化项目记录、双语内容模型——构建时就能承载未来记录，不需要每次重新设计。",
       },
       {
-        en: "Projects enter as compressed signals. The archive routes them — it does not display them.",
-        zh: "项目以压缩信号进入。档案路由它们——而不是展示它们。",
+        en: "Visual judgment proof: every element — tesseract, signal queue, record templates — emerged from concept, not from a template kit.",
+        zh: "视觉判断证明：每个元素——Tesseract、信号队列、记录模板——都从概念中生长出来，不是从模板库选的。",
       },
       {
-        en: "The tesseract is not decoration. It is the entry point, processing object, and field engine.",
-        zh: "Tesseract 不是装饰。它是入口、处理对象与场域引擎。",
+        en: "Identity routing proof: this portfolio routes through Zayn, not through the studio name. That distinction is a design decision.",
+        zh: "身份路由证明：这个作品集通过 Zayn 来路由，而不是通过工作室名称。这个区别是一个设计决策。",
       },
     ],
     template: "slab",
@@ -105,16 +106,16 @@ export const projects: ProjectRecord[] = [
         mediaIds: ["plate-closed-field-p3"],
       },
       {
-        id: "pivot",
-        title: { en: "From Reference Remix To Field System", zh: "从参考拼贴到场域系统" },
+        id: "interface-iteration",
+        title: { en: "Interface Iteration Trail", zh: "界面迭代轨迹" },
         body: [
           {
             en: "Early directions tested minimal portfolio layouts, text-heavy references, and a Namespace-like archive structure. Those versions clarified what the site should not become: a reference-site remix with Chaostudio copy placed on top.",
             zh: "早期我测试过极简作品集排版、文字密集的参考版本，以及接近 Namespace 的档案结构。这些版本帮助确认了这个站不应该变成什么：不是把 Chaostudio 的文案套在参考站结构上，也不是 Chaostudio 的公司主页。",
           },
           {
-            en: "The direction shifted toward a darker, more personal field/system. Chaostudio stayed as the field language, but Zayn remained the subject of the portfolio. The archive index became secondary to the visual field. The tesseract stopped acting like a logo and became the pressure source that opens the system.",
-            zh: "方向随后转向更暗、更个人化的场域系统。Chaostudio 保留为场域语言，但作品集的主体仍然是我。档案索引退到第二层，视觉场域成为入口。Tesseract 不再像一个 logo，而成为打开系统的压力源。",
+            en: "The direction shifted through roughly 16 named skeleton iterations before locking. Each pass resolved a specific tension: v3 moved from light to dark; v4 introduced the field/system split; v4.6 locked the grid and type scale; v4.16 stabilized the signal queue and plate system. The trail is the proof — each version made the next one possible.",
+            zh: "方向经过大约 16 个命名的 skeleton 迭代才锁定。每一轮解决一个具体的张力：v3 从浅色转向深色；v4 引入了场域与系统的分离；v4.6 锁定了网格和字体尺度；v4.16 稳定了信号队列和图版系统。这条迭代轨迹本身就是证明——每个版本让下一个版本成为可能。",
           },
         ],
       },
@@ -156,11 +157,26 @@ export const projects: ProjectRecord[] = [
             zh: "项目详情页是更深一层的档案记录，而不是营销式 case study。进入详情页后，Tesseract 会退场，让项目自身的证据材料成为视觉焦点。",
           },
           {
-            en: "The system keeps two templates: slab for maintainable long-form records, and case for rawer asymmetric dossiers. This project belongs in case, because its strongest material is an uneven trail of concept, visual research, prototype states, and production bridge decisions.",
-            zh: "系统保留两套模板：slab 用于更稳定的长文本记录，case 用于更原始、不对称的档案页面。这个项目我选了 case——它最强的材料是一条不均匀但有力的轨迹：概念、视觉研究、原型状态，和生产桥接决策。",
+            en: "The system keeps two templates: slab for long-form records with a readable document flow, and case for rawer dossier-style layouts. ZAI uses slab — the horizontal header surfaces title, thesis, evidence, and metadata together at entry, then yields to the section trail below.",
+            zh: "系统保留两套模板：slab 用于具有可读文档流的长文本记录，case 用于更原始的档案式布局。ZAI 使用 slab——水平 header 在入口处同时呈现标题、论点、证据与元数据，然后让位于下方展开的 section 轨迹。",
           },
         ],
         mediaIds: ["plate-detail-record"],
+      },
+      {
+        id: "identity-routing",
+        title: { en: "Identity Routing", zh: "身份路由" },
+        body: [
+          {
+            en: "The archive runs at zayn.chaostudio.org. But the subject of this portfolio is Zayn, not Chaostudio. That distinction required an explicit routing decision built into the design.",
+            zh: "这个档案运行在 zayn.chaostudio.org。但这个作品集的主体是 Zayn，不是 Chaostudio。这个区别需要在设计中做出明确的路由决定。",
+          },
+          {
+            en: "Chaostudio serves as the field language — the wider studio context from which these projects emerge. Zayn is the authorial center: the records are Zayn's work, the brand mark reads \"zayn archive interface\", and the About text speaks in Zayn's voice. The portfolio routes through the person, not the studio. This is a design decision, not just a naming convention.",
+            zh: "Chaostudio 作为场域语言——这些项目诞生的工作室语境。Zayn 是主体中心：记录是 Zayn 的工作，品牌标识读作「zayn archive interface」，About 文本以 Zayn 的声音说话。作品集通过人来路由，而不是通过工作室。这是一个设计决策，不只是命名约定。",
+          },
+        ],
+        mediaIds: ["diagram-route-model"],
       },
       {
         id: "production-bridge",
@@ -218,6 +234,20 @@ export const projects: ProjectRecord[] = [
         caption: {
           en: "Projects enter the system as signals, not cards.",
           zh: "项目以信号进入系统，而不是以卡片出现。",
+        },
+      },
+      {
+        id: "diagram-route-model",
+        kind: "image",
+        src: diagramRouteModel,
+        role: "diagram",
+        alt: {
+          en: "Route model diagram: field → archive → project records → about/contact states.",
+          zh: "路由模型图：场域 → 档案 → 项目记录 → 关于/联系状态。",
+        },
+        caption: {
+          en: "The route model — every path through the archive, and where identity enters the system.",
+          zh: "路由模型——档案中的每条路径，以及身份在何处进入系统。",
         },
       },
       {
@@ -413,16 +443,16 @@ export const projects: ProjectRecord[] = [
     },
     evidence: [
       {
-        en: "The system continuously watches. You only need to decide.",
-        zh: "系统持续看着你。你只需要做决定。",
+        en: "Passive capture removes the act of remembering from the cognitive stack — context is structured by the system, not reconstructed by the person.",
+        zh: "被动捕捉将「记忆」这个动作从认知负担中移除——上下文由系统结构化，而不是由人来重建。",
       },
       {
-        en: "Passive capture removes the act of remembering from the cognitive stack.",
-        zh: "被动捕捉将\"记忆\"这个动作从认知负担中移除。",
+        en: "Three-layer architecture: capture runs always-on, AI structures the record, output delivers on demand.",
+        zh: "三层架构：捕捉持续开启，AI 结构化记录，输出按需交付。",
       },
       {
-        en: "v0.1 runs on Notion. v0.2 is designed and waiting.",
-        zh: "v0.1 在 Notion 上运行。v0.2 已设计完成，等待实现。",
+        en: "v0.1 is live on Notion. v0.2 replaces manual snapshots with always-on infrastructure.",
+        zh: "v0.1 在 Notion 上运行。v0.2 用持续运行的基础设施取代手动快照。",
       },
     ],
     template: "slab",
