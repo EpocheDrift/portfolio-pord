@@ -459,7 +459,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         let targetThickness = 1;
         let idleTimer = 0;
         let pulseTimer = 0;
-        let activeIndex = Math.max(0, getSignalIndexById("D04"));
+        let activeIndex = Math.max(0, getSignalIndexById("C03"));
         let wheelLocked = false;
         let pageMode = "archive";
         let stateMode = "closed";
@@ -921,7 +921,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             }
 
             const isActive = index === activeIndex;
-            const isFiled = item.route === "ROOT / ROUTED" || item.route === "FIELD / ACTIVE";
+            const isFiled = item.route === "ROOT / LIVE" || item.route === "CONTEXT / SPEC";
             row.dataset.registerIndex = String(index);
             row.classList.remove("is-hidden");
             row.classList.toggle("active-row", isActive);
