@@ -297,16 +297,16 @@ export const projects: ProjectRecord[] = [
     },
     evidence: [
       {
-        en: "3–5 hrs/week lost to booking coordination per independent practitioner",
-        zh: "每位独立从业者每周因预约协调损失 3–5 小时",
+        en: "Workflow architecture proof: the booking lifecycle is a deterministic state machine — every transition is explicit, logged, and auditable.",
+        zh: "工作流架构证明：预约生命周期是一个确定性状态机——每次跳转都是显式的、有记录的、可审计的。",
       },
       {
-        en: "Deterministic state machine — all transitions explicit, no hidden mutations",
-        zh: "确定性状态机——所有跳转显式，没有隐式状态变更",
+        en: "AI product judgment proof: automation without control creates anxiety. The policy layer (auto / draft / manual) lets practitioners set their own trust level per action.",
+        zh: "AI 产品判断证明：没有控制的自动化会制造焦虑。策略层（自动 / 草稿 / 手动）让从业者为每个动作自行设定信任程度。",
       },
       {
-        en: "Policy layer: auto · draft · manual — practitioner controls automation level",
-        zh: "策略层：自动 · 草稿 · 手动——从业者掌控自动化程度",
+        en: "Trust-preserving automation proof: a working demo at tend.chaostudio.org runs the full booking flow end-to-end through the state machine.",
+        zh: "保留信任的自动化证明：tend.chaostudio.org 的演示完整运行预约流程，全程经由状态机处理。",
       },
     ],
     template: "slab",
@@ -570,12 +570,18 @@ export const projects: ProjectRecord[] = [
       zh: "Energy Sense 将认知清晰度、社交耗能与恢复压力这些不可见的内在状态，转译为一片持续变化的视觉场域。核心设计问题是克制：一个会注意到的陪伴，而不是一个做判断的系统。",
     },
     evidence: [
-      { en: "The design problem is translation, not measurement.", zh: "设计问题是转译，不是测量。" },
       {
-        en: "Three states — Drain, Recovery, Clarity — shape a living visual landscape without numbers or alerts.",
-        zh: "三种状态——耗竭、恢复、清醒——在没有数字和警报的情况下，塑造一片活着的视觉场域。",
+        en: "Creative interaction proof: invisible internal states — clarity, drain, recovery — translated into a living visual landscape without numbers, alerts, or scores.",
+        zh: "创意交互证明：不可见的内在状态——清醒、耗竭、恢复——被转译为一片活着的视觉场域，没有数字、警报或评分。",
       },
-      { en: "The system surfaces awareness. The person decides.", zh: "系统呈现觉察。人来决定。" },
+      {
+        en: "Sensory interface restraint proof: the hardest design challenge was tone. Every decision pulled back from surveillance toward something quieter — a companion that notices, not a system that judges.",
+        zh: "感知界面克制证明：最难的设计挑战是语气。每个决策都在把系统往更安静的方向拉——一个会注意到的陪伴，而不是一个做判断的系统。",
+      },
+      {
+        en: "Embodied translation proof: sensing does not require precision to be meaningful. The design problem is translation, not measurement.",
+        zh: "具身转译证明：感知不需要精确才能有意义。设计问题是转译，不是测量。",
+      },
     ],
     template: "case",
     metadata: [
