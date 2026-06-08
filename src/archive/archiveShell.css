@@ -378,10 +378,10 @@
       .record-index-label,
       .record-index button,
       .record-action {
-        color: rgba(232, 225, 210, 0.46);
-        font-size: 10px;
+        color: rgba(232, 225, 210, 0.68);
+        font-size: 11px;
         line-height: 1.35;
-        letter-spacing: 0.16em;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
       }
 
@@ -432,32 +432,27 @@
       }
 
       .record-actions {
-        display: grid;
-        grid-template-columns: 1fr;
-        border-top: 1px solid rgba(232, 225, 210, 0.22);
-        border-bottom: 1px solid rgba(232, 225, 210, 0.18);
+        display: block;
       }
 
       .record-action {
-        min-height: 34px;
-        padding: 0;
-        border: 0;
-        border-bottom: 1px solid rgba(232, 225, 210, 0.13);
-        background: rgba(2, 3, 2, 0.08);
-        cursor: none;
-        font: inherit;
-        text-align: left;
-      }
-
-      .record-action:last-child {
-        border-bottom: 0;
-        color: rgba(215, 172, 97, 0.72);
+        padding: 10px 24px;
+        border: 1px solid rgba(215, 172, 97, 0.7);
+        background: rgba(215, 172, 97, 0.88);
+        color: #050605;
+        cursor: pointer;
+        font-family: "IBM Plex Sans Condensed", sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        line-height: 1.35;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transition: background 200ms ease;
       }
 
       .record-action:hover,
       .record-action:focus-visible {
-        color: #e8e1d2;
-        background: rgba(232, 225, 210, 0.035);
+        background: rgba(215, 172, 97, 1);
         outline: 0;
       }
 
@@ -1709,7 +1704,7 @@
         right: 32px;
         top: 28px;
         bottom: auto;
-        width: min(30vw, 380px);
+        width: auto;
         z-index: 20;
       }
 
@@ -1720,11 +1715,15 @@
 
       .archive-experience.record-template-slab.is-record-page .record-plate,
       .archive-experience.record-template-slab.is-record-page .record-section {
-        min-height: 62vh;
         margin-top: 0;
         padding: 30px 34px;
         border-top: 1px solid rgba(224, 232, 226, 0.28);
         border-left: 1px solid rgba(224, 232, 226, 0.14);
+      }
+
+      .archive-experience.record-template-slab.is-record-page .record-plate,
+      .archive-experience.record-template-slab.is-record-page .record-section.has-media {
+        min-height: 62vh;
       }
 
       .archive-experience.record-template-slab.is-record-page .record-plate {
@@ -1839,7 +1838,7 @@
       .archive-experience.record-template-slab.is-record-page .record-index {
         position: fixed;
         right: 32px;
-        top: 120px;
+        top: 168px;
         width: min(18vw, 230px);
         height: auto;
         z-index: 18;
@@ -1867,7 +1866,7 @@
         position: fixed;
         right: 32px;
         top: 28px;
-        width: min(28vw, 340px);
+        width: auto;
         z-index: 20;
       }
 
@@ -1878,7 +1877,7 @@
       }
 
       .archive-experience.record-template-case.is-record-page .record-thesis {
-        max-width: 28ch;
+        max-width: 90%;
         font-size: 15px;
       }
 
@@ -1976,21 +1975,13 @@
 
       .archive-experience.record-template-case.is-record-page .record-index {
         position: fixed;
-        right: 32px;
-        top: 50%;
-        width: 128px;
+        left: 32px;
+        right: auto;
+        top: 84vh;
+        width: min(18vw, 230px);
         height: auto;
-        transform: translateY(-50%);
-      }
-
-      .archive-experience.record-template-case.is-record-page .record-index-label,
-      .archive-experience.record-template-case.is-record-page .record-index button {
-        font-size: 9px;
-      }
-
-      .archive-experience.record-template-case.is-record-page .record-index button {
-        min-height: 28px;
-        border-bottom-color: rgba(232, 225, 210, 0.08);
+        transform: none;
+        z-index: 18;
       }
 
       .archive-experience.record-template-case.is-record-page .record-index-state {
@@ -2273,6 +2264,7 @@
           width: calc(100% + 36px);
           margin-top: 0;
           margin-left: -18px;
+          padding: 10px 18px;
           background: rgba(5, 6, 5, 0.94);
           backdrop-filter: blur(6px);
           border-bottom: 1px solid rgba(232, 225, 210, 0.12);
