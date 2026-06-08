@@ -124,6 +124,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           plateCode: root.querySelector("[data-project-plate-code]"),
           plateLiveLink: root.querySelector("[data-project-live-link]"),
           plateMark: root.querySelector(".record-plate-mark"),
+          evidence: root.querySelector("[data-project-evidence]"),
           sections: root.querySelector("[data-project-sections]"),
           index: root.querySelector("[data-project-index]"),
           indexState: root.querySelector("[data-project-index-state]"),
@@ -613,6 +614,16 @@ export function mountArchiveExperience(container: HTMLElement) {
             projectFields.plateMark.classList.remove("has-media");
             projectFields.plateMark.innerHTML = "";
             projectFields.plateMark.setAttribute("aria-hidden", "true");
+          }
+          if (projectFields.evidence) {
+            projectFields.evidence.innerHTML = (signal.evidence ?? [])
+              .map((item, i) => `
+                <div class="record-evidence-item">
+                  <span>${String(i + 1).padStart(2, "0")}</span>
+                  <strong>${item}</strong>
+                </div>
+              `)
+              .join("");
           }
           projectFields.meta.innerHTML = signal.detailMeta
             .map(([label, value]) => `
