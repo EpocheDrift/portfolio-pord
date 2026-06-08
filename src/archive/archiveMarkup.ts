@@ -35,8 +35,7 @@ export const archiveMarkup = `
           </div>
           <div></div>
           <div class="record-actions">
-            <button class="record-action" type="button" data-record-action="queue">Return / Queue</button>
-            <button class="record-action" type="button" data-record-action="archive">Return / Archive</button>
+            <button class="record-action" type="button" data-record-action="queue">Return / Back</button>
           </div>
         </aside>
         <main class="record-main" data-project-main>

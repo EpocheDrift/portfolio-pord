@@ -650,7 +650,7 @@ export function mountArchiveExperience(container: HTMLElement) {
                 : "";
   
               return `
-                <section class="record-section" id="${sectionId}">
+                <section class="record-section${section.images ? " has-media" : ""}" id="${sectionId}">
                   <div class="record-section-kicker">${String(index + 1).padStart(2, "0")}</div>
                   <div>
                     <h2>${section.title}</h2>

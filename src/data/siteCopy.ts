@@ -114,12 +114,12 @@ export const siteCopy = {
       zh: "档案记录",
     },
     returnQueue: {
-      en: "RETURN / QUEUE",
-      zh: "返回 / 队列",
+      en: "Return / Back",
+      zh: "返回 / 退出",
     },
     returnArchive: {
-      en: "RETURN / ARCHIVE",
-      zh: "返回 / 档案",
+      en: "← Close Record",
+      zh: "← 关闭记录",
     },
     minimalInfoPage: {
       en: "SYSTEM INFO",
