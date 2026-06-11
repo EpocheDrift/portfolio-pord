@@ -50,9 +50,9 @@ export const archiveMarkup = `
           </section>
           <div data-project-sections></div>
         </main>
-        <nav class="record-index" aria-label="Project record index">
+        <nav class="record-index is-collapsed" aria-label="Project record index">
           <div>
-            <div class="record-index-label">record index</div>
+            <button class="record-index-label" type="button" aria-expanded="false">record index</button>
             <div class="record-index-list" data-project-index></div>
           </div>
           <div></div>

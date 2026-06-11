@@ -381,7 +381,7 @@
       .record-plate-label,
       .record-section-kicker,
       .record-index-label,
-      .record-index button,
+      .record-index-list button,
       .record-action {
         color: rgba(232, 225, 210, 0.68);
         font-size: 11px;
@@ -684,12 +684,22 @@
         justify-items: stretch;
       }
 
+      .record-index-label {
+        display: block;
+        background: none;
+        border: 0;
+        padding: 0;
+        font-family: inherit;
+        text-align: left;
+        cursor: none;
+      }
+
       .record-index-list {
         margin-top: 20px;
         border-top: 1px solid rgba(232, 225, 210, 0.18);
       }
 
-      .record-index button {
+      .record-index-list button {
         width: 100%;
         min-height: 34px;
         padding: 0;
@@ -701,9 +711,9 @@
         text-align: left;
       }
 
-      .record-index button.is-active,
-      .record-index button:hover,
-      .record-index button:focus-visible {
+      .record-index-list button.is-active,
+      .record-index-list button:hover,
+      .record-index-list button:focus-visible {
         color: #d7ac61;
         outline: 0;
       }
@@ -768,6 +778,13 @@
           height 180ms ease,
           border-color 180ms ease,
           background 180ms ease;
+      }
+
+      /* touch devices never move the custom cursor — keep it out entirely */
+      @media (hover: none) {
+        .cursor {
+          display: none;
+        }
       }
 
       .archive-experience.is-hovering .cursor {
@@ -1681,6 +1698,12 @@
         color: #eef2ee;
       }
 
+      /* CJK glyphs are ~2x the width of "0", so 6ch breaks 4-char titles — let
+         the header column constrain Chinese titles instead */
+      .archive-experience.lang-zh.record-template-slab.is-record-page .record-title {
+        max-width: none;
+      }
+
       .archive-experience.record-template-slab.is-record-page .record-thesis {
         margin-top: 0;
         max-width: 50ch;
@@ -1822,9 +1845,9 @@
         color: rgba(224, 232, 226, 0.48);
       }
 
-      .archive-experience.record-template-slab.is-record-page .record-index button.is-active,
-      .archive-experience.record-template-slab.is-record-page .record-index button:hover,
-      .archive-experience.record-template-slab.is-record-page .record-index button:focus-visible {
+      .archive-experience.record-template-slab.is-record-page .record-index-list button.is-active,
+      .archive-experience.record-template-slab.is-record-page .record-index-list button:hover,
+      .archive-experience.record-template-slab.is-record-page .record-index-list button:focus-visible {
         color: rgba(164, 190, 187, 0.9);
       }
 
@@ -2047,11 +2070,28 @@
         .info-body {
           max-width: 35ch;
           font-size: 17px;
-          max-height: calc(100vh - 560px);
+          max-height: calc(100vh - 460px);
+        }
+
+        .info-body-wrap {
+          position: relative;
+        }
+
+        /* fade cue: there is more copy below the fold */
+        .info-body-wrap:has(.info-scroll-track.is-scrollable)::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 44px;
+          background: linear-gradient(transparent, rgba(5, 6, 5, 0.94));
+          pointer-events: none;
         }
 
         .info-return-link {
-          top: calc(50% + 184px);
+          top: auto;
+          bottom: 84px;
         }
 
         .archive-experience.is-record-page .record-shell,
@@ -2083,6 +2123,30 @@
         .archive-experience.is-record-page .record-main,
         .archive-experience.is-record-page [data-project-sections] {
           display: contents;
+        }
+
+        /* mobile: record index collapses behind its label */
+        .archive-experience.is-record-page .record-index-label {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+        }
+
+        .archive-experience.is-record-page .record-index-label::after {
+          content: "+";
+          font-size: 15px;
+          line-height: 1;
+          color: rgba(215, 172, 97, 0.85);
+        }
+
+        .archive-experience.is-record-page .record-index:not(.is-collapsed) .record-index-label::after {
+          content: "−";
+        }
+
+        .archive-experience.is-record-page .record-index.is-collapsed .record-index-list {
+          display: none;
         }
 
         /* slab sidebar sets display:grid at 4-class specificity — match it to override */
@@ -2466,10 +2530,19 @@
         }
 
         .field-intro {
-          display: none;
+          left: 22px;
+          right: 174px;
+          bottom: 84px;
+          max-width: none;
+          font-size: 12px;
+          line-height: 1.5;
         }
 
         .scroll-hint {
+          display: none;
+        }
+
+        .cursor {
           display: none;
         }
       }
