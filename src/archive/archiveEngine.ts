@@ -112,6 +112,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         const accessionLabel = root.querySelector(".accession-label");
         const counterStateLabel = root.querySelector(".counter .state-label");
         const recordIndexLabel = root.querySelector(".record-index-label");
+        const recordIndexNav = root.querySelector(".record-index");
         const recordIndexStateLabel = root.querySelector(".record-index-state span");
         const archiveCaptionText = root.querySelector(".archive-caption strong");
         const utilityButtons = Array.from(root.querySelectorAll("[data-utility]"));
@@ -568,6 +569,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         }
 
         function applyLocalizedShellCopy() {
+          root.classList.toggle("lang-zh", languageMode === "zh");
           utilityButtons.forEach((button) => {
             if (button.dataset.utility === "about") {
               button.textContent = resolveText(siteCopy.ui.about, languageMode);
@@ -731,6 +733,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           activeIndex = nextIndex;
           renderSignals();
           renderProjectRecord(signal);
+          setRecordIndexCollapsed(true);
           setRecordTemplate(signal.template);
           pageMode = "record";
           isOpen = false;
@@ -1104,15 +1107,26 @@ export function mountArchiveExperience(container: HTMLElement) {
         projectFields.index.addEventListener("click", (event) => {
           const button = event.target.closest("[data-scroll-target]");
           if (!button) return;
-  
+
           event.stopPropagation();
           const target = root.querySelector(`#${button.dataset.scrollTarget}`);
           if (!target) return;
-  
+
           projectFields.index.querySelectorAll("button").forEach((item) => {
             item.classList.toggle("is-active", item === button);
           });
+          setRecordIndexCollapsed(true);
           target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, { signal: disposer.signal });
+
+        function setRecordIndexCollapsed(collapsed) {
+          recordIndexNav?.classList.toggle("is-collapsed", collapsed);
+          recordIndexLabel?.setAttribute("aria-expanded", String(!collapsed));
+        }
+
+        recordIndexLabel?.addEventListener("click", (event) => {
+          event.stopPropagation();
+          setRecordIndexCollapsed(!recordIndexNav?.classList.contains("is-collapsed"));
         }, { signal: disposer.signal });
   
         window.addEventListener("wheel", (event) => {

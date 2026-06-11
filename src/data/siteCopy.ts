@@ -78,8 +78,8 @@ export const siteCopy = {
       zh: "返回 / 退出",
     },
     returnArchive: {
-      en: "← Close Record",
-      zh: "← 关闭记录",
+      en: "← Return",
+      zh: "← 返回",
     },
     evidence: {
       en: "evidence",
