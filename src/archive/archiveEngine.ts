@@ -102,8 +102,10 @@ export function mountArchiveExperience(container: HTMLElement) {
         const fieldIntro = root.querySelector(".field-intro");
         const scrollHint = root.querySelector(".scroll-hint");
         let scrollHintTimer: ReturnType<typeof setTimeout> | null = null;
+        let scrollHintShowTimer: ReturnType<typeof setTimeout> | null = null;
         const signalCards = Array.from(root.querySelectorAll(".signal-card"));
         const signalRows = Array.from(root.querySelectorAll(".signal-row"));
+        const accessionLabel = root.querySelector(".accession-label");
         const utilityButtons = Array.from(root.querySelectorAll("[data-utility]"));
         const infoPage = root.querySelector(".info-page");
         const infoReturn = root.querySelector(".info-return-link");
@@ -124,16 +126,9 @@ export function mountArchiveExperience(container: HTMLElement) {
           plateCode: root.querySelector("[data-project-plate-code]"),
           plateLiveLink: root.querySelector("[data-project-live-link]"),
           plateMark: root.querySelector(".record-plate-mark"),
-          evidence: root.querySelector("[data-project-evidence]"),
           sections: root.querySelector("[data-project-sections]"),
           index: root.querySelector("[data-project-index]"),
           indexState: root.querySelector("[data-project-index-state]"),
-        };
-        const recordFields = {
-          name: root.querySelector('[data-record="name"]'),
-          state: root.querySelector('[data-record="state"]'),
-          type: root.querySelector('[data-record="type"]'),
-          route: root.querySelector('[data-record="route"]'),
         };
         const idleDelay = 5000;
         const pulseDuration = 1450;
@@ -581,6 +576,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           });
           if (fieldEnterHint) fieldEnterHint.textContent = resolveText(siteCopy.ui.enterArchive, languageMode);
           if (fieldIntro) fieldIntro.textContent = resolveText(siteCopy.intro, languageMode);
+          if (accessionLabel) accessionLabel.textContent = resolveText(siteCopy.ui.projectSignals, languageMode);
           setShellState(stateMode);
         }
   
@@ -588,7 +584,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           projectFields.kicker.textContent = `${resolveText(siteCopy.ui.projectDossier, languageMode)} / ${signal.code}`;
           projectFields.title.textContent = signal.name;
           projectFields.thesis.textContent = signal.description;
-          projectFields.plateLabel.textContent = `${resolveText(siteCopy.ui.evidence, languageMode)} / ${signal.id}`;
+          projectFields.plateLabel.textContent = `${resolveText(siteCopy.ui.plate, languageMode)} / ${signal.id}`;
           projectFields.plateCaption.textContent = signal.plateCaption;
           projectFields.plateCode.textContent = signal.code;
           if (projectFields.plateLiveLink) {
@@ -615,16 +611,6 @@ export function mountArchiveExperience(container: HTMLElement) {
             projectFields.plateMark.innerHTML = "";
             projectFields.plateMark.setAttribute("aria-hidden", "true");
           }
-          if (projectFields.evidence) {
-            projectFields.evidence.innerHTML = (signal.evidence ?? [])
-              .map((item, i) => `
-                <div class="record-evidence-item">
-                  <span>${String(i + 1).padStart(2, "0")}</span>
-                  <strong>${item}</strong>
-                </div>
-              `)
-              .join("");
-          }
           projectFields.meta.innerHTML = signal.detailMeta
             .map(([label, value]) => `
               <div class="record-row-detail">
@@ -633,7 +619,25 @@ export function mountArchiveExperience(container: HTMLElement) {
               </div>
             `)
             .join("");
-          projectFields.sections.innerHTML = signal.sections
+          const hasEvidence = (signal.evidence ?? []).length > 0;
+          const sectionNumberOffset = hasEvidence ? 2 : 1;
+          const evidenceHtml = hasEvidence ? `
+            <section class="record-section record-section-evidence" id="record-section-evidence">
+              <div class="record-section-kicker">01</div>
+              <div>
+                <h2>${resolveText(siteCopy.ui.evidence, languageMode)}</h2>
+                <div class="record-evidence">
+                  ${(signal.evidence ?? []).map((item, i) => `
+                    <div class="record-evidence-item">
+                      <span>${String(i + 1).padStart(2, "0")}</span>
+                      <strong>${item}</strong>
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            </section>
+          ` : "";
+          projectFields.sections.innerHTML = evidenceHtml + signal.sections
             .map((section, index) => {
               const sectionId = `record-section-${index + 1}`;
               const body = section.body
@@ -662,7 +666,7 @@ export function mountArchiveExperience(container: HTMLElement) {
   
               return `
                 <section class="record-section${section.images ? " has-media" : ""}" id="${sectionId}">
-                  <div class="record-section-kicker">${String(index + 1).padStart(2, "0")}</div>
+                  <div class="record-section-kicker">${String(index + sectionNumberOffset).padStart(2, "0")}</div>
                   <div>
                     <h2>${section.title}</h2>
                     ${body}
@@ -673,10 +677,11 @@ export function mountArchiveExperience(container: HTMLElement) {
             })
             .join("");
           projectFields.index.innerHTML = [
-            ["record-overview", `00 / ${resolveText(siteCopy.ui.evidence, languageMode)}`],
+            ["record-overview", `00 / ${resolveText(siteCopy.ui.plate, languageMode)}`],
+            ...hasEvidence ? [["record-section-evidence", `01 / ${resolveText(siteCopy.ui.evidence, languageMode)}`]] : [],
             ...signal.sections.map((section, index) => [
               `record-section-${index + 1}`,
-              `${String(index + 1).padStart(2, "0")} / ${section.title}`,
+              `${String(index + sectionNumberOffset).padStart(2, "0")} / ${section.title}`,
             ]),
           ]
             .map(([target, label], index) => `
@@ -820,6 +825,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           if (!scrollHint) return;
           scrollHint.classList.remove("is-visible");
           if (scrollHintTimer) { clearTimeout(scrollHintTimer); scrollHintTimer = null; }
+          if (scrollHintShowTimer) { clearTimeout(scrollHintShowTimer); scrollHintShowTimer = null; }
           window.removeEventListener("wheel", hideScrollHint);
           window.removeEventListener("keydown", onScrollHintKeyDismiss);
         }
@@ -848,10 +854,12 @@ export function mountArchiveExperience(container: HTMLElement) {
           writeRoute(routePath.open, options);
           if (scrollHint) {
             hideScrollHint();
-            scrollHint.classList.add("is-visible");
-            scrollHintTimer = setTimeout(hideScrollHint, 6000);
             window.addEventListener("wheel", hideScrollHint, { once: true });
             window.addEventListener("keydown", onScrollHintKeyDismiss);
+            scrollHintShowTimer = setTimeout(() => {
+              scrollHint.classList.add("is-visible");
+              scrollHintTimer = setTimeout(hideScrollHint, 7000);
+            }, 1000);
           }
         }
 
@@ -917,12 +925,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           `;
         }
   
-        function renderAccession(signal) {
-          recordFields.name.textContent = signal.name;
-          recordFields.state.textContent = signal.state;
-          recordFields.type.textContent = signal.type;
-          recordFields.route.textContent = signal.route;
-  
+        function renderAccession() {
           signalRows.forEach((row, index) => {
             const item = signals[index];
             if (!item) {
@@ -965,11 +968,10 @@ export function mountArchiveExperience(container: HTMLElement) {
         }
 
         function renderSignals() {
-          const signal = signals[activeIndex];
           signalCards.forEach((card, index) => {
             renderCard(card, signals[index], index);
           });
-          renderAccession(signal);
+          renderAccession();
           renderMobileSignalList();
         }
   

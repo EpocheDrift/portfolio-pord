@@ -31,7 +31,6 @@ export const archiveMarkup = `
             <div class="record-thesis" data-project-thesis>
               A personal portfolio structured as an archive machine: projects enter, routes form, and records become readable.
             </div>
-            <div class="record-evidence" data-project-evidence></div>
             <div class="record-meta" aria-label="Project metadata" data-project-meta></div>
           </div>
           <div></div>
@@ -41,7 +40,7 @@ export const archiveMarkup = `
         </aside>
         <main class="record-main" data-project-main>
           <section class="record-plate" id="record-overview">
-            <div class="record-plate-label" data-project-plate-label>evidence / C03</div>
+            <div class="record-plate-label" data-project-plate-label>plate / C03</div>
             <div class="record-plate-mark" aria-hidden="true"></div>
             <div class="record-plate-caption">
               <span data-project-plate-caption>The portfolio is organized as an archive machine before it becomes a set of pages.</span>
@@ -80,13 +79,7 @@ export const archiveMarkup = `
       <span class="type-line"><span class="char is-cut">i</span><span class="char">n</span><span class="char">t</span><span class="char">e</span><span class="char">r</span><span class="char is-cut">f</span><span class="char">a</span><span class="char">c</span><span class="char">e</span></span>
     </div>
     <div class="accession-panel">
-      <div class="accession-label">active record</div>
-      <div class="accession-record">
-        <div class="record-row"><span>Record</span><strong data-record="name">Zayn Archive Interface</strong></div>
-        <div class="record-row"><span>State</span><strong data-record="state">routed</strong></div>
-        <div class="record-row"><span>Type</span><strong data-record="type">personal archive system</strong></div>
-        <div class="record-row"><span>Route</span><strong data-record="route">ROOT / ROUTED</strong></div>
-      </div>
+      <div class="accession-label">archive register</div>
       <div class="signal-register" aria-label="Archive register">
         <div class="signal-row active-row filed-row"><span>C03</span><strong class="active">Zayn Archive Interface</strong><span>routed</span></div>
         <div class="signal-row"><span>D04</span><strong>Tend</strong><span>demo complete</span></div>
