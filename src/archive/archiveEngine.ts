@@ -476,7 +476,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         }
   
         function showFieldPulse() {
-          if (isOpen) return;
+          if (stateMode !== "closed") return;
           root.classList.add("is-idle-pulse");
           window.clearTimeout(pulseTimer);
           pulseTimer = window.setTimeout(() => {
@@ -487,7 +487,7 @@ export function mountArchiveExperience(container: HTMLElement) {
   
         function scheduleFieldPulse() {
           cancelFieldPulse();
-          if (!isOpen) {
+          if (stateMode === "closed") {
             idleTimer = window.setTimeout(showFieldPulse, idleDelay);
           }
         }
@@ -532,6 +532,14 @@ export function mountArchiveExperience(container: HTMLElement) {
         function setShellState(mode) {
           stateMode = mode;
           stateValue.textContent = stateLabel(mode);
+          root.classList.toggle("is-field", mode === "closed");
+          // transient overlays never survive a state change
+          if (mode !== "open") hideScrollHint();
+          if (mode === "closed") {
+            scheduleFieldPulse();
+          } else {
+            cancelFieldPulse();
+          }
         }
 
         function updateInfoScroll() {
@@ -709,8 +717,6 @@ export function mountArchiveExperience(container: HTMLElement) {
         }
   
         function openProjectRecord(index = activeIndex, options = {}) {
-          cancelFieldPulse();
-          hideScrollHint();
           const nextIndex = clampIndex(index);
           const signal = signals[nextIndex];
           if (!canOpenSignal(signal)) {
@@ -767,7 +773,6 @@ export function mountArchiveExperience(container: HTMLElement) {
           utilityButtons.forEach((button) => {
             button.classList.remove("is-active");
           });
-          if (!isOpen) scheduleFieldPulse();
           writeRoute(isOpen ? routePath.open : routePath.closed, options);
         }
   
@@ -780,8 +785,6 @@ export function mountArchiveExperience(container: HTMLElement) {
             return;
           }
   
-          cancelFieldPulse();
-          hideScrollHint();
           isOpen = false;
           pageMode = type;
           root.classList.remove("is-open", "is-record-page");
@@ -849,7 +852,6 @@ export function mountArchiveExperience(container: HTMLElement) {
         }
 
         function openFlow(options = {}) {
-          cancelFieldPulse();
           pageMode = "archive";
           isOpen = true;
           targetScale = getOpenScale();
@@ -898,9 +900,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           utilityButtons.forEach((button) => {
             button.classList.remove("is-active");
           });
-          hideScrollHint();
           setShellState("closed");
-          scheduleFieldPulse();
           writeRoute(routePath.closed, options);
         }
   
