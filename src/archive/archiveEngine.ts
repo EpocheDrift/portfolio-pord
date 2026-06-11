@@ -643,30 +643,36 @@ export function mountArchiveExperience(container: HTMLElement) {
               </div>
             `)
             .join("");
-          const hasEvidence = (signal.evidence ?? []).length > 0;
-          const sectionNumberOffset = hasEvidence ? 2 : 1;
-          const evidenceHtml = hasEvidence ? `
-            <section class="record-section record-section-evidence" id="record-section-evidence">
-              <div class="record-section-kicker">01</div>
-              <div>
-                <h2>${resolveText(siteCopy.ui.evidence, languageMode)}</h2>
-                <div class="record-evidence">
-                  ${(signal.evidence ?? []).map((item, i) => `
-                    <div class="record-evidence-item">
-                      <span>${String(i + 1).padStart(2, "0")}</span>
-                      <strong>${item}</strong>
-                    </div>
-                  `).join("")}
-                </div>
-              </div>
-            </section>
-          ` : "";
-          projectFields.sections.innerHTML = evidenceHtml + signal.sections
+          const evidence = signal.evidence ?? [];
+          const renderSections = [
+            ...evidence.length > 0
+              ? [{
+                  id: "record-section-evidence",
+                  title: resolveText(siteCopy.ui.evidence, languageMode),
+                  evidence,
+                }]
+              : [],
+            ...signal.sections.map((section, index) => ({
+              id: `record-section-${index + 1}`,
+              ...section,
+            })),
+          ];
+          projectFields.sections.innerHTML = renderSections
             .map((section, index) => {
-              const sectionId = `record-section-${index + 1}`;
-              const body = section.body
-                .map((paragraph) => `<p>${paragraph}</p>`)
-                .join("");
+              const body = section.evidence
+                ? `
+                  <div class="record-evidence">
+                    ${section.evidence.map((item, i) => `
+                      <div class="record-evidence-item">
+                        <span>${String(i + 1).padStart(2, "0")}</span>
+                        <strong>${item}</strong>
+                      </div>
+                    `).join("")}
+                  </div>
+                `
+                : section.body
+                    .map((paragraph) => `<p>${paragraph}</p>`)
+                    .join("");
               const images = section.images
                 ? `
                   <div class="record-image-row">
@@ -689,8 +695,8 @@ export function mountArchiveExperience(container: HTMLElement) {
                 : "";
   
               return `
-                <section class="record-section${section.images ? " has-media" : ""}" id="${sectionId}">
-                  <div class="record-section-kicker">${String(index + sectionNumberOffset).padStart(2, "0")}</div>
+                <section class="record-section${section.images ? " has-media" : ""}${section.evidence ? " record-section-evidence" : ""}" id="${section.id}">
+                  <div class="record-section-kicker">${String(index + 1).padStart(2, "0")}</div>
                   <div>
                     <h2>${section.title}</h2>
                     ${body}
@@ -702,10 +708,9 @@ export function mountArchiveExperience(container: HTMLElement) {
             .join("");
           projectFields.index.innerHTML = [
             ["record-overview", `00 / ${resolveText(siteCopy.ui.plate, languageMode)}`],
-            ...hasEvidence ? [["record-section-evidence", `01 / ${resolveText(siteCopy.ui.evidence, languageMode)}`]] : [],
-            ...signal.sections.map((section, index) => [
-              `record-section-${index + 1}`,
-              `${String(index + sectionNumberOffset).padStart(2, "0")} / ${section.title}`,
+            ...renderSections.map((section, index) => [
+              section.id,
+              `${String(index + 1).padStart(2, "0")} / ${section.title}`,
             ]),
           ]
             .map(([target, label], index) => `
