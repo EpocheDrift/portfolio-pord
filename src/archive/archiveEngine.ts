@@ -91,7 +91,10 @@ export function mountArchiveExperience(container: HTMLElement) {
     return () => {};
   }
   container.dataset.archiveMounted = "true";
-  
+
+  // every listener registers against this signal so unmount can sever them all at once
+  const disposer = new AbortController();
+
         const root = container;
         const cursor = root.querySelector(".cursor");
         const stateValue = root.querySelector(".state-value");
@@ -102,8 +105,14 @@ export function mountArchiveExperience(container: HTMLElement) {
         const fieldIntro = root.querySelector(".field-intro");
         const scrollHint = root.querySelector(".scroll-hint");
         let scrollHintTimer: ReturnType<typeof setTimeout> | null = null;
+        let scrollHintShowTimer: ReturnType<typeof setTimeout> | null = null;
         const signalCards = Array.from(root.querySelectorAll(".signal-card"));
         const signalRows = Array.from(root.querySelectorAll(".signal-row"));
+        const accessionLabel = root.querySelector(".accession-label");
+        const counterStateLabel = root.querySelector(".counter .state-label");
+        const recordIndexLabel = root.querySelector(".record-index-label");
+        const recordIndexStateLabel = root.querySelector(".record-index-state span");
+        const archiveCaptionText = root.querySelector(".archive-caption strong");
         const utilityButtons = Array.from(root.querySelectorAll("[data-utility]"));
         const infoPage = root.querySelector(".info-page");
         const infoReturn = root.querySelector(".info-return-link");
@@ -124,22 +133,15 @@ export function mountArchiveExperience(container: HTMLElement) {
           plateCode: root.querySelector("[data-project-plate-code]"),
           plateLiveLink: root.querySelector("[data-project-live-link]"),
           plateMark: root.querySelector(".record-plate-mark"),
-          evidence: root.querySelector("[data-project-evidence]"),
           sections: root.querySelector("[data-project-sections]"),
           index: root.querySelector("[data-project-index]"),
           indexState: root.querySelector("[data-project-index-state]"),
         };
-        const recordFields = {
-          name: root.querySelector('[data-record="name"]'),
-          state: root.querySelector('[data-record="state"]'),
-          type: root.querySelector('[data-record="type"]'),
-          route: root.querySelector('[data-record="route"]'),
-        };
         const idleDelay = 5000;
         const pulseDuration = 1450;
         const infoKickers = {
-          about: "about / zayn archive",
-          contact: "contact / open",
+          about: siteCopy.ui.infoKickerAbout,
+          contact: siteCopy.ui.infoKickerContact,
         };
         let languageMode = readStoredLanguage();
         persistLanguage(languageMode);
@@ -464,6 +466,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         let wheelLocked = false;
         let pageMode = "archive";
         let stateMode = "closed";
+        let rafId = 0;
   
         function cancelFieldPulse() {
           window.clearTimeout(idleTimer);
@@ -507,7 +510,7 @@ export function mountArchiveExperience(container: HTMLElement) {
 
         function getInfoContent(type) {
           return {
-            kicker: infoKickers[type],
+            kicker: resolveText(infoKickers[type], languageMode),
             title: resolveText(siteCopy.ui[type], languageMode),
             body: resolveText(siteCopy[type], languageMode),
           };
@@ -580,7 +583,15 @@ export function mountArchiveExperience(container: HTMLElement) {
             );
           });
           if (fieldEnterHint) fieldEnterHint.textContent = resolveText(siteCopy.ui.enterArchive, languageMode);
+          if (fieldReturnHint) fieldReturnHint.textContent = resolveText(siteCopy.ui.closeField, languageMode);
           if (fieldIntro) fieldIntro.textContent = resolveText(siteCopy.intro, languageMode);
+          if (accessionLabel) accessionLabel.textContent = resolveText(siteCopy.ui.projectSignals, languageMode);
+          if (scrollHint) scrollHint.textContent = resolveText(siteCopy.ui.scrollHint, languageMode);
+          if (counterStateLabel) counterStateLabel.textContent = resolveText(siteCopy.ui.state, languageMode);
+          if (recordIndexLabel) recordIndexLabel.textContent = resolveText(siteCopy.ui.recordIndex, languageMode);
+          if (recordIndexStateLabel) recordIndexStateLabel.textContent = resolveText(siteCopy.ui.projectState, languageMode);
+          if (archiveCaptionText) archiveCaptionText.textContent = resolveText(siteCopy.ui.archiveCaption, languageMode);
+          if (projectFields.plateLiveLink) projectFields.plateLiveLink.textContent = resolveText(siteCopy.ui.liveDemo, languageMode);
           setShellState(stateMode);
         }
   
@@ -588,7 +599,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           projectFields.kicker.textContent = `${resolveText(siteCopy.ui.projectDossier, languageMode)} / ${signal.code}`;
           projectFields.title.textContent = signal.name;
           projectFields.thesis.textContent = signal.description;
-          projectFields.plateLabel.textContent = `${resolveText(siteCopy.ui.evidence, languageMode)} / ${signal.id}`;
+          projectFields.plateLabel.textContent = `${resolveText(siteCopy.ui.plate, languageMode)} / ${signal.id}`;
           projectFields.plateCaption.textContent = signal.plateCaption;
           projectFields.plateCode.textContent = signal.code;
           if (projectFields.plateLiveLink) {
@@ -615,16 +626,6 @@ export function mountArchiveExperience(container: HTMLElement) {
             projectFields.plateMark.innerHTML = "";
             projectFields.plateMark.setAttribute("aria-hidden", "true");
           }
-          if (projectFields.evidence) {
-            projectFields.evidence.innerHTML = (signal.evidence ?? [])
-              .map((item, i) => `
-                <div class="record-evidence-item">
-                  <span>${String(i + 1).padStart(2, "0")}</span>
-                  <strong>${item}</strong>
-                </div>
-              `)
-              .join("");
-          }
           projectFields.meta.innerHTML = signal.detailMeta
             .map(([label, value]) => `
               <div class="record-row-detail">
@@ -633,7 +634,25 @@ export function mountArchiveExperience(container: HTMLElement) {
               </div>
             `)
             .join("");
-          projectFields.sections.innerHTML = signal.sections
+          const hasEvidence = (signal.evidence ?? []).length > 0;
+          const sectionNumberOffset = hasEvidence ? 2 : 1;
+          const evidenceHtml = hasEvidence ? `
+            <section class="record-section record-section-evidence" id="record-section-evidence">
+              <div class="record-section-kicker">01</div>
+              <div>
+                <h2>${resolveText(siteCopy.ui.evidence, languageMode)}</h2>
+                <div class="record-evidence">
+                  ${(signal.evidence ?? []).map((item, i) => `
+                    <div class="record-evidence-item">
+                      <span>${String(i + 1).padStart(2, "0")}</span>
+                      <strong>${item}</strong>
+                    </div>
+                  `).join("")}
+                </div>
+              </div>
+            </section>
+          ` : "";
+          projectFields.sections.innerHTML = evidenceHtml + signal.sections
             .map((section, index) => {
               const sectionId = `record-section-${index + 1}`;
               const body = section.body
@@ -662,7 +681,7 @@ export function mountArchiveExperience(container: HTMLElement) {
   
               return `
                 <section class="record-section${section.images ? " has-media" : ""}" id="${sectionId}">
-                  <div class="record-section-kicker">${String(index + 1).padStart(2, "0")}</div>
+                  <div class="record-section-kicker">${String(index + sectionNumberOffset).padStart(2, "0")}</div>
                   <div>
                     <h2>${section.title}</h2>
                     ${body}
@@ -673,10 +692,11 @@ export function mountArchiveExperience(container: HTMLElement) {
             })
             .join("");
           projectFields.index.innerHTML = [
-            ["record-overview", `00 / ${resolveText(siteCopy.ui.evidence, languageMode)}`],
+            ["record-overview", `00 / ${resolveText(siteCopy.ui.plate, languageMode)}`],
+            ...hasEvidence ? [["record-section-evidence", `01 / ${resolveText(siteCopy.ui.evidence, languageMode)}`]] : [],
             ...signal.sections.map((section, index) => [
               `record-section-${index + 1}`,
-              `${String(index + 1).padStart(2, "0")} / ${section.title}`,
+              `${String(index + sectionNumberOffset).padStart(2, "0")} / ${section.title}`,
             ]),
           ]
             .map(([target, label], index) => `
@@ -689,6 +709,7 @@ export function mountArchiveExperience(container: HTMLElement) {
   
         function openProjectRecord(index = activeIndex, options = {}) {
           cancelFieldPulse();
+          hideScrollHint();
           const nextIndex = clampIndex(index);
           const signal = signals[nextIndex];
           if (!canOpenSignal(signal)) {
@@ -759,6 +780,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           }
   
           cancelFieldPulse();
+          hideScrollHint();
           isOpen = false;
           pageMode = type;
           root.classList.remove("is-open", "is-record-page");
@@ -820,6 +842,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           if (!scrollHint) return;
           scrollHint.classList.remove("is-visible");
           if (scrollHintTimer) { clearTimeout(scrollHintTimer); scrollHintTimer = null; }
+          if (scrollHintShowTimer) { clearTimeout(scrollHintShowTimer); scrollHintShowTimer = null; }
           window.removeEventListener("wheel", hideScrollHint);
           window.removeEventListener("keydown", onScrollHintKeyDismiss);
         }
@@ -848,10 +871,12 @@ export function mountArchiveExperience(container: HTMLElement) {
           writeRoute(routePath.open, options);
           if (scrollHint) {
             hideScrollHint();
-            scrollHint.classList.add("is-visible");
-            scrollHintTimer = setTimeout(hideScrollHint, 6000);
-            window.addEventListener("wheel", hideScrollHint, { once: true });
-            window.addEventListener("keydown", onScrollHintKeyDismiss);
+            window.addEventListener("wheel", hideScrollHint, { once: true, signal: disposer.signal });
+            window.addEventListener("keydown", onScrollHintKeyDismiss, { signal: disposer.signal });
+            scrollHintShowTimer = setTimeout(() => {
+              scrollHint.classList.add("is-visible");
+              scrollHintTimer = setTimeout(hideScrollHint, 7000);
+            }, 1000);
           }
         }
 
@@ -913,16 +938,11 @@ export function mountArchiveExperience(container: HTMLElement) {
             <strong>${signal.name}</strong>
             <p>${signal.description}</p>
             <span class="route-code">${signal.code}</span>
-            ${isActive ? `<span class="card-enter-cue">open record →</span>` : ""}
+            ${isActive ? `<span class="card-enter-cue">${resolveText(siteCopy.ui.openRecordCue, languageMode)}</span>` : ""}
           `;
         }
   
-        function renderAccession(signal) {
-          recordFields.name.textContent = signal.name;
-          recordFields.state.textContent = signal.state;
-          recordFields.type.textContent = signal.type;
-          recordFields.route.textContent = signal.route;
-  
+        function renderAccession() {
           signalRows.forEach((row, index) => {
             const item = signals[index];
             if (!item) {
@@ -960,16 +980,15 @@ export function mountArchiveExperience(container: HTMLElement) {
             btn.addEventListener("click", () => {
               const index = parseInt(btn.dataset.mobileIndex);
               if (canOpenSignal(signals[index])) openProjectRecord(index);
-            });
+            }, { signal: disposer.signal });
           });
         }
 
         function renderSignals() {
-          const signal = signals[activeIndex];
           signalCards.forEach((card, index) => {
             renderCard(card, signals[index], index);
           });
-          renderAccession(signal);
+          renderAccession();
           renderMobileSignalList();
         }
   
@@ -988,7 +1007,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           pointerTarget.x = (event.clientX / window.innerWidth) * 2 - 1;
           pointerTarget.y = -(event.clientY / window.innerHeight) * 2 + 1;
           cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate3d(-50%, -50%, 0)`;
-        });
+        }, { signal: disposer.signal });
   
         window.addEventListener("pointerdown", (event) => {
           if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list, .record-page, .field-return-hint, .field-enter-hint")) return;
@@ -1006,7 +1025,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           } else {
             openFlow();
           }
-        });
+        }, { signal: disposer.signal });
 
         signalCards.forEach((card, index) => {
           card.addEventListener("click", (event) => {
@@ -1016,7 +1035,7 @@ export function mountArchiveExperience(container: HTMLElement) {
               return;
             }
             setActive(index);
-          });
+          }, { signal: disposer.signal });
           card.addEventListener("keydown", (event) => {
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault();
@@ -1026,7 +1045,7 @@ export function mountArchiveExperience(container: HTMLElement) {
               }
               setActive(index);
             }
-          });
+          }, { signal: disposer.signal });
         });
   
         signalRows.forEach((row, index) => {
@@ -1038,32 +1057,32 @@ export function mountArchiveExperience(container: HTMLElement) {
               return;
             }
             setActive(index);
-          });
+          }, { signal: disposer.signal });
         });
   
         utilityButtons.forEach((button) => {
           button.addEventListener("click", (event) => {
             event.stopPropagation();
             handleUtility(button.dataset.utility);
-          });
+          }, { signal: disposer.signal });
         });
   
         infoReturn.addEventListener("click", (event) => {
           event.stopPropagation();
           closeInfoPage();
-        });
+        }, { signal: disposer.signal });
 
-        infoBody?.addEventListener("scroll", updateInfoScroll);
+        infoBody?.addEventListener("scroll", updateInfoScroll, { signal: disposer.signal });
 
         fieldReturnHint?.addEventListener("click", (event) => {
           event.stopPropagation();
           if (isOpen) closeFlow();
-        });
+        }, { signal: disposer.signal });
 
         fieldEnterHint?.addEventListener("click", (event) => {
           event.stopPropagation();
           if (!isOpen) openFlow();
-        });
+        }, { signal: disposer.signal });
 
         recordActions.forEach((button) => {
           button.addEventListener("click", (event) => {
@@ -1073,7 +1092,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             } else {
               closeRecordToQueue();
             }
-          });
+          }, { signal: disposer.signal });
         });
   
         projectFields.index.addEventListener("click", (event) => {
@@ -1088,7 +1107,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             item.classList.toggle("is-active", item === button);
           });
           target.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
+        }, { signal: disposer.signal });
   
         window.addEventListener("wheel", (event) => {
           if (isInfoPage() || isRecordPage()) return;
@@ -1108,7 +1127,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           window.setTimeout(() => {
             wheelLocked = false;
           }, 600);
-        }, { passive: false });
+        }, { passive: false, signal: disposer.signal });
   
         window.addEventListener("keydown", (event) => {
           if (event.key === "Escape") {
@@ -1137,7 +1156,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             if (!isOpen) openFlow();
             stepActive(-1);
           }
-        });
+        }, { signal: disposer.signal });
   
         function isSmallViewport() {
           return window.innerWidth < 720;
@@ -1498,7 +1517,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           }
 
           renderer.render(scene, camera);
-          requestAnimationFrame(animate);
+          rafId = requestAnimationFrame(animate);
         }
   
         function resize() {
@@ -1515,10 +1534,10 @@ export function mountArchiveExperience(container: HTMLElement) {
                 : getBaseScale();
         }
   
-        window.addEventListener("resize", resize);
+        window.addEventListener("resize", resize, { signal: disposer.signal });
         window.addEventListener("popstate", () => {
           applyRouteFromLocation();
-        });
+        }, { signal: disposer.signal });
 
         function applyRouteFromLocation() {
           const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -1578,5 +1597,13 @@ export function mountArchiveExperience(container: HTMLElement) {
 
   return () => {
     container.dataset.archiveMounted = "false";
+    disposer.abort();
+    cancelFieldPulse();
+    hideScrollHint();
+    cancelAnimationFrame(rafId);
+    renderer.dispose();
+    renderer.domElement.remove();
   };
 }
+
+
