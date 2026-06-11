@@ -1018,9 +1018,28 @@ export function mountArchiveExperience(container: HTMLElement) {
           cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate3d(-50%, -50%, 0)`;
         }, { signal: disposer.signal });
   
+        function isTapOnTesseract(event) {
+          const center = new Vector3();
+          tesseract.group.getWorldPosition(center);
+          center.project(camera);
+          const screenX = ((center.x + 1) / 2) * window.innerWidth;
+          const screenY = ((-center.y + 1) / 2) * window.innerHeight;
+          return Math.hypot(event.clientX - screenX, event.clientY - screenY) < 140;
+        }
+
         window.addEventListener("pointerdown", (event) => {
           if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list, .record-page, .field-return-hint, .field-enter-hint")) return;
-          if (event.pointerType !== "touch" && !isHovering) return;
+
+          if (event.pointerType === "touch") {
+            // touch is mistap-prone: the closed field only opens via the ENTER
+            // ARCHIVE button, and the open queue only returns via the tesseract
+            if (isOpen && isTapOnTesseract(event)) {
+              closeFlow();
+            }
+            return;
+          }
+
+          if (!isHovering) return;
           if (isRecordPage()) {
             closeRecordToQueue();
             return;
