@@ -95,6 +95,7 @@ export function mountArchiveExperience(container: HTMLElement) {
   // every listener registers against this signal so unmount can sever them all at once
   const disposer = new AbortController();
 
+  try {
         const root = container;
         const cursor = root.querySelector(".cursor");
         const stateValue = root.querySelector(".state-value");
@@ -1604,6 +1605,15 @@ export function mountArchiveExperience(container: HTMLElement) {
     renderer.dispose();
     renderer.domElement.remove();
   };
+  } catch (error) {
+    // init failed (e.g. WebGL unavailable) — roll back the mount flag so the
+    // static shell stays usable and a later mount attempt can retry
+    container.dataset.archiveMounted = "false";
+    disposer.abort();
+    container.querySelector("canvas")?.remove();
+    console.error("archive engine failed to initialize", error);
+    return () => {};
+  }
 }
 
 

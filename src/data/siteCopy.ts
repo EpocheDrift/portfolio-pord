@@ -49,22 +49,6 @@ export const siteCopy = {
       en: "CONTACT",
       zh: "联系",
     },
-    languageToggle: {
-      en: "Toggle language",
-      zh: "切换语言",
-    },
-    accessionSurface: {
-      en: "ARCHIVE SURFACE",
-      zh: "档案表面",
-    },
-    closedBatch: {
-      en: "PERSONAL ARCHIVE / SIGNAL ROUTES / LIVE RECORDS",
-      zh: "个人档案 / 信号路径 / 实时记录",
-    },
-    activeAccession: {
-      en: "ACTIVE RECORD",
-      zh: "当前记录",
-    },
     active: {
       en: "active",
       zh: "当前",
@@ -73,33 +57,9 @@ export const siteCopy = {
       en: "state",
       zh: "状态",
     },
-    projectType: {
-      en: "type",
-      zh: "类型",
-    },
-    route: {
-      en: "route",
-      zh: "路径",
-    },
     projectSignals: {
       en: "Archive register",
       zh: "档案登记",
-    },
-    verticalArchiveProcessing: {
-      en: "VERTICAL RECORD PROCESSING",
-      zh: "纵向记录处理",
-    },
-    archiveForm: {
-      en: "CHAOSTUDIO",
-      zh: "混沌工作室",
-    },
-    processingFlow: {
-      en: "archive\n2026",
-      zh: "档案\n2026",
-    },
-    queueSummary: {
-      en: "Projects are routed through queue, focus, and record states.",
-      zh: "项目会经过队列、焦点与记录状态。",
     },
     closeField: {
       en: "RETURN / FIELD",
@@ -120,10 +80,6 @@ export const siteCopy = {
     returnArchive: {
       en: "← Close Record",
       zh: "← 关闭记录",
-    },
-    minimalInfoPage: {
-      en: "SYSTEM INFO",
-      zh: "系统信息",
     },
     evidence: {
       en: "evidence",
@@ -160,10 +116,6 @@ export const siteCopy = {
     liveDemo: {
       en: "live demo →",
       zh: "在线演示 →",
-    },
-    evidenceCompressed: {
-      en: "evidence / record notes",
-      zh: "证据 / 记录笔记",
     },
     imagePending: {
       en: "Evidence media awaiting final selection.",
