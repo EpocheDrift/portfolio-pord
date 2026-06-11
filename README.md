@@ -10,6 +10,25 @@ Live: [zayn.chaostudio.org](https://zayn.chaostudio.org)
 Vite + React 19 + TypeScript + Three.js
 ```
 
+## Runtime model
+
+React only mounts the shell. The live archive experience runs through
+`src/archive/archiveEngine.ts`, which owns the Three.js scene, DOM updates,
+routing, language state, and event handling after `ArchiveExperience` mounts.
+
+The React implementation under `src/components/` and `src/state/` is a
+migration target/reference path, not the active render tree.
+
+## Routes
+
+| Path | State |
+| --- | --- |
+| `/` | closed field |
+| `/archive` | open signal queue |
+| `/projects/:slug` | project record |
+| `/about` | about overlay |
+| `/contact` | contact overlay |
+
 ## Commands
 
 ```bash
@@ -22,6 +41,13 @@ npm run preview   # serve dist/ locally
 ## Deploy
 
 Docker image is built and pushed to `ghcr.io/epochedrift/portfolio-pord:latest` automatically on every push to `main` via GitHub Actions.
+
+To verify the production image locally:
+
+```bash
+docker build -t portfolio-pord:local .
+docker run --rm -p 3088:80 portfolio-pord:local
+```
 
 To deploy on VPS:
 
@@ -50,4 +76,8 @@ src/visual-anchor/    Tesseract geometry and motion helpers
 
 1. Add assets to `src/assets/projects/<slug>/`
 2. Add a `ProjectRecord` entry to `src/data/projects.ts`
-3. Run `npm run build` to verify
+3. Choose a detail template:
+   - `slab` for long-form records with a horizontal header and vertical sections
+   - `case` for dossier-style records with a fixed left sidebar
+4. Add section media through `mediaIds`/project media records so the engine can apply media-aware layout classes
+5. Run `npm run build` to verify
