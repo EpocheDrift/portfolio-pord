@@ -109,6 +109,10 @@ export function mountArchiveExperience(container: HTMLElement) {
         const signalCards = Array.from(root.querySelectorAll(".signal-card"));
         const signalRows = Array.from(root.querySelectorAll(".signal-row"));
         const accessionLabel = root.querySelector(".accession-label");
+        const counterStateLabel = root.querySelector(".counter .state-label");
+        const recordIndexLabel = root.querySelector(".record-index-label");
+        const recordIndexStateLabel = root.querySelector(".record-index-state span");
+        const archiveCaptionText = root.querySelector(".archive-caption strong");
         const utilityButtons = Array.from(root.querySelectorAll("[data-utility]"));
         const infoPage = root.querySelector(".info-page");
         const infoReturn = root.querySelector(".info-return-link");
@@ -136,8 +140,8 @@ export function mountArchiveExperience(container: HTMLElement) {
         const idleDelay = 5000;
         const pulseDuration = 1450;
         const infoKickers = {
-          about: "about / zayn archive",
-          contact: "contact / open",
+          about: siteCopy.ui.infoKickerAbout,
+          contact: siteCopy.ui.infoKickerContact,
         };
         let languageMode = readStoredLanguage();
         persistLanguage(languageMode);
@@ -506,7 +510,7 @@ export function mountArchiveExperience(container: HTMLElement) {
 
         function getInfoContent(type) {
           return {
-            kicker: infoKickers[type],
+            kicker: resolveText(infoKickers[type], languageMode),
             title: resolveText(siteCopy.ui[type], languageMode),
             body: resolveText(siteCopy[type], languageMode),
           };
@@ -579,8 +583,15 @@ export function mountArchiveExperience(container: HTMLElement) {
             );
           });
           if (fieldEnterHint) fieldEnterHint.textContent = resolveText(siteCopy.ui.enterArchive, languageMode);
+          if (fieldReturnHint) fieldReturnHint.textContent = resolveText(siteCopy.ui.closeField, languageMode);
           if (fieldIntro) fieldIntro.textContent = resolveText(siteCopy.intro, languageMode);
           if (accessionLabel) accessionLabel.textContent = resolveText(siteCopy.ui.projectSignals, languageMode);
+          if (scrollHint) scrollHint.textContent = resolveText(siteCopy.ui.scrollHint, languageMode);
+          if (counterStateLabel) counterStateLabel.textContent = resolveText(siteCopy.ui.state, languageMode);
+          if (recordIndexLabel) recordIndexLabel.textContent = resolveText(siteCopy.ui.recordIndex, languageMode);
+          if (recordIndexStateLabel) recordIndexStateLabel.textContent = resolveText(siteCopy.ui.projectState, languageMode);
+          if (archiveCaptionText) archiveCaptionText.textContent = resolveText(siteCopy.ui.archiveCaption, languageMode);
+          if (projectFields.plateLiveLink) projectFields.plateLiveLink.textContent = resolveText(siteCopy.ui.liveDemo, languageMode);
           setShellState(stateMode);
         }
   
@@ -698,6 +709,7 @@ export function mountArchiveExperience(container: HTMLElement) {
   
         function openProjectRecord(index = activeIndex, options = {}) {
           cancelFieldPulse();
+          hideScrollHint();
           const nextIndex = clampIndex(index);
           const signal = signals[nextIndex];
           if (!canOpenSignal(signal)) {
@@ -768,6 +780,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           }
   
           cancelFieldPulse();
+          hideScrollHint();
           isOpen = false;
           pageMode = type;
           root.classList.remove("is-open", "is-record-page");
@@ -925,7 +938,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             <strong>${signal.name}</strong>
             <p>${signal.description}</p>
             <span class="route-code">${signal.code}</span>
-            ${isActive ? `<span class="card-enter-cue">open record →</span>` : ""}
+            ${isActive ? `<span class="card-enter-cue">${resolveText(siteCopy.ui.openRecordCue, languageMode)}</span>` : ""}
           `;
         }
   

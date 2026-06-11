@@ -4,7 +4,7 @@ export const archiveMarkup = `
       <div class="caption">
         <strong>record<br />field</strong>
       </div>
-      <div class="counter">state<strong class="state-value">field</strong></div>
+      <div class="counter"><span class="state-label">state</span><strong class="state-value">field</strong></div>
     </div>
     <div class="utility-strip" aria-label="Archive utility controls">
       <button type="button" data-utility="about">About</button>
@@ -110,8 +110,8 @@ export const archiveMarkup = `
     </div>
     <div class="scanline" aria-hidden="true"></div>
     <div class="cursor" aria-hidden="true"></div>
-    <button class="field-return-hint" type="button" aria-label="Return to field">return / field</button>
-    <button class="field-enter-hint" type="button" aria-label="Enter archive">ENTER ARCHIVE</button>
+    <button class="field-return-hint" type="button">return / field</button>
+    <button class="field-enter-hint" type="button">ENTER ARCHIVE</button>
     <div class="field-intro" aria-hidden="true"></div>
     <div class="scroll-hint" aria-hidden="true">↕ scroll to browse</div>
     <nav class="mobile-signal-list" aria-label="Archive signal list" aria-hidden="true"></nav>

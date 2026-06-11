@@ -133,6 +133,34 @@ export const siteCopy = {
       en: "plate",
       zh: "图版",
     },
+    scrollHint: {
+      en: "↕ scroll to browse",
+      zh: "↕ 滚动浏览",
+    },
+    openRecordCue: {
+      en: "open record →",
+      zh: "打开记录 →",
+    },
+    recordIndex: {
+      en: "record index",
+      zh: "记录索引",
+    },
+    infoKickerAbout: {
+      en: "about / zayn archive",
+      zh: "关于 / zayn 档案",
+    },
+    infoKickerContact: {
+      en: "contact / open",
+      zh: "联系 / 开放",
+    },
+    archiveCaption: {
+      en: "Zayn turns early AI product and workflow ideas into runnable prototypes, demo stories, and short cases that people can test and discuss.",
+      zh: "Zayn 把早期的 AI 产品与工作流想法，变成可运行的原型、demo 叙事和可测试、可讨论的短案例。",
+    },
+    liveDemo: {
+      en: "live demo →",
+      zh: "在线演示 →",
+    },
     evidenceCompressed: {
       en: "evidence / record notes",
       zh: "证据 / 记录笔记",
