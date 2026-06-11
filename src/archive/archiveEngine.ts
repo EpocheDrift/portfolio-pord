@@ -91,7 +91,10 @@ export function mountArchiveExperience(container: HTMLElement) {
     return () => {};
   }
   container.dataset.archiveMounted = "true";
-  
+
+  // every listener registers against this signal so unmount can sever them all at once
+  const disposer = new AbortController();
+
         const root = container;
         const cursor = root.querySelector(".cursor");
         const stateValue = root.querySelector(".state-value");
@@ -459,6 +462,7 @@ export function mountArchiveExperience(container: HTMLElement) {
         let wheelLocked = false;
         let pageMode = "archive";
         let stateMode = "closed";
+        let rafId = 0;
   
         function cancelFieldPulse() {
           window.clearTimeout(idleTimer);
@@ -854,8 +858,8 @@ export function mountArchiveExperience(container: HTMLElement) {
           writeRoute(routePath.open, options);
           if (scrollHint) {
             hideScrollHint();
-            window.addEventListener("wheel", hideScrollHint, { once: true });
-            window.addEventListener("keydown", onScrollHintKeyDismiss);
+            window.addEventListener("wheel", hideScrollHint, { once: true, signal: disposer.signal });
+            window.addEventListener("keydown", onScrollHintKeyDismiss, { signal: disposer.signal });
             scrollHintShowTimer = setTimeout(() => {
               scrollHint.classList.add("is-visible");
               scrollHintTimer = setTimeout(hideScrollHint, 7000);
@@ -963,7 +967,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             btn.addEventListener("click", () => {
               const index = parseInt(btn.dataset.mobileIndex);
               if (canOpenSignal(signals[index])) openProjectRecord(index);
-            });
+            }, { signal: disposer.signal });
           });
         }
 
@@ -990,7 +994,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           pointerTarget.x = (event.clientX / window.innerWidth) * 2 - 1;
           pointerTarget.y = -(event.clientY / window.innerHeight) * 2 + 1;
           cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate3d(-50%, -50%, 0)`;
-        });
+        }, { signal: disposer.signal });
   
         window.addEventListener("pointerdown", (event) => {
           if (event.target.closest(".signal-card, .signal-row, .accession-panel, .utility-strip, .info-page, .record-action, .mobile-signal-list, .record-page, .field-return-hint, .field-enter-hint")) return;
@@ -1008,7 +1012,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           } else {
             openFlow();
           }
-        });
+        }, { signal: disposer.signal });
 
         signalCards.forEach((card, index) => {
           card.addEventListener("click", (event) => {
@@ -1018,7 +1022,7 @@ export function mountArchiveExperience(container: HTMLElement) {
               return;
             }
             setActive(index);
-          });
+          }, { signal: disposer.signal });
           card.addEventListener("keydown", (event) => {
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault();
@@ -1028,7 +1032,7 @@ export function mountArchiveExperience(container: HTMLElement) {
               }
               setActive(index);
             }
-          });
+          }, { signal: disposer.signal });
         });
   
         signalRows.forEach((row, index) => {
@@ -1040,32 +1044,32 @@ export function mountArchiveExperience(container: HTMLElement) {
               return;
             }
             setActive(index);
-          });
+          }, { signal: disposer.signal });
         });
   
         utilityButtons.forEach((button) => {
           button.addEventListener("click", (event) => {
             event.stopPropagation();
             handleUtility(button.dataset.utility);
-          });
+          }, { signal: disposer.signal });
         });
   
         infoReturn.addEventListener("click", (event) => {
           event.stopPropagation();
           closeInfoPage();
-        });
+        }, { signal: disposer.signal });
 
-        infoBody?.addEventListener("scroll", updateInfoScroll);
+        infoBody?.addEventListener("scroll", updateInfoScroll, { signal: disposer.signal });
 
         fieldReturnHint?.addEventListener("click", (event) => {
           event.stopPropagation();
           if (isOpen) closeFlow();
-        });
+        }, { signal: disposer.signal });
 
         fieldEnterHint?.addEventListener("click", (event) => {
           event.stopPropagation();
           if (!isOpen) openFlow();
-        });
+        }, { signal: disposer.signal });
 
         recordActions.forEach((button) => {
           button.addEventListener("click", (event) => {
@@ -1075,7 +1079,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             } else {
               closeRecordToQueue();
             }
-          });
+          }, { signal: disposer.signal });
         });
   
         projectFields.index.addEventListener("click", (event) => {
@@ -1090,7 +1094,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             item.classList.toggle("is-active", item === button);
           });
           target.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
+        }, { signal: disposer.signal });
   
         window.addEventListener("wheel", (event) => {
           if (isInfoPage() || isRecordPage()) return;
@@ -1110,7 +1114,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           window.setTimeout(() => {
             wheelLocked = false;
           }, 600);
-        }, { passive: false });
+        }, { passive: false, signal: disposer.signal });
   
         window.addEventListener("keydown", (event) => {
           if (event.key === "Escape") {
@@ -1139,7 +1143,7 @@ export function mountArchiveExperience(container: HTMLElement) {
             if (!isOpen) openFlow();
             stepActive(-1);
           }
-        });
+        }, { signal: disposer.signal });
   
         function isSmallViewport() {
           return window.innerWidth < 720;
@@ -1500,7 +1504,7 @@ export function mountArchiveExperience(container: HTMLElement) {
           }
 
           renderer.render(scene, camera);
-          requestAnimationFrame(animate);
+          rafId = requestAnimationFrame(animate);
         }
   
         function resize() {
@@ -1517,10 +1521,10 @@ export function mountArchiveExperience(container: HTMLElement) {
                 : getBaseScale();
         }
   
-        window.addEventListener("resize", resize);
+        window.addEventListener("resize", resize, { signal: disposer.signal });
         window.addEventListener("popstate", () => {
           applyRouteFromLocation();
-        });
+        }, { signal: disposer.signal });
 
         function applyRouteFromLocation() {
           const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -1580,5 +1584,13 @@ export function mountArchiveExperience(container: HTMLElement) {
 
   return () => {
     container.dataset.archiveMounted = "false";
+    disposer.abort();
+    cancelFieldPulse();
+    hideScrollHint();
+    cancelAnimationFrame(rafId);
+    renderer.dispose();
+    renderer.domElement.remove();
   };
 }
+
+
