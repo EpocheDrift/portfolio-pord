@@ -1228,7 +1228,7 @@
         position: fixed;
         z-index: 13;
         left: 32px;
-        top: 312px;
+        top: 43%;
         width: min(29vw, 360px);
         pointer-events: none;
         opacity: 0;
