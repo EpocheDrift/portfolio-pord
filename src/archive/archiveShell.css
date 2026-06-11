@@ -908,8 +908,8 @@
         display: block;
         margin-top: 14px;
         padding-top: 10px;
-        border-top: 1px solid rgba(131, 189, 184, 0.34);
-        color: rgba(131, 189, 184, 0.95);
+        border-top: 1px solid rgba(215, 172, 97, 0.44);
+        color: rgba(215, 172, 97, 1);
         font-family: "IBM Plex Sans Condensed", sans-serif;
         font-size: 11px;
         letter-spacing: 0.14em;
@@ -918,7 +918,7 @@
       }
 
       .signal-card.active:hover .card-enter-cue {
-        color: rgba(131, 189, 184, 1);
+        color: #e8c684;
         transform: translateX(4px);
       }
 
