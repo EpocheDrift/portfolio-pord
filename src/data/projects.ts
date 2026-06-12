@@ -42,21 +42,21 @@ export const projects: ProjectRecord[] = [
       zh: "档案以一个安静的投影场域开始。",
     },
     summary: {
-      en: "The archive you are currently inside — built to prove that a portfolio can be a running system rather than a static display surface. The interface, content model, and bilingual routing are all part of the evidence.",
-      zh: "你现在正在其中的这个档案——被构建来证明：一个作品集可以是一个正在运行的系统，而不只是一个静态展示页面。界面本身、内容模型，和双语路由——都是证明的一部分。",
+      en: "The archive you are currently inside. It runs as a system, not a display surface: every state is a URL, every record is typed and bilingual, and new work files itself in without a redesign.",
+      zh: "你现在正在其中的这个档案。它作为系统运行，而不是展示页面：每个状态都是一个 URL，每条记录都是类型化且双语的，新项目进来无需重新设计。",
     },
     evidence: [
       {
-        en: "System architecture proof: URL-backed routing, typed project records, bilingual content model — built to hold future work without redesign.",
-        zh: "系统架构证明：URL 状态路由、类型化项目记录、双语内容模型——构建时就能承载未来记录，不需要每次重新设计。",
+        en: "URL-backed routing, typed project records, bilingual content model — built to hold future work without redesign.",
+        zh: "URL 状态路由、类型化项目记录、双语内容模型——构建时就能承载未来记录，不需要每次重新设计。",
       },
       {
-        en: "Visual judgment proof: every element — tesseract, signal queue, record templates — emerged from concept, not from a template kit.",
-        zh: "视觉判断证明：每个元素——Tesseract、信号队列、记录模板——都从概念中生长出来，不是从模板库选的。",
+        en: "Every element — tesseract, signal queue, record templates — emerged from concept, not from a template kit.",
+        zh: "每个元素——Tesseract、信号队列、记录模板——都从概念中生长出来，不是从模板库选的。",
       },
       {
-        en: "Identity routing proof: this portfolio routes through Zayn, not through the studio name. That distinction is a design decision.",
-        zh: "身份路由证明：这个作品集通过 Zayn 来路由，而不是通过工作室名称。这个区别是一个设计决策。",
+        en: "This portfolio routes through Zayn, not through the studio name. That distinction is a design decision.",
+        zh: "这个作品集通过 Zayn 来路由，而不是通过工作室名称。这个区别是一个设计决策。",
       },
     ],
     template: "slab",
@@ -292,21 +292,21 @@ export const projects: ProjectRecord[] = [
       zh: "系统设计 / Next.js / 状态机",
     },
     summary: {
-      en: "Tend is a booking automation system for independent wellness practitioners, built around a deterministic state machine. The core design problem: how do you automate discretionary decisions without erasing practitioner judgment?",
-      zh: "Tend 是为独立 wellness 从业者构建的预约自动化系统，以确定性状态机为核心。核心设计问题：如何在不抹去从业者判断的前提下，自动化那些需要权衡的决策？",
+      en: "Tend runs the booking lifecycle for independent wellness practitioners — the 3–5 weekly hours of inquiries, intake, and reminders — while every discretionary call stays theirs. A deterministic state machine does the work; a policy layer keeps the judgment human.",
+      zh: "Tend 为独立 wellness 从业者接管预约全流程——每周 3–5 小时的询问、接诊与提醒——而每个需要权衡的决定仍由他们自己做。确定性状态机负责执行；策略层把判断权留在人手里。",
     },
     evidence: [
       {
-        en: "Workflow architecture proof: the booking lifecycle is a deterministic state machine — every transition is explicit, logged, and auditable.",
-        zh: "工作流架构证明：预约生命周期是一个确定性状态机——每次跳转都是显式的、有记录的、可审计的。",
+        en: "The booking lifecycle is a deterministic state machine — every transition is explicit, logged, and auditable.",
+        zh: "预约生命周期是一个确定性状态机——每次跳转都是显式的、有记录的、可审计的。",
       },
       {
-        en: "AI product judgment proof: automation without control creates anxiety. The policy layer (auto / draft / manual) lets practitioners set their own trust level per action.",
-        zh: "AI 产品判断证明：没有控制的自动化会制造焦虑。策略层（自动 / 草稿 / 手动）让从业者为每个动作自行设定信任程度。",
+        en: "Automation without control creates anxiety. The policy layer (auto / draft / manual) lets practitioners set their own trust level per action.",
+        zh: "没有控制的自动化会制造焦虑。策略层（自动 / 草稿 / 手动）让从业者为每个动作自行设定信任程度。",
       },
       {
-        en: "Trust-preserving automation proof: a working demo at tend.chaostudio.org runs the full booking flow end-to-end through the state machine.",
-        zh: "保留信任的自动化证明：tend.chaostudio.org 的演示完整运行预约流程，全程经由状态机处理。",
+        en: "A working demo at tend.chaostudio.org runs the full booking flow end-to-end through the state machine.",
+        zh: "tend.chaostudio.org 的演示完整运行预约流程，全程经由状态机处理。",
       },
     ],
     template: "slab",
@@ -566,21 +566,21 @@ export const projects: ProjectRecord[] = [
       zh: "场域向有方向的流动打开。你正在进入一个专注窗口。",
     },
     summary: {
-      en: "Energy Sense translates invisible internal states — cognitive clarity, social drain, recovery pressure — into a living visual landscape. The design problem was restraint: a companion that notices, not a system that judges.",
-      zh: "Energy Sense 将认知清晰度、社交耗能与恢复压力这些不可见的内在状态，转译为一片持续变化的视觉场域。核心设计问题是克制：一个会注意到的陪伴，而不是一个做判断的系统。",
+      en: "Energy Sense makes invisible internal states — cognitive clarity, social drain, recovery pressure — readable as a living visual landscape, so the shift is felt before you push through the wrong moment. The design problem was restraint: a companion that notices, not a system that judges.",
+      zh: "Energy Sense 让认知清晰度、社交耗能与恢复压力这些不可见的内在状态，变成一片可读的视觉场域——让你在错误时刻硬撑之前就察觉到变化。核心设计问题是克制：一个会注意到的陪伴，而不是一个做判断的系统。",
     },
     evidence: [
       {
-        en: "Creative interaction proof: invisible internal states — clarity, drain, recovery — translated into a living visual landscape without numbers, alerts, or scores.",
-        zh: "创意交互证明：不可见的内在状态——清醒、耗竭、恢复——被转译为一片活着的视觉场域，没有数字、警报或评分。",
+        en: "Invisible internal states — clarity, drain, recovery — translated into a living visual landscape without numbers, alerts, or scores.",
+        zh: "不可见的内在状态——清醒、耗竭、恢复——被转译为一片活着的视觉场域，没有数字、警报或评分。",
       },
       {
-        en: "Sensory interface restraint proof: the hardest design challenge was tone. Every decision pulled back from surveillance toward something quieter — a companion that notices, not a system that judges.",
-        zh: "感知界面克制证明：最难的设计挑战是语气。每个决策都在把系统往更安静的方向拉——一个会注意到的陪伴，而不是一个做判断的系统。",
+        en: "The hardest design challenge was tone. Every decision pulled back from surveillance toward something quieter — a companion that notices, not a system that judges.",
+        zh: "最难的设计挑战是语气。每个决策都在把系统往更安静的方向拉——一个会注意到的陪伴，而不是一个做判断的系统。",
       },
       {
-        en: "Embodied translation proof: sensing does not require precision to be meaningful. The design problem is translation, not measurement.",
-        zh: "具身转译证明：感知不需要精确才能有意义。设计问题是转译，不是测量。",
+        en: "Sensing does not require precision to be meaningful. The design problem is translation, not measurement.",
+        zh: "感知不需要精确才能有意义。设计问题是转译，不是测量。",
       },
     ],
     template: "case",
