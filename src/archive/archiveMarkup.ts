@@ -97,7 +97,7 @@ export const archiveMarkup = `
     </div>
     <div class="archive-caption" aria-hidden="true">
       zayn wang
-      <strong>Zayn turns early AI product and workflow ideas into runnable prototypes, demo stories, and short cases that people can test and discuss.</strong>
+      <strong>Zayn designs and builds AI systems that give time and judgment back — bookings that run themselves, context that returns on its own, internal states made visible.</strong>
     </div>
     <div class="field-pulse" aria-hidden="true">
       <span class="pulse-tick"></span>

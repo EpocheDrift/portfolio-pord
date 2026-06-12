@@ -5,8 +5,8 @@ export const siteCopy = {
     zh: "ZAYN 档案接口",
   },
   intro: {
-    en: "An archive of AI product prototypes, workflow systems, and creative interfaces — built to be tested and discussed, not only viewed.",
-    zh: "一个 AI 产品原型、工作流系统与创意界面的档案——为可测试、可讨论而建，而不仅仅是为了展示。",
+    en: "I design and build AI systems that take on judgment-heavy work — bookings, memory, sensing — while the judgment stays human. This archive keeps them running as live records.",
+    zh: "我设计并构建 AI 系统：接手依赖判断的工作——预约、记忆、感知——但把判断权留给人。这个档案让它们作为活的记录持续运行。",
   },
   about: {
     en: "<strong>I design and build AI workflow tools, product systems, and creative interfaces — turning messy, judgment-heavy work into clear, testable systems.</strong><br><br>I shape the product logic, design the system, and write the code. The problems I keep returning to: automation that supports human judgment instead of replacing it, and interfaces that make AI behavior easier to trust.<br><br>Every project in this archive is a short case — something you can test, read, and discuss. Chaostudio is the studio context; this remains my personal archive.<br><br>Currently studying Data Science at the University of Washington. Open to AI product roles, workflow tooling, creative technology, and early-stage building.",
@@ -110,8 +110,8 @@ export const siteCopy = {
       zh: "联系 / 开放",
     },
     archiveCaption: {
-      en: "Zayn turns early AI product and workflow ideas into runnable prototypes, demo stories, and short cases that people can test and discuss.",
-      zh: "Zayn 把早期的 AI 产品与工作流想法，变成可运行的原型、demo 叙事和可测试、可讨论的短案例。",
+      en: "Zayn designs and builds AI systems that give time and judgment back — bookings that run themselves, context that returns on its own, internal states made visible.",
+      zh: "Zayn 设计并构建把时间和判断还给人的 AI 系统——自己运转的预约、自动回到手边的上下文、变得可见的内在状态。",
     },
     liveDemo: {
       en: "live demo →",
