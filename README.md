@@ -16,8 +16,8 @@ React only mounts the shell. The live archive experience runs through
 `src/archive/archiveEngine.ts`, which owns the Three.js scene, DOM updates,
 routing, language state, and event handling after `ArchiveExperience` mounts.
 
-The React implementation under `src/components/` and `src/state/` is a
-migration target/reference path, not the active render tree.
+The React implementation under `src/state/` is a migration target/reference
+path, not the active render tree.
 
 ## Routes
 
@@ -66,11 +66,19 @@ src/archive/          Engine, markup, shell styles (live runtime)
 src/assets/projects/  Project images and diagrams
 src/data/             Bilingual project content and site copy
 src/styles/           Shared CSS tokens and global styles
-src/components/       Extracted React components (migration target)
 src/state/            Archive state hooks (migration target)
 src/routes/           URL state helpers
 src/visual-anchor/    Tesseract geometry and motion helpers
 ```
+
+## Design system
+
+The studio's visual language is maintained in a separate repo,
+[Chaostudio-DesignSystem](https://github.com/EpocheDrift/Chaostudio-DesignSystem)
+(tokens, principles, living styleguide). Those tokens were extracted from this
+portfolio's `src/styles/tokens.css`. The portfolio does not consume that repo yet
+— adopting it is deferred so it can't break the live build. Keep visual changes
+here aligned with the design system.
 
 ## Adding a project
 
